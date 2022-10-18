@@ -5,13 +5,20 @@ author:
   - Chiara Paolini
   - Benedikt Szmrecsanyi
   - Mariana Montes
-format: revealjs
+format:
+  revealjs:
+    footer: "BKL - Liège, 2022-10-21"
+execute:
+  echo: false
 ---
 
 ```{r}
 #| label: setup
 #| include: false
-headings <- c()
+headings <- c("Introduction: the dative alternation",
+              "From vectors to predictors",
+              "Forests and clouds",
+              "Insights and further research")
 source(here::here("BKL_22", "plots.R"))
 ```
 
@@ -20,7 +27,6 @@ source(here::here("BKL_22", "plots.R"))
 ```{r}
 #| label: outline
 #| results: asis
-#| echo: false
 for (heading in headings) {
   cat("-", heading, "\n")
 }
@@ -29,7 +35,99 @@ i <- 1
 
 # `r headings[[i]]`
 
-## Some heading
+## The dative alternation
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Modelling grammatical alternations
+
+Traditional vs distributional predictors.
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+```{r}
+#| label: add-heading1
+#| include: false
+i <- i+1
+```
+
+# `r headings[[i]]`
+
+## Automatically-generated semantic predictors
+
+Define distributional semantics.
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Matrix of recipients
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Clustering
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+
+```{r}
+#| label: add-heading2
+#| include: false
+i <- i+1
+```
+
+# `r headings[[i]]`
+
+## Cloud of recipients
+
+```{r}
+#| label: fig-tsne-r
+#| fig-cap: Scatterplot of recipient lemmas. Colors are clusters, labelled by their medoids.
+tsne_plot(recipient_coords) %>%
+  add_point(recipient_coords %>% filter(cw == "government/nn"), -6, 0) %>%
+  add_point(recipient_coords %>% filter(cw == "mother/nn"), -7)
+```
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Cloud of themes
+
+```{r}
+#| label: fig-tsne-t
+#| fig-cap: Scatterplot of themes lemmas. Colors are clusters, labelled by their medoids.
+tsne_plot(theme_coords) %>%
+  add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
+```
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Random forest of distributional predictors
+
+```{r}
+#| label: fig-rf-dist
+#| fig-cap: Variable importances from a random forest with only distributional predictors.
+varimp_dotplot(varimp_bin)
+```
+
+::: {.footer}
+`r headings[[i]]`
+:::
+
+## Random forest of traditional and distributional predictors
+
+Still need to create the forest. 
 
 ::: {.footer}
 `r headings[[i]]`

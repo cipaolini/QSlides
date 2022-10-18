@@ -9,7 +9,7 @@ If you would like to download slides as PDF, please follow the [instructions in 
 
 # [BKL](BKL_22/index.qmd){target="_blank"}
 
-These are the slides presented at the Belgian Society of Linguistics on 2022-10-18
+These are the slides presented at the Belgian Society of Linguistics on 2022-10-21
 with Benedikt Szmrecsanyi and Mariana Montes.
 [Read the abstract](BKL_22/abstract.qmd)
 

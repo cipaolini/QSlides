@@ -101,13 +101,13 @@ tsne_plot <- function(coords, seed = 7) {
     geom_point(size = 3, alpha = 0.7) +
     geom_label_repel(data = filter(coords, cw == medoid_label),
                      aes(label = cw),
-                     seed = seed) +
+                     seed = seed, size = 8) +
     theme_void() +
     scale_color_viridis_d(na.value = "gray", guide = "none") +
     coord_fixed()
 }
 add_point <- function(p, lemma_data, add_x = 1, add_y = 1, curvature = -0.2,
-                      hjust = 1, vjust = -0.1, font_size = 6) {
+                      hjust = 1, vjust = -0.1, font_size = 10) {
   p + annotate("point", x = lemma_data$x, y = lemma_data$y, shape = 1, size = 5) +
     annotate("curve",
              x = lemma_data$x + add_x, xend = lemma_data$x, 
@@ -142,22 +142,22 @@ varimp_dotplot <- function(varimp_data) {
     labs(x = "Variable importance", y = "Predictor") +
     geom_vline(xintercept = abs(min(varimp_bin)),
                color = "gray30", linetype = 2) +
-    theme_minimal() +
+    theme_minimal(base_size = 20) +
     theme(legend.position = c(0.9, 0.2))
 }
 
 ## Actual plotting -------------------------------------------------------------
-tsne_plot(recipient_coords) %>% 
-  add_point(recipient_coords %>% filter(cw == "government/nn"), -6, 0) %>% 
-  add_point(recipient_coords %>% filter(cw == "mother/nn"), -7)
-
-tsne_plot(theme_coords) %>% 
-  add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
-
-clusters_barplot(Recipient.medoid)
-clusters_barplot(Theme.medoid)
-clusters_barplot(tree_cluster)
-varimp_dotplot(varimp_bin)
+# tsne_plot(recipient_coords) %>%
+#   add_point(recipient_coords %>% filter(cw == "government/nn"), -6, 0) %>%
+#   add_point(recipient_coords %>% filter(cw == "mother/nn"), -7)
+# 
+# tsne_plot(theme_coords) %>%
+#   add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
+# 
+# clusters_barplot(Recipient.medoid)
+# clusters_barplot(Theme.medoid)
+# clusters_barplot(tree_cluster)
+# varimp_dotplot(varimp_bin)
 # add a freq plot of the distribution of LEMMAS
 
 # Experiment ----

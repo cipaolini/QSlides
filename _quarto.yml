@@ -7,11 +7,14 @@ format:
   revealjs:
     preview-links: auto
     multiplex: true
+    slide-number: true
+    logo: ../qlvl.png
+    theme: solarized
   html:
     theme: united
     css: styles.css
     toc: true
     code-link: true
 execute:
-  echo: true
+  echo: false
   freeze: auto

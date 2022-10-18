@@ -11,20 +11,76 @@
     "href": "BKL_22/index.html#outline",
     "title": "Using distributional semantics to annotate for semantic predictors",
     "section": "Outline",
-    "text": "Outline"
+    "text": "Outline\n\nIntroduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nInsights and further research"
   },
   {
-    "objectID": "BKL_22/index.html#some-heading",
-    "href": "BKL_22/index.html#some-heading",
+    "objectID": "BKL_22/index.html#the-dative-alternation",
+    "href": "BKL_22/index.html#the-dative-alternation",
     "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Some heading",
-    "text": "Some heading"
+    "section": "The dative alternation",
+    "text": "The dative alternation\n\nIntroduction: the dative alternation"
+  },
+  {
+    "objectID": "BKL_22/index.html#modelling-grammatical-alternations",
+    "href": "BKL_22/index.html#modelling-grammatical-alternations",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Modelling grammatical alternations",
+    "text": "Modelling grammatical alternations\nTraditional vs distributional predictors.\n\nIntroduction: the dative alternation"
+  },
+  {
+    "objectID": "BKL_22/index.html#automatically-generated-semantic-predictors",
+    "href": "BKL_22/index.html#automatically-generated-semantic-predictors",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Automatically-generated semantic predictors",
+    "text": "Automatically-generated semantic predictors\nDefine distributional semantics.\n\nFrom vectors to predictors"
+  },
+  {
+    "objectID": "BKL_22/index.html#matrix-of-recipients",
+    "href": "BKL_22/index.html#matrix-of-recipients",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Matrix of recipients",
+    "text": "Matrix of recipients\n\nFrom vectors to predictors"
+  },
+  {
+    "objectID": "BKL_22/index.html#clustering",
+    "href": "BKL_22/index.html#clustering",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Clustering",
+    "text": "Clustering\n\nFrom vectors to predictors"
+  },
+  {
+    "objectID": "BKL_22/index.html#cloud-of-recipients",
+    "href": "BKL_22/index.html#cloud-of-recipients",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Cloud of recipients",
+    "text": "Cloud of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their medoids.\nForests and clouds"
+  },
+  {
+    "objectID": "BKL_22/index.html#cloud-of-themes",
+    "href": "BKL_22/index.html#cloud-of-themes",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Cloud of themes",
+    "text": "Cloud of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their medoids.\nForests and clouds"
+  },
+  {
+    "objectID": "BKL_22/index.html#random-forest-of-distributional-predictors",
+    "href": "BKL_22/index.html#random-forest-of-distributional-predictors",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Random forest of distributional predictors",
+    "text": "Random forest of distributional predictors\n\nFigure 3: Variable importances from a random forest with only distributional predictors.\nForests and clouds"
+  },
+  {
+    "objectID": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "href": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Random forest of traditional and distributional predictors",
+    "text": "Random forest of traditional and distributional predictors\nStill need to create the forest.\n\nForests and clouds\n\n\n\n\nBKL - Liège, 2022-10-21"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Slides by Chiara Paolini",
     "section": "",
-    "text": "1 BKL\nThese are the slides presented at the Belgian Society of Linguistics on 2022-10-18 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract"
+    "text": "1 BKL\nThese are the slides presented at the Belgian Society of Linguistics on 2022-10-21 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract"
   }
 ]
