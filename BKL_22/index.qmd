@@ -1,0 +1,36 @@
+---
+title: "Using distributional semantics to annotate for semantic predictors"
+subtitle: "A case study on the English dative alternation"
+author:
+  - Chiara Paolini
+  - Benedikt Szmrecsanyi
+  - Mariana Montes
+format: revealjs
+---
+
+```{r}
+#| label: setup
+#| include: false
+headings <- c()
+source(here::here("BKL_22", "plots.R"))
+```
+
+## Outline
+
+```{r}
+#| label: outline
+#| results: asis
+#| echo: false
+for (heading in headings) {
+  cat("-", heading, "\n")
+}
+i <- 1
+```
+
+# `r headings[[i]]`
+
+## Some heading
+
+::: {.footer}
+`r headings[[i]]`
+:::

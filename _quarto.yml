@@ -1,0 +1,17 @@
+project:
+  title: "QSlides"
+  type: website
+  output-dir: docs
+
+format:
+  revealjs:
+    preview-links: auto
+    multiplex: true
+  html:
+    theme: united
+    css: styles.css
+    toc: true
+    code-link: true
+execute:
+  echo: true
+  freeze: auto

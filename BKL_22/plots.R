@@ -7,7 +7,7 @@ library(showtext) # for a fun font
 font_add_google("Schoolbell", "bell")
 showtext_auto()
 
-data_folder <- here::here("slides", "BKL_22", "data")
+data_folder <- here::here("BKL_22", "data")
 model_name <- list.dirs(data_folder, recursive = FALSE, full.names = FALSE)
 
 # Read data ====================================================================

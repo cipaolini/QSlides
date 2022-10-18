@@ -1,0 +1,22 @@
+---
+title: "Slides by Chiara Paolini"
+format: html
+number-sections: true
+---
+
+These are slides presented at various conferences by Chiara Paolini.
+If you would like to download slides as PDF, please follow the [instructions in the Quarto documentation](https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf).
+
+# [BKL](BKL_22/index.qmd){target="_blank"}
+
+These are the slides presented at the Belgian Society of Linguistics on 2022-10-18
+with Benedikt Szmrecsanyi and Mariana Montes.
+[Read the abstract](BKL_22/abstract.qmd)
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="BKL_22/index.html"></iframe>
+```
+
+</div>
