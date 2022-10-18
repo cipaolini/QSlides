@@ -20,3 +20,16 @@ with Benedikt Szmrecsanyi and Mariana Montes.
 ```
 
 </div>
+
+<!-- # [Conference](Conf_dir/index.qmd){target="_blank"} -->
+
+<!-- These are the slides presented at ... -->
+<!-- [Read the abstract](Conf_dir/abstract.qmd) -->
+
+<!-- <div> -->
+
+<!-- ```{=html} -->
+<!-- <iframe class="slide-deck" src="Conf_dir/index.html"></iframe> -->
+<!-- ``` -->
+
+<!-- </div> -->
