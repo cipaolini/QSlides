@@ -19,7 +19,15 @@ headings <- c("Introduction: the dative alternation",
               "From vectors to predictors",
               "Forests and clouds",
               "Insights and further research")
-source(here::here("BKL_22", "plots.R"))
+source(here::here("BKL_22", "R", "plots.R"))
+read_data <- function(fname) {
+  read_tsv(here::here("BKL_22", "data_processed", paste0(fname, ".tsv")), show_col_types = FALSE)
+}
+recipient_coords <- read_data("recipient_coords")
+theme_coords <- read_data("theme_coords")
+tokens <- read_data("dat_clusters")
+varimp_bin <- read_data("varimp_bin")
+varimp_full <- read_data("varimp_full")
 ```
 
 ## Outline
@@ -116,8 +124,7 @@ tsne_plot(theme_coords) %>%
 ## Random forest of distributional predictors
 
 ```{r}
-#| label: fig-rf-dist
-#| fig-cap: Variable importances from a random forest with only distributional predictors.
+#| label: rf-dist
 varimp_dotplot(varimp_bin)
 ```
 
@@ -127,7 +134,10 @@ varimp_dotplot(varimp_bin)
 
 ## Random forest of traditional and distributional predictors
 
-Still need to create the forest. 
+```{r}
+#| label: rf-full
+varimp_dotplot(varimp_full)
+```
 
 ::: {.footer}
 `r headings[[i]]`
