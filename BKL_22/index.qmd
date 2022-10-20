@@ -10,7 +10,6 @@ format:
     footer: "BKL - Liège, 2022-10-21"
 execute:
   echo: false
-css: styles.css
 ---
 
 ```{r}
@@ -42,7 +41,7 @@ for (heading in headings) {
 i <- 1
 ```
 
-::: notes
+::: {.notes}
 In this talk, I would like to introduce you to the first case study of my PhD research project called "How much does meaning matter? A fresh look at grammatical alternations". The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study,and how semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.
 :::
 
@@ -57,10 +56,6 @@ In this talk, I would like to introduce you to the first case study of my PhD re
 -   **Prepositional** dative variant
 
     \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ \[*to my cousin*\]~recipient~
-
-::: footer
-`r headings[[i]]`
-:::
 
 ::: notes
 Let's dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as "two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker".
@@ -77,10 +72,6 @@ In previous literature, focus on three kinds of predictors:
 2.  **Information status‐related predictors:** e.g., *givenness*
 
 3.  **Semantic, coarse-grained, higher-level predictors:** e.g., *animacy* (i.e., annotate for a binary distinction between animate and inanimate recipients -- see Bresnan et al. 2007)
-
-::: footer
-`r headings[[i]]`
-:::
 
 ```{r}
 #a cosa serve?
@@ -105,10 +96,6 @@ To explore the correlation of choices between the two variants, are usually mode
 **We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.**
 :::
 
-::: footer
-`r headings[[i]]`
-:::
-
 ::: notes
 Accounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it's challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)
 :::
@@ -124,10 +111,6 @@ Accounting for the explanatory power of lexical meaning is not easy: Annotating 
 -   New inputs from DMSs: **more data, less annotation**
 
 -   Methodological breakthrough: demonstrating to the research community how **distributional semantics methods can be marshaled to annotate for semantics** computationally, without the need for labor‐intensive hand‐coding.
-
-::: footer
-`r headings[[i]]`
-:::
 
 ::: notes
 (after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.
@@ -147,10 +130,6 @@ DAT-4067
     \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~recipient~ \[*to the mother*\]~theme~ ninety-seven percent of the time.
     :::
 
-::: footer
-`r headings[[i]]`
-:::
-
 ::: notes
 Read the examples
 :::
@@ -166,10 +145,6 @@ Read the examples
 -   *Dative alternation dataset from Szmrecsanyi et al. (2017)*, which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)
 
 -   Corpus for building DMSs: *Corpus of Contemporary American English (COCA),* spoken register (ca. 127 million tokens)
-
-::: footer
-`r headings[[i]]`
-:::
 
 ::: notes
 But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let's consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn. In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.
@@ -193,10 +168,6 @@ One parameter is missing, and it is the crucial one in order to obtain the predi
 
 -   **CS_4\_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)**
 
-::: footer
-`r headings[[i]]`
-:::
-
 ```{r}
 #| label: add-heading2
 #| include: false
@@ -216,10 +187,6 @@ tsne_plot(recipient_coords) %>%
   add_point(recipient_coords %>% filter(cw == "mother/nn"), -7)
 ```
 
-::: footer
-`r headings[[i]]`
-:::
-
 ::: notes
 Building the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.
 
@@ -237,10 +204,6 @@ tsne_plot(theme_coords) %>%
   add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
 ```
 
-::: footer
-`r headings[[i]]`
-:::
-
 ::: notes
 :::
 
@@ -250,10 +213,6 @@ tsne_plot(theme_coords) %>%
 #| label: rf-dist
 varimp_dotplot(varimp_bin)
 ```
-
-::: footer
-`r headings[[i]]`
-:::
 
 ::: notes
 :::
@@ -265,21 +224,20 @@ varimp_dotplot(varimp_bin)
 varimp_dotplot(varimp_full)
 ```
 
-::: footer
-`r headings[[i]]`
-:::
-
 ::: notes
 Speaker notes go here.
 :::
 
-# Insights and further research
+```{r}
+#| label: add-heading3
+#| include: false
+i <- i+1
+```
+
+# `r headings[[i]]`
+
 
 ## Take-home messages
-
-::: footer
-Insights and further research
-:::
 
 ::: notes
 Speaker notes go here.

@@ -10,6 +10,7 @@ format:
     slide-number: true
     logo: ../qlvl.png
     theme: default
+    css: ../styles.css
   html:
     theme: united
     css: styles.css

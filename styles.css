@@ -6,6 +6,14 @@
   height: 475px;
 }
 
-caption {
+.reveal p.caption {
   font-size: 0.4em;
+}
+
+.reveal h2 {
+  color: steelblue;
+}
+
+.reveal h1 {
+  color: steelblue;
 }

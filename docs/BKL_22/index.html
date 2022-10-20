@@ -7,7 +7,7 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.189">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Chiara Paolini">
   <meta name="author" content="Benedikt Szmrecsanyi">
@@ -32,7 +32,7 @@
     }
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -369,9 +369,6 @@
 <li><p><strong>Prepositional</strong> dative variant</p>
 <p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p></li>
 </ul>
-<div class="footer">
-<p>Introduction: the dative alternation</p>
-</div>
 <aside class="notes">
 <p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker”.</p>
 <p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order). We chose this alternation for the immense amount of literature available (eg Bresnan et al 2007), and the available annotated data, like the dataset we used.</p>
@@ -395,9 +392,6 @@
 <li><p><strong>Information status‐related predictors:</strong> e.g., <em>givenness</em></p></li>
 <li><p><strong>Semantic, coarse-grained, higher-level predictors:</strong> e.g., <em>animacy</em> (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al.&nbsp;2007)</p></li>
 </ol>
-<div class="footer">
-<p>Introduction: the dative alternation</p>
-</div>
 <div class="cell">
 
 </div>
@@ -425,9 +419,6 @@
 </div>
 <div style="text-align: center; color: red;">
 <p><strong>We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.</strong></p>
-</div>
-<div class="footer">
-<p>From vectors to predictors</p>
 </div>
 <aside class="notes">
 <p>Accounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)</p>
@@ -457,9 +448,6 @@
 <li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
 <li><p>Methodological breakthrough: demonstrating to the research community how <strong>distributional semantics methods can be marshaled to annotate for semantics</strong> computationally, without the need for labor‐intensive hand‐coding.</p></li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 <aside class="notes">
 <p>(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.</p>
 <style type="text/css">
@@ -488,9 +476,6 @@
 <p>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>recipient</sub> [<em>to the mother</em>]<sub>theme</sub> ninety-seven percent of the time.</p>
 </div></li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 <aside class="notes">
 <p>Read the examples</p>
 <style type="text/css">
@@ -557,9 +542,6 @@
 <li><p><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em>, which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)</p></li>
 <li><p>Corpus for building DMSs: <em>Corpus of Contemporary American English (COCA),</em> spoken register (ca. 127 million tokens)</p></li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 <aside class="notes">
 <p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let’s consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn.&nbsp;In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
 <p>Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters, such as context windows, PoS filters, length of the vectors, association and distance measures, and dimensionality reduction in order to compare those model and pick the best one BASED ON CUSTOMARY CRITERIA.</p>
@@ -588,9 +570,6 @@
 <ul>
 <li><strong>CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)</strong></li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 </section></section>
 <section>
 <section id="forests-and-clouds" class="title-slide slide level1 center">
@@ -600,10 +579,7 @@
 <section id="from-predictors-to-clouds-cloud-of-recipients" class="slide level2">
 <h2>From predictors to clouds: cloud of recipients</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><aside class="notes">
 <p>Building the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.</p>
 <p>The best model is […]</p>
 <p>[describe the clusters]</p>
@@ -622,10 +598,7 @@
 <section id="cloud-of-themes" class="slide level2">
 <h2>Cloud of themes</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p><aside class="notes">
 
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -642,10 +615,7 @@
 <section id="random-forest-of-distributional-predictors" class="slide level2">
 <h2>Random forest of distributional predictors</h2>
 
-<img data-src="index_files/figure-revealjs/rf-dist-1.png" width="960" class="r-stretch"><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/rf-dist-1.png" width="960" class="r-stretch"><aside class="notes">
 
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -662,10 +632,7 @@
 <section id="random-forest-of-traditional-and-distributional-predictors" class="slide level2">
 <h2>Random forest of traditional and distributional predictors</h2>
 
-<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><aside class="notes">
 <p>Speaker notes go here.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -686,9 +653,6 @@
 </section>
 <section id="take-home-messages" class="slide level2">
 <h2>Take-home messages</h2>
-<div class="footer">
-<p>Insights and further research</p>
-</div>
 <aside class="notes">
 <p>Speaker notes go here.</p>
 <style type="text/css">
