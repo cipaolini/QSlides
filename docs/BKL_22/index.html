@@ -7,7 +7,7 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.251">
+  <meta name="generator" content="quarto-1.1.189">
 
   <meta name="author" content="Chiara Paolini">
   <meta name="author" content="Benedikt Szmrecsanyi">
@@ -32,6 +32,7 @@
     }
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -341,6 +342,19 @@
 <li>Forests and clouds</li>
 <li>Insights and further research</li>
 </ul>
+<aside class="notes">
+<p>In this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study,and how semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section>
 <section id="introduction-the-dative-alternation" class="title-slide slide level1 center">
@@ -349,16 +363,85 @@
 </section>
 <section id="the-dative-alternation" class="slide level2">
 <h2>The dative alternation</h2>
+<ul>
+<li><p><strong>Ditransitive</strong> dative variant</p>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p></li>
+<li><p><strong>Prepositional</strong> dative variant</p>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p></li>
+</ul>
 <div class="footer">
 <p>Introduction: the dative alternation</p>
 </div>
+<aside class="notes">
+<p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker”.</p>
+<p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order). We chose this alternation for the immense amount of literature available (eg Bresnan et al 2007), and the available annotated data, like the dataset we used.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="modelling-grammatical-alternations" class="slide level2">
 <h2>Modelling grammatical alternations</h2>
-<p>Traditional vs distributional predictors.</p>
+<p>In previous literature, focus on three kinds of predictors:</p>
+<ol type="1">
+<li><p><strong>Formal predictors:</strong> e.g., <em>structural complexity of constituents</em> (e.g., presence of heavy postmodification), <em>pronominality</em>, and <em>constituent length</em> (in words, syllables, or similar)</p></li>
+<li><p><strong>Information status‐related predictors:</strong> e.g., <em>givenness</em></p></li>
+<li><p><strong>Semantic, coarse-grained, higher-level predictors:</strong> e.g., <em>animacy</em> (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al.&nbsp;2007)</p></li>
+</ol>
 <div class="footer">
 <p>Introduction: the dative alternation</p>
 </div>
+<div class="cell">
+
+</div>
+<aside class="notes">
+<p>To explore the correlation of choices between the two variants, are usually modeled language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, traditional variationist approach is fairly good at manually annotating for formal predictors, such as (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="role-of-semantic-predictors-in-alternation-predictions" class="slide level2">
+<h2>Role of semantic predictors in alternation predictions</h2>
+<p><strong>Annotating for semantics is labor‐intensive and challenging to perform objectively.</strong></p>
+<div class="caption" style="font-size: 0.8em;">
+<ul>
+<li><em>What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.</em></li>
+</ul>
+</div>
+<div style="text-align: center; color: red;">
+<p><strong>We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.</strong></p>
+</div>
+<div class="footer">
+<p>From vectors to predictors</p>
+</div>
+<aside class="notes">
+<p>Accounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="from-vectors-to-predictors" class="title-slide slide level1 center">
@@ -367,19 +450,144 @@
 </section>
 <section id="automatically-generated-semantic-predictors" class="slide level2">
 <h2>Automatically-generated semantic predictors</h2>
-<p>Define distributional semantics.</p>
+<div style="text-align: center; color: red;">
+<p><strong>Our potential solution: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
+</div>
+<ul>
+<li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
+<li><p>Methodological breakthrough: demonstrating to the research community how <strong>distributional semantics methods can be marshaled to annotate for semantics</strong> computationally, without the need for labor‐intensive hand‐coding.</p></li>
+</ul>
 <div class="footer">
 <p>From vectors to predictors</p>
 </div>
+<aside class="notes">
+<p>(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="examples-recipient-type-lemmas" class="slide level2">
+<h2>Examples: recipient type-lemmas</h2>
+<p>DAT-4100:</p>
+<ul>
+<li><div style="font-size: 0.8em;">
+<p>[<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub> they would just waste it.</p>
+</div></li>
+</ul>
+<p>DAT-4067</p>
+<ul>
+<li><div style="font-size: 0.8em;">
+<p>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>recipient</sub> [<em>to the mother</em>]<sub>theme</sub> ninety-seven percent of the time.</p>
+</div></li>
+</ul>
+<div class="footer">
+<p>From vectors to predictors</p>
+</div>
+<aside class="notes">
+<p>Read the examples</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="matrix-of-recipients" class="slide level2">
 <h2>Matrix of recipients</h2>
+<table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 19%">
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><em>Target</em></th>
+<th>daughter/nn</th>
+<th>europe/np</th>
+<th>it/pp</th>
+<th>dad/nn</th>
+<th>troop/nn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>government/nn</strong></td>
+<td>-1.23</td>
+<td>3.23</td>
+<td>0.21</td>
+<td>NA</td>
+<td>2.59</td>
+</tr>
+<tr class="even">
+<td><strong>mother/nn</strong></td>
+<td>4.36</td>
+<td>NA</td>
+<td>1.65</td>
+<td>2.89</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td><strong>advance/nn</strong></td>
+<td>-2.32</td>
+<td>2.09</td>
+<td>NA</td>
+<td>-0.59</td>
+<td>3.67</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em>, which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)</p></li>
+<li><p>Corpus for building DMSs: <em>Corpus of Contemporary American English (COCA),</em> spoken register (ca. 127 million tokens)</p></li>
+</ul>
 <div class="footer">
 <p>From vectors to predictors</p>
 </div>
+<aside class="notes">
+<p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let’s consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn.&nbsp;In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
+<p>Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters, such as context windows, PoS filters, length of the vectors, association and distance measures, and dimensionality reduction in order to compare those model and pick the best one BASED ON CUSTOMARY CRITERIA.</p>
+<p>One parameter is missing, and it is the crucial one in order to obtain the predictors, that is the PAM clustering parameter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="clustering" class="slide level2">
-<h2>Clustering</h2>
+<section id="identifying-the-best-models" class="slide level2">
+<h2>Identifying the best model(s)</h2>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li><p>Type-level clusters = semantic predictors</p></li>
+<li><p>C-values for (binary) conditional inference trees and conditional random forests</p></li>
+<li><p>Percentage of negative silhouette in types and tokens (&lt; = 0.25)</p></li>
+</ul>
+<p><strong>Best model:</strong></p>
+<ul>
+<li><strong>CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)</strong></li>
+</ul>
 <div class="footer">
 <p>From vectors to predictors</p>
 </div>
@@ -389,19 +597,47 @@
 <h1>Forests and clouds</h1>
 
 </section>
-<section id="cloud-of-recipients" class="slide level2">
-<h2>Cloud of recipients</h2>
+<section id="from-predictors-to-clouds-cloud-of-recipients" class="slide level2">
+<h2>From predictors to clouds: cloud of recipients</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their medoids.</p><div class="footer">
+<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
 <p>Forests and clouds</p>
 </div>
+<aside class="notes">
+<p>Building the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.</p>
+<p>The best model is […]</p>
+<p>[describe the clusters]</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="cloud-of-themes" class="slide level2">
 <h2>Cloud of themes</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their medoids.</p><div class="footer">
+<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
 <p>Forests and clouds</p>
 </div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="random-forest-of-distributional-predictors" class="slide level2">
 <h2>Random forest of distributional predictors</h2>
@@ -409,20 +645,66 @@
 <img data-src="index_files/figure-revealjs/rf-dist-1.png" width="960" class="r-stretch"><div class="footer">
 <p>Forests and clouds</p>
 </div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="random-forest-of-traditional-and-distributional-predictors" class="slide level2">
 <h2>Random forest of traditional and distributional predictors</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/rf-full-1.png" width="960"></p>
-</div>
-</div>
-<div class="footer">
+
+<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><div class="footer">
 <p>Forests and clouds</p>
 </div>
+<aside class="notes">
+<p>Speaker notes go here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="insights-and-further-research" class="title-slide slide level1 center">
+<h1>Insights and further research</h1>
 
-<p><img src="../qlvl.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</section>
+<section id="take-home-messages" class="slide level2">
+<h2>Take-home messages</h2>
+<div class="footer">
+<p>Insights and further research</p>
+</div>
+<aside class="notes">
+<p>Speaker notes go here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+<img src="../qlvl.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>BKL - Liège, 2022-10-21</p>
 </div>
 </section></section>

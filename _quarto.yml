@@ -9,7 +9,7 @@ format:
     multiplex: true
     slide-number: true
     logo: ../qlvl.png
-    theme: solarized
+    theme: default
   html:
     theme: united
     css: styles.css
