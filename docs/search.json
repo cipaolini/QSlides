@@ -18,7 +18,7 @@
     "href": "BKL_22/index.html#the-dative-alternation",
     "title": "Using distributional semantics to annotate for semantic predictors",
     "section": "The dative alternation",
-    "text": "The dative alternation\n\nDitransitive dative variant\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\nPrepositional dative variant\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order). We chose this alternation for the immense amount of literature available (eg Bresnan et al 2007), and the available annotated data, like the dataset we used."
+    "text": "The dative alternation\n\n\nDitransitive dative variant\n\n\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n\n\nPrepositional dative variant\n\n\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order). We chose this alternation for the immense amount of literature available (eg Bresnan et al 2007), and the available annotated data, like the dataset we used."
   },
   {
     "objectID": "BKL_22/index.html#modelling-grammatical-alternations",
@@ -28,90 +28,6 @@
     "text": "Modelling grammatical alternations\nIn previous literature, focus on three kinds of predictors:\n\nFormal predictors: e.g., structural complexity of constituents (e.g., presence of heavy postmodification), pronominality, and constituent length (in words, syllables, or similar)\nInformation status‐related predictors: e.g., givenness\nSemantic, coarse-grained, higher-level predictors: e.g., animacy (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al. 2007)\n\n\n\n\n\nTo explore the correlation of choices between the two variants, are usually modeled language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, traditional variationist approach is fairly good at manually annotating for formal predictors, such as (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)"
   },
   {
-    "objectID": "BKL_22/index.html#automatically-generated-semantic-predictors",
-    "href": "BKL_22/index.html#automatically-generated-semantic-predictors",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Automatically-generated semantic predictors",
-    "text": "Automatically-generated semantic predictors\n\nOur potential solution: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\nNew inputs from DMSs: more data, less annotation\nMethodological breakthrough: demonstrating to the research community how distributional semantics methods can be marshaled to annotate for semantics computationally, without the need for labor‐intensive hand‐coding.\n\n\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
-  },
-  {
-    "objectID": "BKL_22/index.html#matrix-of-recipients",
-    "href": "BKL_22/index.html#matrix-of-recipients",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Matrix of recipients",
-    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\nTarget\ndaughter/nn\neurope/np\nit/pp\ndad/nn\ntroop/nn\n\n\n\n\ngovernment/nn\n-1.23\n3.23\n0.21\nNA\n2.59\n\n\nmother/nn\n4.36\nNA\n1.65\n2.89\nNA\n\n\nadvance/nn\n-2.32\n2.09\nNA\n-0.59\n3.67\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\nBut, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let’s consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn. In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters, such as context windows, PoS filters, length of the vectors, association and distance measures, and dimensionality reduction in order to compare those model and pick the best one BASED ON CUSTOMARY CRITERIA.\nOne parameter is missing, and it is the crucial one in order to obtain the predictors, that is the PAM clustering parameter."
-  },
-  {
-    "objectID": "BKL_22/index.html#clustering",
-    "href": "BKL_22/index.html#clustering",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Clustering",
-    "text": "Clustering\n\nFrom vectors to predictors"
-  },
-  {
-    "objectID": "BKL_22/index.html#cloud-of-recipients",
-    "href": "BKL_22/index.html#cloud-of-recipients",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Cloud of recipients",
-    "text": "Cloud of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their medoids.\nForests and clouds"
-  },
-  {
-    "objectID": "BKL_22/index.html#cloud-of-themes",
-    "href": "BKL_22/index.html#cloud-of-themes",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Cloud of themes",
-    "text": "Cloud of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
-  },
-  {
-    "objectID": "BKL_22/index.html#random-forest-of-distributional-predictors",
-    "href": "BKL_22/index.html#random-forest-of-distributional-predictors",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Random forest of distributional predictors",
-    "text": "Random forest of distributional predictors"
-  },
-  {
-    "objectID": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
-    "href": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Random forest of traditional and distributional predictors",
-    "text": "Random forest of traditional and distributional predictors\n\n\nSpeaker notes go here."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Slides by Chiara Paolini",
-    "section": "",
-    "text": "1 BKL\nThese are the slides presented at the Belgian Society of Linguistics on 2022-10-21 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract"
-  },
-  {
-    "objectID": "BKL_22/index.html#conclusions",
-    "href": "BKL_22/index.html#conclusions",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Conclusions",
-    "text": "Conclusions\n\n\n\nBKL - Liège, 2022-10-21"
-  },
-  {
-    "objectID": "BKL_22/index.html#the-dative-alternation-1",
-    "href": "BKL_22/index.html#the-dative-alternation-1",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "The dative alternation",
-    "text": "The dative alternation\n\nForests and clouds\n\n\nSpeaker notes go here.\n\n\n\n\nBKL - Liège, 2022-10-21"
-  },
-  {
-    "objectID": "BKL_22/index.html#take-home-messages",
-    "href": "BKL_22/index.html#take-home-messages",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Take-home messages",
-    "text": "Take-home messages\n\nSpeaker notes go here.\n\n\n\n\nBKL - Liège, 2022-10-21"
-  },
-  {
-    "objectID": "BKL_22/index.html#modelling-grammatical-alternations-1",
-    "href": "BKL_22/index.html#modelling-grammatical-alternations-1",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Modelling grammatical alternations",
-    "text": "Modelling grammatical alternations\nAnnotating for semantics is labor‐intensive and challenging to perform objectively.\nWhat role do semantic characteristics play in the choice of one of the two variants?\nAt the current state of the research, we know very little about them.\n\n\n\n\nForests and clouds\n\n\nAccounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)"
-  },
-  {
     "objectID": "BKL_22/index.html#role-of-semantic-predictors-in-alternation-predictions",
     "href": "BKL_22/index.html#role-of-semantic-predictors-in-alternation-predictions",
     "title": "Using distributional semantics to annotate for semantic predictors",
@@ -119,31 +35,94 @@
     "text": "Role of semantic predictors in alternation predictions\nAnnotating for semantics is labor‐intensive and challenging to perform objectively.\n\n\nWhat role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.\n\n\n\nWe assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.\n\n\nAccounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)"
   },
   {
-    "objectID": "BKL_22/index.html#identyfing-the-best-models",
-    "href": "BKL_22/index.html#identyfing-the-best-models",
+    "objectID": "BKL_22/index.html#automatically-generated-semantic-predictors",
+    "href": "BKL_22/index.html#automatically-generated-semantic-predictors",
     "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Identyfing the best model(s)",
-    "text": "Identyfing the best model(s)\n\nFrom vectors to predictors\n\n\n[dataset used+tools] Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters, such as context windows, PoS filters, length of the vectors, association and distance measures, and dimensionality reduction in order to compare those model and pick the best one. [how we choose the BM] One parameter is missing, and it is the crucial one in order to obtain the predictors, that is the PAM clustering parameter."
-  },
-  {
-    "objectID": "BKL_22/index.html#from-predictors-to-clouds-cloud-of-recipients",
-    "href": "BKL_22/index.html#from-predictors-to-clouds-cloud-of-recipients",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "From predictors to clouds: cloud of recipients",
-    "text": "From predictors to clouds: cloud of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\nBuilding the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nThe best model is […]\n[describe the clusters]"
-  },
-  {
-    "objectID": "BKL_22/index.html#identifying-the-best-models",
-    "href": "BKL_22/index.html#identifying-the-best-models",
-    "title": "Using distributional semantics to annotate for semantic predictors",
-    "section": "Identifying the best model(s)",
-    "text": "Identifying the best model(s)\nOutputs:\n\nType-level clusters = semantic predictors\nC-values for (binary) conditional inference trees and conditional random forests\nPercentage of negative silhouette in types and tokens (< = 0.25)\n\nBest model:\n\nCS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)"
+    "section": "Automatically-generated semantic predictors",
+    "text": "Automatically-generated semantic predictors\n\nOur suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\nNew inputs from DMSs: more data, less annotation\nMethodological breakthrough: demonstrating to the research community how distributional semantics methods can be marshaled to annotate for semantics computationally, without the need for labor‐intensive hand‐coding.\n\n\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
   },
   {
     "objectID": "BKL_22/index.html#examples-recipient-type-lemmas",
     "href": "BKL_22/index.html#examples-recipient-type-lemmas",
     "title": "Using distributional semantics to annotate for semantic predictors",
     "section": "Examples: recipient type-lemmas",
-    "text": "Examples: recipient type-lemmas\nDAT-4100:\n\n\n[if I]subject [gave]verb [it]theme [to the government]recipient they would just waste it.\n\n\nDAT-4067\n\n\n[The judge]subject [will usually, uh, give]verb [custody]recipient [to the mother]theme ninety-seven percent of the time.\n\n\n\nRead the examples"
+    "text": "Examples: recipient type-lemmas\n\nDAT-4100\n\n\n\n[if I]subject [gave]verb [it]theme [to the government]recipient they would just waste it.\n\n\n\nDAT-4067\n\n\n\n[The judge]subject [will usually, uh, give]verb [custody]recipient [to the mother]theme ninety-seven percent of the time.\n\n\n\nRead the examples"
+  },
+  {
+    "objectID": "BKL_22/index.html#matrix-of-recipients",
+    "href": "BKL_22/index.html#matrix-of-recipients",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Matrix of recipients",
+    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\nNA\n2.59\n\n\n\nmother/nn\n\n4.36\nNA\n1.65\n2.89\nNA\n\n\n\nadvance/nn\n\n-2.32\n2.09\nNA\n-0.59\n3.67\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nBut, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let’s consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn. In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters, such as context windows, PoS filters, length of the vectors, association and distance measures, and dimensionality reduction in order to compare those model and pick the best one BASED ON CUSTOMARY CRITERIA.\nOne parameter is missing, and it is the crucial one in order to obtain the predictors, that is the PAM clustering parameter."
+  },
+  {
+    "objectID": "BKL_22/index.html#from-predictors-to-clouds-cloud-of-recipients",
+    "href": "BKL_22/index.html#from-predictors-to-clouds-cloud-of-recipients",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "From predictors to clouds: cloud of recipients",
+    "text": "From predictors to clouds: cloud of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\nBuilding the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nThe best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction).\n[describe the clusters]"
+  },
+  {
+    "objectID": "BKL_22/index.html#from-predictor-to-clouds-cloud-of-themes",
+    "href": "BKL_22/index.html#from-predictor-to-clouds-cloud-of-themes",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "From predictor to clouds: cloud of themes",
+    "text": "From predictor to clouds: cloud of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+  },
+  {
+    "objectID": "BKL_22/index.html#from-clouds-to-distributional-semantic-predictors",
+    "href": "BKL_22/index.html#from-clouds-to-distributional-semantic-predictors",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "From clouds to distributional semantic predictors",
+    "text": "From clouds to distributional semantic predictors\n\nEach grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor.\n\nThe prediction of the dative variants is based on the membership of the recipient/theme type-lemma in a particular semantic cluster.\n\nIn what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster."
+  },
+  {
+    "objectID": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "href": "BKL_22/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Random forest of traditional and distributional predictors",
+    "text": "Random forest of traditional and distributional predictors\n\n\n\nDo not insist too much on the pronominality"
+  },
+  {
+    "objectID": "BKL_22/index.html#inside-the-most-important-clouds",
+    "href": "BKL_22/index.html#inside-the-most-important-clouds",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Inside the most important clouds",
+    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
+  },
+  {
+    "objectID": "BKL_22/index.html#another-look-at-the-clouds-regression-modeling",
+    "href": "BKL_22/index.html#another-look-at-the-clouds-regression-modeling",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Another look at the clouds: regression modeling",
+    "text": "Another look at the clouds: regression modeling\nc-values of regression model with only traditional and traditional+semantic predictors\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nc-value (Concordance index C): goodness of fit"
+  },
+  {
+    "objectID": "BKL_22/index.html#another-look-at-the-clouds-regression-modeling-1",
+    "href": "BKL_22/index.html#another-look-at-the-clouds-regression-modeling-1",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Another look at the clouds: regression modeling",
+    "text": "Another look at the clouds: regression modeling\nDifference of fixed/random effects between models: in what extent the contribution of the predictors change in the models?\n\n\n\nDelta c-values\ndiffprop\noddsratio\ndifflogits\n\n\n\n\nRM only trad predictors\n0.007643931\n2.127902\n0.7551367\n\n\nRM trad+sem predictors\n-0.009705108\n0.6100782\n-0.4941681\n\n\n\n\nfrom Speelman"
+  },
+  {
+    "objectID": "BKL_22/index.html#take-home-messages",
+    "href": "BKL_22/index.html#take-home-messages",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Take-home messages",
+    "text": "Take-home messages\n\n“You shall choose a variant by the company it keeps!”\n(semi-cit. Firth 1955)\n\n\nOverall, there are some distributional semantics clusters that are very predictive of the alternation\nStatistical analyses show how traditional predictors outperform distributional semantics predictors in terms of model performances\n\n\n\nbased on the c-value"
+  },
+  {
+    "objectID": "BKL_22/index.html#directions-for-future-research",
+    "href": "BKL_22/index.html#directions-for-future-research",
+    "title": "Using distributional semantics to annotate for semantic predictors",
+    "section": "Directions for future research",
+    "text": "Directions for future research\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context\n\n\n\n\nBKL - Liège, 2022-10-21"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Slides by Chiara Paolini",
+    "section": "",
+    "text": "1 BKL\nThese are the slides presented at the Belgian Society of Linguistics on 2022-10-21 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract"
   }
 ]

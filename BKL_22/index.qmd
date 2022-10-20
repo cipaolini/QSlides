@@ -41,7 +41,7 @@ for (heading in headings) {
 i <- 1
 ```
 
-::: {.notes}
+::: notes
 In this talk, I would like to introduce you to the first case study of my PhD research project called "How much does meaning matter? A fresh look at grammatical alternations". The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study,and how semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.
 :::
 
@@ -49,13 +49,17 @@ In this talk, I would like to introduce you to the first case study of my PhD re
 
 ## The dative alternation
 
+::: {style="color: #F39D41;"}
 -   **Ditransitive** dative variant
+:::
 
-    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ \[*some pizza*\]~theme~
+\[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ \[*some pizza*\]~theme~
 
+::: {style="color: #F39D41;"}
 -   **Prepositional** dative variant
+:::
 
-    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ \[*to my cousin*\]~recipient~
+\[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ \[*to my cousin*\]~recipient~
 
 ::: notes
 Let's dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as "two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker".
@@ -74,7 +78,7 @@ In previous literature, focus on three kinds of predictors:
 3.  **Semantic, coarse-grained, higher-level predictors:** e.g., *animacy* (i.e., annotate for a binary distinction between animate and inanimate recipients -- see Bresnan et al. 2007)
 
 ```{r}
-#a cosa serve?
+#serve a far cambiare l'indice al ciclo degli headings
 #| label: add-heading1
 #| include: false
 i <- i+1
@@ -92,7 +96,7 @@ To explore the correlation of choices between the two variants, are usually mode
 -   *What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.*
 :::
 
-::: {style="text-align: center; color: red;"}
+::: {style="text-align: center; color: #E04836;"}
 **We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.**
 :::
 
@@ -104,8 +108,8 @@ Accounting for the explanatory power of lexical meaning is not easy: Annotating 
 
 ## Automatically-generated semantic predictors
 
-::: {style="text-align: center; color: red;"}
-**Our potential solution: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).**
+::: {style="text-align: center; color: #E04836;"}
+**Our suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).**
 :::
 
 -   New inputs from DMSs: **more data, less annotation**
@@ -118,17 +122,21 @@ Accounting for the explanatory power of lexical meaning is not easy: Annotating 
 
 ## Examples: recipient type-lemmas
 
-DAT-4100:
+::: {style="color: #F39D41;"}
+**DAT-4100**
+:::
 
--   ::: {style="font-size: 0.8em;"}
-    \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~ they would just waste it.
-    :::
+::: {style="font-size: 0.8em;"}
+1.  \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~ they would just waste it.
+:::
 
-DAT-4067
+::: {style="color: #F39D41;"}
+**DAT-4067**
+:::
 
--   ::: {style="font-size: 0.8em;"}
-    \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~recipient~ \[*to the mother*\]~theme~ ninety-seven percent of the time.
-    :::
+::: {style="font-size: 0.8em;"}
+2.  \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~recipient~ \[*to the mother*\]~theme~ ninety-seven percent of the time.
+:::
 
 ::: notes
 Read the examples
@@ -136,15 +144,28 @@ Read the examples
 
 ## Matrix of recipients
 
-| *Target*          | daughter/nn | europe/np | it/pp | dad/nn | troop/nn |
-|-------------------|-------------|-----------|-------|--------|----------|
-| **government/nn** | -1.23       | 3.23      | 0.21  | NA     | 2.59     |
-| **mother/nn**     | 4.36        | NA        | 1.65  | 2.89   | NA       |
-| **advance/nn**    | -2.32       | 2.09      | NA    | -0.59  | 3.67     |
++-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+
+|                               | ::: {style="color: #8D5924;"} | ::: {style="color: #8D5924;"} | ::: {style="color: #8D5924;"} | ::: {style="color: #8D5924;"} | ::: {style="color: #8D5924;"} |
+|                               | daughter/nn                   | europe/np                     | it/pp                         | dad/nn                        | troop/nn                      |
+|                               | :::                           | :::                           | :::                           | :::                           | :::                           |
++===============================+===============================+===============================+===============================+===============================+===============================+
+| ::: {style="color: #F39D41;"} | -1.23                         | 3.23                          | 0.21                          | NA                            | 2.59                          |
+| **government/nn**             |                               |                               |                               |                               |                               |
+| :::                           |                               |                               |                               |                               |                               |
++-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+
+| ::: {style="color: #F39D41;"} | 4.36                          | NA                            | 1.65                          | 2.89                          | NA                            |
+| **mother/nn**                 |                               |                               |                               |                               |                               |
+| :::                           |                               |                               |                               |                               |                               |
++-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+
+| ::: {style="color: #F39D41;"} | -2.32                         | 2.09                          | NA                            | -0.59                         | 3.67                          |
+| **advance/nn**                |                               |                               |                               |                               |                               |
+| :::                           |                               |                               |                               |                               |                               |
++-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+
 
--   *Dative alternation dataset from Szmrecsanyi et al. (2017)*, which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)
-
--   Corpus for building DMSs: *Corpus of Contemporary American English (COCA),* spoken register (ca. 127 million tokens)
+::: {style="font-size: 0.7em;"}
+-   ***Dative alternation dataset from Szmrecsanyi et al. (2017)***, which covers **N = 4,136** dative observations in contemporary spoken English (Switchboard corpus)
+-   Corpus for building DMSs: ***Corpus of Contemporary American English** (COCA),* spoken register (ca. **127 million** tokens)
+:::
 
 ::: notes
 But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let's consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn. In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.
@@ -154,26 +175,11 @@ Building a DS model, means that we train a DS mode, a type-level one in this cas
 One parameter is missing, and it is the crucial one in order to obtain the predictors, that is the PAM clustering parameter.
 :::
 
-## Identifying the best model(s)
-
-**Outputs:**
-
--   Type-level clusters = semantic predictors
-
--   C-values for (binary) conditional inference trees and conditional random forests
-
--   Percentage of negative silhouette in types and tokens (\< = 0.25)
-
-**Best model:**
-
--   **CS_4\_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)**
-
 ```{r}
 #| label: add-heading2
 #| include: false
 i <- i+1
 ```
-
 
 # `r headings[[i]]`
 
@@ -190,12 +196,12 @@ tsne_plot(recipient_coords) %>%
 ::: notes
 Building the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.
 
-The best model is \[...\]
+The best model is CS_4\_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction).
 
 \[describe the clusters\]
 :::
 
-## Cloud of themes
+## From predictor to clouds: cloud of themes
 
 ```{r}
 #| label: fig-tsne-t
@@ -204,28 +210,80 @@ tsne_plot(theme_coords) %>%
   add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
 ```
 
-::: notes
+## From clouds to distributional semantic predictors
+
+::: {style="text-align: center; color: #E04836;"}
+Each grouping of recipient/theme lemmas represents what we call ***distributional (semantic) predictor.***
 :::
 
-## Random forest of distributional predictors
-
-```{r}
-#| label: rf-dist
-varimp_dotplot(varimp_bin)
-```
+The prediction of the dative variants is based on the **membership of the recipient/theme type-lemma in a particular semantic cluster.**
 
 ::: notes
+In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster.
 :::
 
 ## Random forest of traditional and distributional predictors
 
 ```{r}
 #| label: rf-full
+#fig-cap: C-value: 0.958779655
 varimp_dotplot(varimp_full)
 ```
 
 ::: notes
-Speaker notes go here.
+-   Do not insist too much on the pronominality
+:::
+
+## Inside the most important clouds
+
+::: {style="color: #F39D41;"}
+**Theme.one:**
+:::
+
+::: {style="font-size: 0.7em;"}
+-   **one/pn**, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn
+:::
+
+::: {style="color: #F39D41;"}
+**Recipient.everybody:**
+:::
+
+::: {style="font-size: 0.7em;"}
+-   **everybody/pn**, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp
+:::
+
+::: {style="color: #F39D41;"}
+**Recipient.it:**
+:::
+
+::: {style="font-size: 0.7em;"}
+-   **it/pp**, that/dd, theory/nn, thing/nn
+:::
+
+## Another look at the clouds: regression modeling
+
+**c-values of regression model with only traditional and traditional+semantic predictors**
+
+|                                          | RM only trad predictors | RM trad+sem predictors |
+|------------------------------------------|-------------------------|------------------------|
+| **C-value for fixed effects**            | 0.9844213               | 0.9747162              |
+| **C-value for fixed and random effects** | 0.9854791               | 0.993123               |
+
+::: notes
+c-value (**Concordance index C)**: goodness of fit
+:::
+
+## Another look at the clouds: regression modeling
+
+**Difference of fixed/random effects between models**: in what extent the contribution of the predictors change in the models?
+
+| *Delta c-values*            | diffprop     | oddsratio | difflogits |
+|-----------------------------|--------------|-----------|------------|
+| **RM only trad predictors** | 0.007643931  | 2.127902  | 0.7551367  |
+| **RM trad+sem predictors**  | -0.009705108 | 0.6100782 | -0.4941681 |
+
+::: notes
+from Speelman
 :::
 
 ```{r}
@@ -236,9 +294,31 @@ i <- i+1
 
 # `r headings[[i]]`
 
-
 ## Take-home messages
 
+::: {style="text-align: center; color: #E04836;"}
+*"You shall choose a variant by the company it keeps!"*
+
+*(semi-cit. Firth 1955)*
+:::
+
+1.  Overall, there are some **distributional semantics clusters** that are **very predictive** of the alternation
+
+2.  Statistical analyses show how **traditional predictors outperform distributional semantics predictors** in terms of model performances
+
 ::: notes
-Speaker notes go here.
+2.  based on the c-value
+:::
+
+## Directions for future research
+
+-   **Other alternations:**
+    -   *Clausal complementation alternation* in the history of English
+
+    -   *Progressive alternation* in Italian
+-   **Experiment with token-level modeling**
+    -   see Montes (2021)
+
+::: notes
+Token-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context
 :::

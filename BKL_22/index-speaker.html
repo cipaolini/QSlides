@@ -7,7 +7,7 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.251">
+  <meta name="generator" content="quarto-1.1.189">
 
   <meta name="author" content="Chiara Paolini">
   <meta name="author" content="Benedikt Szmrecsanyi">
@@ -33,7 +33,6 @@
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -364,15 +363,18 @@
 </section>
 <section id="the-dative-alternation" class="slide level2">
 <h2>The dative alternation</h2>
+<div style="color: #F39D41;">
 <ul>
-<li><p><strong>Ditransitive</strong> dative variant</p>
-<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p></li>
-<li><p><strong>Prepositional</strong> dative variant</p>
-<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p></li>
+<li><strong>Ditransitive</strong> dative variant</li>
 </ul>
-<div class="footer">
-<p>Introduction: the dative alternation</p>
 </div>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p>
+<div style="color: #F39D41;">
+<ul>
+<li><strong>Prepositional</strong> dative variant</li>
+</ul>
+</div>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p>
 <aside class="notes">
 <p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions with a highly similar meaning - called linguistic variants - which represents a choice point for an individual speaker”.</p>
 <p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order). We chose this alternation for the immense amount of literature available (eg Bresnan et al 2007), and the available annotated data, like the dataset we used.</p>
@@ -396,9 +398,6 @@
 <li><p><strong>Information status‐related predictors:</strong> e.g., <em>givenness</em></p></li>
 <li><p><strong>Semantic, coarse-grained, higher-level predictors:</strong> e.g., <em>animacy</em> (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al.&nbsp;2007)</p></li>
 </ol>
-<div class="footer">
-<p>Introduction: the dative alternation</p>
-</div>
 <div class="cell">
 
 </div>
@@ -424,11 +423,8 @@
 <li><em>What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.</em></li>
 </ul>
 </div>
-<div style="text-align: center; color: red;">
+<div style="text-align: center; color: #E04836;">
 <p><strong>We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.</strong></p>
-</div>
-<div class="footer">
-<p>From vectors to predictors</p>
 </div>
 <aside class="notes">
 <p>Accounting for the explanatory power of lexical meaning is not easy: Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover. (next slide)</p>
@@ -451,16 +447,13 @@
 </section>
 <section id="automatically-generated-semantic-predictors" class="slide level2">
 <h2>Automatically-generated semantic predictors</h2>
-<div style="text-align: center; color: red;">
-<p><strong>Our potential solution: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
+<div style="text-align: center; color: #E04836;">
+<p><strong>Our suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
 </div>
 <ul>
 <li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
 <li><p>Methodological breakthrough: demonstrating to the research community how <strong>distributional semantics methods can be marshaled to annotate for semantics</strong> computationally, without the need for labor‐intensive hand‐coding.</p></li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 <aside class="notes">
 <p>(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.</p>
 <style type="text/css">
@@ -477,20 +470,21 @@
 </section>
 <section id="examples-recipient-type-lemmas" class="slide level2">
 <h2>Examples: recipient type-lemmas</h2>
-<p>DAT-4100:</p>
-<ul>
-<li><div style="font-size: 0.8em;">
-<p>[<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub> they would just waste it.</p>
-</div></li>
-</ul>
-<p>DAT-4067</p>
-<ul>
-<li><div style="font-size: 0.8em;">
-<p>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>recipient</sub> [<em>to the mother</em>]<sub>theme</sub> ninety-seven percent of the time.</p>
-</div></li>
-</ul>
-<div class="footer">
-<p>From vectors to predictors</p>
+<div style="color: #F39D41;">
+<p><strong>DAT-4100</strong></p>
+</div>
+<div style="font-size: 0.8em;">
+<ol type="1">
+<li>[<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub> they would just waste it.</li>
+</ol>
+</div>
+<div style="color: #F39D41;">
+<p><strong>DAT-4067</strong></p>
+</div>
+<div style="font-size: 0.8em;">
+<ol start="2" type="1">
+<li>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>recipient</sub> [<em>to the mother</em>]<sub>theme</sub> ninety-seven percent of the time.</li>
+</ol>
 </div>
 <aside class="notes">
 <p>Read the examples</p>
@@ -508,28 +502,40 @@
 </section>
 <section id="matrix-of-recipients" class="slide level2">
 <h2>Matrix of recipients</h2>
-<table>
+<table style="width:98%;">
 <colgroup>
-<col style="width: 27%">
-<col style="width: 19%">
 <col style="width: 16%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 14%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
-<th><em>Target</em></th>
-<th>daughter/nn</th>
-<th>europe/np</th>
-<th>it/pp</th>
-<th>dad/nn</th>
-<th>troop/nn</th>
+<th></th>
+<th><div style="color: #8D5924;">
+<p>daughter/nn</p>
+</div></th>
+<th><div style="color: #8D5924;">
+<p>europe/np</p>
+</div></th>
+<th><div style="color: #8D5924;">
+<p>it/pp</p>
+</div></th>
+<th><div style="color: #8D5924;">
+<p>dad/nn</p>
+</div></th>
+<th><div style="color: #8D5924;">
+<p>troop/nn</p>
+</div></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>government/nn</strong></td>
+<td><div style="color: #F39D41;">
+<p><strong>government/nn</strong></p>
+</div></td>
 <td>-1.23</td>
 <td>3.23</td>
 <td>0.21</td>
@@ -537,7 +543,9 @@
 <td>2.59</td>
 </tr>
 <tr class="even">
-<td><strong>mother/nn</strong></td>
+<td><div style="color: #F39D41;">
+<p><strong>mother/nn</strong></p>
+</div></td>
 <td>4.36</td>
 <td>NA</td>
 <td>1.65</td>
@@ -545,7 +553,9 @@
 <td>NA</td>
 </tr>
 <tr class="odd">
-<td><strong>advance/nn</strong></td>
+<td><div style="color: #F39D41;">
+<p><strong>advance/nn</strong></p>
+</div></td>
 <td>-2.32</td>
 <td>2.09</td>
 <td>NA</td>
@@ -554,12 +564,11 @@
 </tr>
 </tbody>
 </table>
+<div style="font-size: 0.7em;">
 <ul>
-<li><p><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em>, which covers N = 4,136 dative observations in contemporary spoken English (Switchboard corpus)</p></li>
-<li><p>Corpus for building DMSs: <em>Corpus of Contemporary American English (COCA),</em> spoken register (ca. 127 million tokens)</p></li>
+<li><strong><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em></strong>, which covers <strong>N = 4,136</strong> dative observations in contemporary spoken English (Switchboard corpus)</li>
+<li>Corpus for building DMSs: <em><strong>Corpus of Contemporary American English</strong> (COCA),</em> spoken register (ca. <strong>127 million</strong> tokens)</li>
 </ul>
-<div class="footer">
-<p>From vectors to predictors</p>
 </div>
 <aside class="notes">
 <p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (show the DA slide). Let’s consider the group of recipients, here exemplified by two real cases, government/nn and mother/nn.&nbsp;In this first part of the study, we implemented what we call a type-level model. As you can see in this table, the row in this table are word-type vectors, that is the distributional semantic vector as for ex. GOV/nn, is the results of the aggregation of all the individual occurrences in the corpus for the type lemma GOV/nn with each of the context words represented in the columns. The raw frequencies are then transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
@@ -576,22 +585,6 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="identifying-the-best-models" class="slide level2">
-<h2>Identifying the best model(s)</h2>
-<p><strong>Outputs:</strong></p>
-<ul>
-<li><p>Type-level clusters = semantic predictors</p></li>
-<li><p>C-values for (binary) conditional inference trees and conditional random forests</p></li>
-<li><p>Percentage of negative silhouette in types and tokens (&lt; = 0.25)</p></li>
-</ul>
-<p><strong>Best model:</strong></p>
-<ul>
-<li><strong>CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)</strong></li>
-</ul>
-<div class="footer">
-<p>From vectors to predictors</p>
-</div>
 </section></section>
 <section>
 <section id="forests-and-clouds" class="title-slide slide level1 center">
@@ -601,12 +594,9 @@
 <section id="from-predictors-to-clouds-cloud-of-recipients" class="slide level2">
 <h2>From predictors to clouds: cloud of recipients</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
+<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><aside class="notes">
 <p>Building the semantic predictors using DS means identifying cluster centers (called medoids) from the data and grouping the type-word vectors we obtained from the co-occurrences matrix around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.</p>
-<p>The best model is […]</p>
+<p>The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction).</p>
 <p>[describe the clusters]</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -620,34 +610,18 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="cloud-of-themes" class="slide level2">
-<h2>Cloud of themes</h2>
+<section id="from-predictor-to-clouds-cloud-of-themes" class="slide level2">
+<h2>From predictor to clouds: cloud of themes</h2>
 
-<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p><div class="footer">
-<p>Forests and clouds</p>
+<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p></section>
+<section id="from-clouds-to-distributional-semantic-predictors" class="slide level2">
+<h2>From clouds to distributional semantic predictors</h2>
+<div style="text-align: center; color: #E04836;">
+<p>Each grouping of recipient/theme lemmas represents what we call <strong><em>distributional (semantic) predictor.</em></strong></p>
 </div>
+<p>The prediction of the dative variants is based on the <strong>membership of the recipient/theme type-lemma in a particular semantic cluster.</strong></p>
 <aside class="notes">
-
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="random-forest-of-distributional-predictors" class="slide level2">
-<h2>Random forest of distributional predictors</h2>
-
-<img data-src="index_files/figure-revealjs/rf-dist-1.png" width="960" class="r-stretch"><div class="footer">
-<p>Forests and clouds</p>
-</div>
-<aside class="notes">
-
+<p>In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -663,11 +637,121 @@
 <section id="random-forest-of-traditional-and-distributional-predictors" class="slide level2">
 <h2>Random forest of traditional and distributional predictors</h2>
 
-<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><div class="footer">
-<p>Forests and clouds</p>
+<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><aside class="notes">
+<ul>
+<li>Do not insist too much on the pronominality</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inside-the-most-important-clouds" class="slide level2">
+<h2>Inside the most important clouds</h2>
+<div style="color: #F39D41;">
+<p><strong>Theme.one:</strong></p>
 </div>
+<div style="font-size: 0.7em;">
+<ul>
+<li><strong>one/pn</strong>, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn</li>
+</ul>
+</div>
+<div style="color: #F39D41;">
+<p><strong>Recipient.everybody:</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li><strong>everybody/pn</strong>, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp</li>
+</ul>
+</div>
+<div style="color: #F39D41;">
+<p><strong>Recipient.it:</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li><strong>it/pp</strong>, that/dd, theory/nn, thing/nn</li>
+</ul>
+</div>
+</section>
+<section id="another-look-at-the-clouds-regression-modeling" class="slide level2">
+<h2>Another look at the clouds: regression modeling</h2>
+<p><strong>c-values of regression model with only traditional and traditional+semantic predictors</strong></p>
+<table>
+<colgroup>
+<col style="width: 46%">
+<col style="width: 27%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>RM only trad predictors</th>
+<th>RM trad+sem predictors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>C-value for fixed effects</strong></td>
+<td>0.9844213</td>
+<td>0.9747162</td>
+</tr>
+<tr class="even">
+<td><strong>C-value for fixed and random effects</strong></td>
+<td>0.9854791</td>
+<td>0.993123</td>
+</tr>
+</tbody>
+</table>
 <aside class="notes">
-<p>Speaker notes go here.</p>
+<p>c-value (<strong>Concordance index C)</strong>: goodness of fit</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="another-look-at-the-clouds-regression-modeling-1" class="slide level2">
+<h2>Another look at the clouds: regression modeling</h2>
+<p><strong>Difference of fixed/random effects between models</strong>: in what extent the contribution of the predictors change in the models?</p>
+<table>
+<thead>
+<tr class="header">
+<th><em>Delta c-values</em></th>
+<th>diffprop</th>
+<th>oddsratio</th>
+<th>difflogits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RM only trad predictors</strong></td>
+<td>0.007643931</td>
+<td>2.127902</td>
+<td>0.7551367</td>
+</tr>
+<tr class="even">
+<td><strong>RM trad+sem predictors</strong></td>
+<td>-0.009705108</td>
+<td>0.6100782</td>
+<td>-0.4941681</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>from Speelman</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -687,11 +771,45 @@
 </section>
 <section id="take-home-messages" class="slide level2">
 <h2>Take-home messages</h2>
-<div class="footer">
-<p>Insights and further research</p>
+<div style="text-align: center; color: #E04836;">
+<p><em>“You shall choose a variant by the company it keeps!”</em></p>
+<p><em>(semi-cit. Firth 1955)</em></p>
 </div>
+<ol type="1">
+<li><p>Overall, there are some <strong>distributional semantics clusters</strong> that are <strong>very predictive</strong> of the alternation</p></li>
+<li><p>Statistical analyses show how <strong>traditional predictors outperform distributional semantics predictors</strong> in terms of model performances</p></li>
+</ol>
 <aside class="notes">
-<p>Speaker notes go here.</p>
+<ol start="2" type="1">
+<li>based on the c-value</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="directions-for-future-research" class="slide level2">
+<h2>Directions for future research</h2>
+<ul>
+<li><strong>Other alternations:</strong>
+<ul>
+<li><p><em>Clausal complementation alternation</em> in the history of English</p></li>
+<li><p><em>Progressive alternation</em> in Italian</p></li>
+</ul></li>
+<li><strong>Experiment with token-level modeling</strong>
+<ul>
+<li>see Montes (2021)</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Token-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -743,7 +861,7 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":"16661770145173399085","id":"a2ae9b38ad4679cc","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":"16662598768146873000","id":"9ebf35c92aa92df7","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner
