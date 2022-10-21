@@ -486,7 +486,7 @@
 </div>
 <div style="font-size: 0.8em;">
 <ol start="2" type="1">
-<li>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>recipient</sub> [<em>to the mother</em>]<sub>theme</sub> ninety-seven percent of the time.</li>
+<li>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>theme</sub> [<em>to the mother</em>]<sub>recipient</sub> ninety-seven percent of the time.</li>
 </ol>
 </div>
 <aside class="notes">
@@ -713,48 +713,7 @@
 </table>
 <aside class="notes">
 <p>We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.</p>
-<p>First of all, we computed the c-value (<strong>Concordance index C: goodness of fit</strong>) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="another-look-at-the-clouds-regression-modeling" class="slide level2">
-<h2>Another look at the clouds: regression modeling</h2>
-<p><strong>Difference of fixed/random effects between models</strong>: in what extent the contribution of the predictors change in the models?</p>
-<table>
-<thead>
-<tr class="header">
-<th><em>Delta c-values</em></th>
-<th>diffprop</th>
-<th>oddsratio</th>
-<th>difflogits</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>RM only trad predictors</strong></td>
-<td>0.007643931</td>
-<td>2.127902</td>
-<td>0.7551367</td>
-</tr>
-<tr class="even">
-<td><strong>RM trad+sem predictors</strong></td>
-<td>-0.009705108</td>
-<td>0.6100782</td>
-<td>-0.4941681</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>Computating the delta c-value, we have been able to check the <strong>Difference of fixed/random effects between models</strong>: in what extent the contribution of the predictors change in the models? (see with mariana)</p>
+<p>We computed the c-value (<strong>Concordance index C: goodness of fit</strong>) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
