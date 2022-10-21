@@ -139,7 +139,7 @@ In particular, we are interested how much the semantic characteristics of the le
 :::
 
 ::: {style="font-size: 0.8em;"}
-2.  \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~recipient~ \[*to the mother*\]~theme~ ninety-seven percent of the time.
+2.  \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~theme~ \[*to the mother*\]~recipient~ ninety-seven percent of the time.
 :::
 
 ::: notes
@@ -285,21 +285,7 @@ variants?
 ::: notes
 We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.
 
-First of all, we computed the c-value (**Concordance index C: goodness of fit**) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.
-:::
-
-## Another look at the clouds: regression modeling
-
-**Difference of fixed/random effects between models**: in what extent the contribution of the predictors change in the models?
-
-| *Delta c-values*            | diffprop     | oddsratio | difflogits |
-|-----------------------------|--------------|-----------|------------|
-| **RM only trad predictors** | 0.007643931  | 2.127902  | 0.7551367  |
-| **RM trad+sem predictors**  | -0.009705108 | 0.6100782 | -0.4941681 |
-
-::: notes
-Computating the delta c-value, we have been able to check the **Difference of fixed/random effects between models**: in what extent the contribution of the predictors change in the models?
-(see with mariana)
+We computed the c-value (**Concordance index C: goodness of fit**) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.
 :::
 
 ```{r}
