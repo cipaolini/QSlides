@@ -7,9 +7,9 @@ number-sections: true
 These are slides presented at various conferences by Chiara Paolini.
 If you would like to download slides as PDF, please follow the [instructions in the Quarto documentation](https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf).
 
-# [BKL](BKL_22/index.qmd){target="_blank"}
+# [Linguists’ Day 2022 (CBL-BKL)](BKL_22/index.qmd){target="_blank"}
 
-These are the slides presented at the Belgian Society of Linguistics on 2022-10-21
+These are the slides presented at the Belgian Society of Linguistics on 21-10-2022
 with Benedikt Szmrecsanyi and Mariana Montes.
 [Read the abstract](BKL_22/abstract.qmd)
 

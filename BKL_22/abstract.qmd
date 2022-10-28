@@ -8,12 +8,10 @@ author:
 format: html
 ---
 
-<!-- TODO add references -->
 The dative alternation in English is one of the most extensively investigated alternations in English. The
 ditransitive (@dit) and prepositional (prep) variants (Bresnan et al. 2007) are acknowledged to be broadly
 equivalent semantically:
 
-<!-- QUESTION with subscript or not? -->
 (@dit) [*The waiter*]~subject~ [*gave*]~verb~ [*my cousin*]~recipient~ [*some pizza*]~theme~
 
 (@prep) [*The waiter*]subject [*gave*]verb [*some pizza*]theme [*to my cousin*]recipient
@@ -43,13 +41,19 @@ predictors appear to be subtly more powerful than type-level semantic predictors
 effects emerge as the most important features for both theme and recipients, opening the research to
 further applications and developments.
 
-# References
+### References
 
+::: {#refs}
 Bresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J.
 (Eds.), Cognitive Foundations of Interpretation. Royal Netherlands Academy of Science, Amsterdam, pp. 69–94.
+
 Davies, M., 2008-. The Corpus of Contemporary American English (COCA). Available online at https://www.englishcorpora.org/coca/.
 Lenci, A., 2018. Distributional models of word meaning. Annual review of Linguistics, 4, 151-171.
+
 Röthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive indigenization effects in the English dative alternation.
 Cogn. Linguist. 28, 673–710.
+
 Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative
 perspective: The dative and genitive alternation in varieties of English. Glossa J. Gen. Linguist. 2, 86.
+:::
+

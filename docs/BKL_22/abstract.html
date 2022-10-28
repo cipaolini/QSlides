@@ -23,6 +23,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -109,23 +128,26 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<!-- TODO add references -->
 <p>The dative alternation in English is one of the most extensively investigated alternations in English. The ditransitive (1) and prepositional (prep) variants (Bresnan et al.&nbsp;2007) are acknowledged to be broadly equivalent semantically:</p>
-<!-- QUESTION with subscript or not? -->
 <ol class="example" type="1">
 <li><p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p></li>
 <li><p>[<em>The waiter</em>]subject [<em>gave</em>]verb [<em>some pizza</em>]theme [<em>to my cousin</em>]recipient</p></li>
 </ol>
 <p>Many quantitative studies focused on the more traditional formal predictors, such as structural complexity of constituents, pronominality, constituent length (e.g.&nbsp;Szmrecsanyi et al 2017) to explain the choice of one variant over the other. In contrast, semantic properties have been largely neglected in variationist alternation research due to its perceived cost efficiency. Manually annotating for semantic predictors is labor-intensive, time-consuming, and challenging to perform systematically and objectively, while not promising much in terms of explanatory power. Röthlisberger et al.&nbsp;(2017) has tried to tackle this issue via inclusion of lexical random effects in regression analysis, but while this method works reasonably well to increase the goodness of fit of regression models, it does not contribute to explaining the phenomenon. In this presentation, we introduce a potential solution to this issue: automatically generated semantic predictors using distributional models of meaning (Lenci 2018). The objectives of this research are on the one hand to determine the importance of semantic properties of the lexical context for predicting variant choice, and on the other hand whether and what they add to the explanatory power of traditional formal predictors. To accomplish our aims, the heads of the noun phrases that take the role of theme and recipient (e.g.&nbsp;pizza and cousin, respectively, in (i)) are represented in terms of their association strength to other items in a corpus. Based on such a numerical profile, we can cluster both the theme heads and the recipient heads and use the resulting classes as categorical predictors in a regression model. The approach is applied on a dataset of 1200 observations of the alternation for give in Spoken American English (Bresnan et al.&nbsp;2007); the heads are modelled with data from the Spoken COCA (Davies 2008 - , ~127 million words).</p>
 <p>The preliminary findings suggest that semantic clusters have significant predictive power, but traditional predictors appear to be subtly more powerful than type-level semantic predictors. Nevertheless, lexical effects emerge as the most important features for both theme and recipients, opening the research to further applications and developments.</p>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>Bresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.), Cognitive Foundations of Interpretation. Royal Netherlands Academy of Science, Amsterdam, pp.&nbsp;69–94. Davies, M., 2008-. The Corpus of Contemporary American English (COCA). Available online at https://www.englishcorpora.org/coca/. Lenci, A., 2018. Distributional models of word meaning. Annual review of Linguistics, 4, 151-171. Röthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive indigenization effects in the English dative alternation. Cogn. Linguist. 28, 673–710. Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. Glossa J. Gen.&nbsp;Linguist. 2, 86.</p>
+<section id="references" class="level3">
+
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" role="doc-bibliography">
+<p>Bresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.), Cognitive Foundations of Interpretation. Royal Netherlands Academy of Science, Amsterdam, pp.&nbsp;69–94.</p>
+<p>Davies, M., 2008-. The Corpus of Contemporary American English (COCA). Available online at https://www.englishcorpora.org/coca/. Lenci, A., 2018. Distributional models of word meaning. Annual review of Linguistics, 4, 151-171.</p>
+<p>Röthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive indigenization effects in the English dative alternation. Cogn. Linguist. 28, 673–710.</p>
+<p>Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. Glossa J. Gen.&nbsp;Linguist. 2, 86.</p>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
