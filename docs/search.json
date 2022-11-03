@@ -151,7 +151,7 @@
     "href": "QLVL_colloquium/index.html#the-dative-alternation",
     "title": "Annotation goes distributional:",
     "section": "The dative alternation",
-    "text": "The dative alternation\n\n\n\na) Ditransitive dative variant\n\n\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n\n\n\nb) Prepositional dative variant\n\n\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order)."
+    "text": "The dative alternation\n\n\na) Ditransitive dative variant\n\n\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n\n\nb) Prepositional dative variant\n\n\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order)."
   },
   {
     "objectID": "QLVL_colloquium/index.html#modelling-grammatical-alternations",
@@ -186,7 +186,7 @@
     "href": "QLVL_colloquium/index.html#matrix-of-recipients",
     "title": "Annotation goes distributional:",
     "section": "Matrix of recipients",
-    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\n0.0\n2.59\n\n\n\nmother/nn\n\n4.36\n0.0\n1.65\n2.89\n0.0\n\n\n\nadvance/nn\n\n-2.32\n2.09\n0.0\n-0.59\n3.67\n\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 1,190 dative observations in contemporary spoken American English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nIn this first part of the study, we implemented what we call a type-level model.\nLet’s consider only the group of recipients, here exemplified by government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a word-type vector. What you see here are raw frequencies transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.\n(read about the data set)"
+    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\n0.0\n2.59\n\n\n\nmother/nn\n\n4.36\n0.0\n1.65\n2.89\n0.0\n\n\n\nadvance/nn\n\n-2.32\n2.09\n0.0\n-0.59\n3.67\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 1,190 dative observations in contemporary spoken American English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nIn this first part of the study, we implemented what we call a type-level model.\nLet’s consider only the group of recipients, here exemplified by government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a word-type vector. What you see here are raw frequencies transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.\n(read about the data set)"
   },
   {
     "objectID": "QLVL_colloquium/index.html#from-predictors-to-clouds-cloud-of-recipients",
@@ -221,14 +221,14 @@
     "href": "QLVL_colloquium/index.html#inside-the-most-important-clouds",
     "title": "Annotation goes distributional:",
     "section": "Inside the most important clouds",
-    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
+    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
   },
   {
     "objectID": "QLVL_colloquium/index.html#another-look-at-the-clouds-regression-modelling",
     "href": "QLVL_colloquium/index.html#another-look-at-the-clouds-regression-modelling",
     "title": "Annotation goes distributional:",
     "section": "Another look at the clouds: regression modelling",
-    "text": "Another look at the clouds: regression modelling\n\nc-values of regression model with only traditional and traditional+semantic predictors\n\nChi-square (Χ2) goodness of fit (c-value) = non-parametric measure of how well a statistical model fits a set of observations.\n\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the c-value (Concordance index C: goodness of fit) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones."
+    "text": "Another look at the clouds: regression modelling\n\nc-values of regression model with only traditional and traditional+semantic predictors\n\nChi-square (Χ2) goodness of fit (c-value) = non-parametric measure of how well a statistical model fits a set of observations.\n\n\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the c-value (Concordance index C: goodness of fit) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones."
   },
   {
     "objectID": "QLVL_colloquium/index.html#take-home-messages",
@@ -242,28 +242,28 @@
     "href": "QLVL_colloquium/index.html#directions-for-future-research",
     "title": "Annotation goes distributional:",
     "section": "Directions for future research",
-    "text": "Directions for future research\n\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\n\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context"
+    "text": "Directions for future research\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context"
   },
   {
     "objectID": "QLVL_colloquium/index.html#clouds-of-recipients",
     "href": "QLVL_colloquium/index.html#clouds-of-recipients",
     "title": "Annotation goes distributional:",
     "section": "Clouds of recipients",
-    "text": "Clouds of recipients\n\n\n\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\n\n\n\n\n\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
+    "text": "Clouds of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
   },
   {
     "objectID": "QLVL_colloquium/index.html#clouds-of-themes",
     "href": "QLVL_colloquium/index.html#clouds-of-themes",
     "title": "Annotation goes distributional:",
     "section": "Clouds of themes",
-    "text": "Clouds of themes\n\n\n\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+    "text": "Clouds of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
   },
   {
     "objectID": "QLVL_colloquium/index.html#random-forest",
     "href": "QLVL_colloquium/index.html#random-forest",
     "title": "Annotation goes distributional:",
     "section": "Random forest",
-    "text": "Random forest\n\nRandom forest of traditional and distributional predictors\n\n\n\n\n\n\n\nCRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
+    "text": "Random forest\n\nRandom forest of traditional and distributional predictors\n\n\n\nCRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
   },
   {
     "objectID": "QLVL_colloquium/index.html#thank-you",
@@ -277,7 +277,7 @@
     "href": "QLVL_colloquium/index.html#thoughts-comments-suggestions",
     "title": "Annotation goes distributional:",
     "section": "Thoughts? Comments? Suggestions?",
-    "text": "Thoughts? Comments? Suggestions?\n\n\n\n\n\nchiara.paolini@kuleuven.be"
+    "text": "Thoughts? Comments? Suggestions?\n\n\nchiara.paolini@kuleuven.be"
   },
   {
     "objectID": "QLVL_colloquium/index_pdf.html",
@@ -417,6 +417,34 @@
     "href": "QLVL_colloquium/index.html#inside-the-recipients-clouds",
     "title": "Annotation goes distributional:",
     "section": "Inside the recipients clouds",
-    "text": "Inside the recipients clouds\n\n\nRecipient.advance: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np\nRecipient.wife: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np\n\nRecipient.kids: agencies/nn\n2\n0.3443036000\nkids/nn\n16\nboys/nn\n2\n0.5979984000\nkids/nn\n20\nbusinesses/nn\n2\n0.4080819000\nkids/nn\n29\ncompanies/nn\n2\n0.5218712000\nkids/nn\n33\ncountries/nn\n2\n0.5652321000\nkids/nn\n37\ncriminals/nn\n2\n0.3794335700\nkids/nn\n42\ndogs/nn\n2\n0.5007423000\nkids/nn\n43\nemployees/nn\n2\n0.4876230700\nkids/nn\n56\nfriends/nn\n2\n0.4518532500\nkids/nn\n60\ngrandparents/nn\n2\n0.3280267400\nkids/nn\n66\nguys/nn\n2\n0.3701141800\nkids/nn\n70\nhorses/nn\n2\n0.3475765000\nkids/nn\n72\nhouses/nn\n2\n0.5975894300\nkids/nn\n82\nkids/nn\n2\n0.6238054000\nkids/nn\n95\nmembers/nn\n2\n0.4905860400\nkids/nn\n104\nparents/nn\n2\n0.5942958000\nkids/nn\n113\nrashad/np\n2\n0.3486836900\nkids/nn\n124\nsons/nn\n2\n0.5616968000\nkids/nn\n127\nstudents/nn\n2\n0.4786918000\nkids/nn\n135\nthings/nn\n2\n0.4555949600\nkids/nn\n141\ntwins/nn\n2\n0.5751200300\nkids/nn\n152\nwomen/nn"
+    "text": "Inside the recipients clouds\n\n\nRecipient.advance: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np\nRecipient.wife: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np\nRecipient.kids: agencies/nn\n2\n0.3443036000\nkids/nn\n16\nboys/nn\n2\n0.5979984000\nkids/nn\n20\nbusinesses/nn\n2\n0.4080819000\nkids/nn\n29\ncompanies/nn\n2\n0.5218712000\nkids/nn\n33\ncountries/nn\n2\n0.5652321000\nkids/nn\n37\ncriminals/nn\n2\n0.3794335700\nkids/nn\n42\ndogs/nn\n2\n0.5007423000\nkids/nn\n43\nemployees/nn\n2\n0.4876230700\nkids/nn\n56\nfriends/nn\n2\n0.4518532500\nkids/nn\n60\ngrandparents/nn\n2\n0.3280267400\nkids/nn\n66\nguys/nn\n2\n0.3701141800\nkids/nn\n70\nhorses/nn\n2\n0.3475765000\nkids/nn\n72\nhouses/nn\n2\n0.5975894300\nkids/nn\n82\nkids/nn\n2\n0.6238054000\nkids/nn\n95\nmembers/nn\n2\n0.4905860400\nkids/nn\n104\nparents/nn\n2\n0.5942958000\nkids/nn\n113\nrashad/np\n2\n0.3486836900\nkids/nn\n124\nsons/nn\n2\n0.5616968000\nkids/nn\n127\nstudents/nn\n2\n0.4786918000\nkids/nn\n135\nthings/nn\n2\n0.4555949600\nkids/nn\n141\ntwins/nn\n2\n0.5751200300\nkids/nn\n152\nwomen/nn\n\n\n\n\n\nQLVL colloquium - Leuven, 2022-11-4"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-recipient-clouds",
+    "href": "QLVL_colloquium/index.html#inside-the-recipient-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the recipient clouds",
+    "text": "Inside the recipient clouds\n\n\nRecipient.advance: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np\nRecipient.wife: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np\nRecipient.kids: agencies/nn, boys/nn, businesses/nn, companies/nn, countries/nn, criminals/nn, dogs/nn, employees/nn, friends/nn, grandparents/nn, guys/nn, horses/nn, houses/nn, kids/nn, members/nn, parents/nn, rashad/np, sons/nn, students/nn, things/nn, twins/nn, women/nn\nRecipient.people: people/nn, citizen/nn, folk/nn, individual/nn, other/nn, peasant/nn, public/nn, reader/nn, white/nn\nRecipient.person: person/nn, convict/nn. criminal/nn, guy/nn, man/nn, someone/pn, stranger/nn\nRecipient.court: court/nn, judge/nn, jury/nn, matter/nn, plaintiff/nn, topic/nn\nRecipient.business: business/nn, car/nn, charity/nn, company/nn, competitor/nn, employee/nn, enterprise/nn, environment/nn, food/nn, grower/nn, household/nn, management/nn, taxpayer/nn"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-theme-clouds",
+    "href": "QLVL_colloquium/index.html#inside-the-theme-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the theme clouds",
+    "text": "Inside the theme clouds\n\n\nTheme.discount:\nTheme.book:\nTheme.bag:\nTheme.appeal:\nTheme.power:\nTheme.drug:\nTheme.doubt:\nTheme.half:\n\n\n\n\n\nQLVL colloquium - Leuven, 2022-11-4"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-theme-clouds-1",
+    "href": "QLVL_colloquium/index.html#inside-the-theme-clouds-1",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the theme clouds #1",
+    "text": "Inside the theme clouds #1\n\n\nTheme.discount: discount/nn, allowance/nn, amount/nn, bargain/nn, benefit/nn, bill/nn, billion/nn, bond/nn, bonus/nn, buck/nn, budget/nn, card/nn, cash/nn, cent/nn, checkbook/nn, contract/nn, credit-card/nn, credit/nn, cut/nn, deal/nn, degree/nn, discount/nn, dollar/nn, estimate/nn, extra/nn, incentive/nn, income/nn, insurance/nn, less/da, limit/nn, loan/nn, mail/nn, million/nn, minimum/nn, money/nn, more/da, mortgage/nn, much/da, nickel/nn, number/nn, offer/nn, outlook/nn, pay/nn, paycheck/nn, payment/nn, penny/nn, percent/nn, physical/nn, point/nn, price/nn, profit-sharing/nn, raise/nn, rate/nn, rating/nn, rebate/nn, refund/nn, salary/nn, scale/nn, stipend/nn, stock/nn, tariff/nn, tax-credit/nn, tax/nn, thumbs-down/nn, ticket/nn, tune-up/nn, veto/nn, warranty/nn, worth/nn\nTheme.book: book/nn, address/nn, appearance/nn, assistant/nn, band/nn, booklet/nn, book/nn, break/nn, broadcast/nn, cable/nn, call/nn, comedy/nn, demo/nn, description/nn, entertainment/nn, f/np, figure/nn, game/nn, glimpse/nn, graph/nn, headline/nn, history/nn, husband/nn, list/nn, literature/nn, look/nn, magazine/nn, meeting/nn, message/nn, music/nn, name/nn, new/jj, news/nn, newspaper/nn, novel/nn, paper/nn, picture/nn, present/nn, rap/nn, report/nn, run/nn, rush/nn, screen/nn, sermon/nn, song/nn, speech/nn, story/nn, subscription/nn, subtitle/nn, synopsis/nn, talk/nn, tape/nn, television/nn, this/dd, tile/nn, topic/nn, trip/nn, tv/nn, update/nn, warning/nn, world/nn\nTheme.bag: bag/nn, amp/nn, arm/nn, azalea/nn, backpack/nn, ball/nn, bath/nn, bedroom/nn, bike/nn, bin/nn, body/nn, bulb/nn, can/nn, car/nn, coat/nn, deer/nn, dog/nn, glass/nn, gun/nn, inn/nn, junkyard/nn, knife/nn, light/nn, paint/nn, pair/nn, parking/nn, pt/nn, pipe/nn, plate/nn, pony/nn, puppy/nn, purse/nn, rabbit/nn, ride/nn, ring/nn, room/nn, seat/nn, shirts/nn, shirt/nn, shower/nn, spec/nn, spot/nn, suit/nn, sweatshirt/nn, tub/nn, uniform/nn, walking/nn"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-theme-clouds-2",
+    "href": "QLVL_colloquium/index.html#inside-the-theme-clouds-2",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the theme clouds #2",
+    "text": "Inside the theme clouds #2\n\n\nTheme.appeal: appeal/nn, appointment/nn, choice/nn, custody/nn, decision/nn, demonstration/nn, demonstrator/nn, detention/nn, election/nn, felony/nn, jurisdiction/nn, law/nn, nomination/nn, order/nn, parole/nn, penalty/nn, punishment/nn, release/nn, right/nn, rule/nn, sentence/nn, trial/nn, verdict/nn\nTheme.power: power/nn, ability/nn, activity/nn, advantage/nn, ambition/nn, attention/nn, balance/nn, chance/nn, command/nn, concession/nn, consistency/nn, control/nn, credibility/nn, dignity/nn, direction/nn, flexibility/nn, focus/nn, foothold/nn, freedom/nn, goal/nn, importance/nn, independence/nn, interest/nn, isolation/nn, leeway/nn, opportunity/nn, patronage/nn, peace/nn, policy/nn, potential/nn, power/nn, preference/nn, process/nn, preference/nn, push/nn, rein/nn, self-esteem/nn, skill/nn, strenght/nn, support/nn, talent/nn, thrust/nn, traction/nn, variance/nn\nTheme.drug: drug/nn, ache/nn, aids/nn, awareness/nn, blood/nn, diet/nn, effect/nn, evaluation/nn, exercise/nn, exposure/nn, hdls/np, headache/nn, injection/nn, interaction/nn, medication/nn, medicine/nn, penicillin/nn, pill/nn, prescription/nn, rash/nn, relaxation/nn, simulation/nn, stroke/nn, test/nn, testing/nn, therapy/nn, transfusion/nn, workout/nn\nTheme.doubt: doubt/nn, affection/nn, answer/nn, appreciation/nn, background/nn, experience/nn, feeling/nn, grief/nn, idea/nn, impression/nn, insight/nn, knowledge/nn, life/nn, motivation/nn, motive/nn, payback/nn, perspective/nn, question/nn, reason/nn, respect/nn, sense/nn, slant/nn, sympathy/nn, thought/nn, uplift/nn, view/nn\n\n\n\n\n\nQLVL colloquium - Leuven, 2022-11-4"
   }
 ]

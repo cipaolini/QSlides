@@ -354,222 +354,42 @@ Token-level: in-depth analysis of the correlation of the single occurrences of t
 -   **Recipient/Theme.head:** Head lexeme of both the theme and the recipient.
 :::
 
-## Inside the recipients clouds {visibility="uncounted"}
+## Inside the recipient clouds {visibility="uncounted"}
 
-::: {style="font-size: 0.7em;"}
+::: {style="font-size: 0.6em;"}
 -   **Recipient.advance**: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np
 
 -   **Recipient.wife**: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np
 
--   Recipient.kids: agencies/nn
+-   **Recipient.kids:** agencies/nn, boys/nn, businesses/nn, companies/nn, countries/nn, criminals/nn, dogs/nn, employees/nn, friends/nn, grandparents/nn, guys/nn, horses/nn, houses/nn, kids/nn, members/nn, parents/nn, rashad/np, sons/nn, students/nn, things/nn, twins/nn, women/nn
 
-    2
+-   **Recipient.people:** people/nn, citizen/nn, folk/nn, individual/nn, other/nn, peasant/nn, public/nn, reader/nn, white/nn
 
-    0.3443036000
+-   **Recipient.person:** person/nn, convict/nn. criminal/nn, guy/nn, man/nn, someone/pn, stranger/nn
 
-    kids/nn
+-   **Recipient.cour**t: court/nn, judge/nn, jury/nn, matter/nn, plaintiff/nn, topic/nn
 
-    16
+-   **Recipient.business:** business/nn, car/nn, charity/nn, company/nn, competitor/nn, employee/nn, enterprise/nn, environment/nn, food/nn, grower/nn, household/nn, management/nn, taxpayer/nn
+:::
 
-    boys/nn
+## Inside the theme clouds #1 {visibility="uncounted"}
 
-    2
+::: {style="font-size: 0.5em;"}
+-   **Theme.discount:** discount/nn, allowance/nn, amount/nn, bargain/nn, benefit/nn, bill/nn, billion/nn, bond/nn, bonus/nn, buck/nn, budget/nn, card/nn, cash/nn, cent/nn, checkbook/nn, contract/nn, credit-card/nn, credit/nn, cut/nn, deal/nn, degree/nn, discount/nn, dollar/nn, estimate/nn, extra/nn, incentive/nn, income/nn, insurance/nn, less/da, limit/nn, loan/nn, mail/nn, million/nn, minimum/nn, money/nn, more/da, mortgage/nn, much/da, nickel/nn, number/nn, offer/nn, outlook/nn, pay/nn, paycheck/nn, payment/nn, penny/nn, percent/nn, physical/nn, point/nn, price/nn, profit-sharing/nn, raise/nn, rate/nn, rating/nn, rebate/nn, refund/nn, salary/nn, scale/nn, stipend/nn, stock/nn, tariff/nn, tax-credit/nn, tax/nn, thumbs-down/nn, ticket/nn, tune-up/nn, veto/nn, warranty/nn, worth/nn
 
-    0.5979984000
+-   **Theme.book:** book/nn, address/nn, appearance/nn, assistant/nn, band/nn, booklet/nn, book/nn, break/nn, broadcast/nn, cable/nn, call/nn, comedy/nn, demo/nn, description/nn, entertainment/nn, f/np, figure/nn, game/nn, glimpse/nn, graph/nn, headline/nn, history/nn, husband/nn, list/nn, literature/nn, look/nn, magazine/nn, meeting/nn, message/nn, music/nn, name/nn, new/jj, news/nn, newspaper/nn, novel/nn, paper/nn, picture/nn, present/nn, rap/nn, report/nn, run/nn, rush/nn, screen/nn, sermon/nn, song/nn, speech/nn, story/nn, subscription/nn, subtitle/nn, synopsis/nn, talk/nn, tape/nn, television/nn, this/dd, tile/nn, topic/nn, trip/nn, tv/nn, update/nn, warning/nn, world/nn
 
-    kids/nn
+-   **Theme.bag:** bag/nn, amp/nn, arm/nn, azalea/nn, backpack/nn, ball/nn, bath/nn, bedroom/nn, bike/nn, bin/nn, body/nn, bulb/nn, can/nn, car/nn, coat/nn, deer/nn, dog/nn, glass/nn, gun/nn, inn/nn, junkyard/nn, knife/nn, light/nn, paint/nn, pair/nn, parking/nn, pt/nn, pipe/nn, plate/nn, pony/nn, puppy/nn, purse/nn, rabbit/nn, ride/nn, ring/nn, room/nn, seat/nn, shirts/nn, shirt/nn, shower/nn, spec/nn, spot/nn, suit/nn, sweatshirt/nn, tub/nn, uniform/nn, walking/nn
+:::
 
-    20
+## Inside the theme clouds #2 {visibility="uncounted"}
 
-    businesses/nn
+::: {style="font-size: 0.5em;"}
+-   **Theme.appeal:** appeal/nn, appointment/nn, choice/nn, custody/nn, decision/nn, demonstration/nn, demonstrator/nn, detention/nn, election/nn, felony/nn, jurisdiction/nn, law/nn, nomination/nn, order/nn, parole/nn, penalty/nn, punishment/nn, release/nn, right/nn, rule/nn, sentence/nn, trial/nn, verdict/nn
 
-    2
+-   **Theme.power:** power/nn, ability/nn, activity/nn, advantage/nn, ambition/nn, attention/nn, balance/nn, chance/nn, command/nn, concession/nn, consistency/nn, control/nn, credibility/nn, dignity/nn, direction/nn, flexibility/nn, focus/nn, foothold/nn, freedom/nn, goal/nn, importance/nn, independence/nn, interest/nn, isolation/nn, leeway/nn, opportunity/nn, patronage/nn, peace/nn, policy/nn, potential/nn, power/nn, preference/nn, process/nn, preference/nn, push/nn, rein/nn, self-esteem/nn, skill/nn, strenght/nn, support/nn, talent/nn, thrust/nn, traction/nn, variance/nn
 
-    0.4080819000
+-   **Theme.drug:** drug/nn, ache/nn, aids/nn, awareness/nn, blood/nn, diet/nn, effect/nn, evaluation/nn, exercise/nn, exposure/nn, hdls/np, headache/nn, injection/nn, interaction/nn, medication/nn, medicine/nn, penicillin/nn, pill/nn, prescription/nn, rash/nn, relaxation/nn, simulation/nn, stroke/nn, test/nn, testing/nn, therapy/nn, transfusion/nn, workout/nn
 
-    kids/nn
-
-    29
-
-    companies/nn
-
-    2
-
-    0.5218712000
-
-    kids/nn
-
-    33
-
-    countries/nn
-
-    2
-
-    0.5652321000
-
-    kids/nn
-
-    37
-
-    criminals/nn
-
-    2
-
-    0.3794335700
-
-    kids/nn
-
-    42
-
-    dogs/nn
-
-    2
-
-    0.5007423000
-
-    kids/nn
-
-    43
-
-    employees/nn
-
-    2
-
-    0.4876230700
-
-    kids/nn
-
-    56
-
-    friends/nn
-
-    2
-
-    0.4518532500
-
-    kids/nn
-
-    60
-
-    grandparents/nn
-
-    2
-
-    0.3280267400
-
-    kids/nn
-
-    66
-
-    guys/nn
-
-    2
-
-    0.3701141800
-
-    kids/nn
-
-    70
-
-    horses/nn
-
-    2
-
-    0.3475765000
-
-    kids/nn
-
-    72
-
-    houses/nn
-
-    2
-
-    0.5975894300
-
-    kids/nn
-
-    82
-
-    kids/nn
-
-    2
-
-    0.6238054000
-
-    kids/nn
-
-    95
-
-    members/nn
-
-    2
-
-    0.4905860400
-
-    kids/nn
-
-    104
-
-    parents/nn
-
-    2
-
-    0.5942958000
-
-    kids/nn
-
-    113
-
-    rashad/np
-
-    2
-
-    0.3486836900
-
-    kids/nn
-
-    124
-
-    sons/nn
-
-    2
-
-    0.5616968000
-
-    kids/nn
-
-    127
-
-    students/nn
-
-    2
-
-    0.4786918000
-
-    kids/nn
-
-    135
-
-    things/nn
-
-    2
-
-    0.4555949600
-
-    kids/nn
-
-    141
-
-    twins/nn
-
-    2
-
-    0.5751200300
-
-    kids/nn
-
-    152
-
-    women/nn
+-   **Theme.doubt:** doubt/nn, affection/nn, answer/nn, appreciation/nn, background/nn, experience/nn, feeling/nn, grief/nn, idea/nn, impression/nn, insight/nn, knowledge/nn, life/nn, motivation/nn, motive/nn, payback/nn, perspective/nn, question/nn, reason/nn, respect/nn, sense/nn, slant/nn, sympathy/nn, thought/nn, uplift/nn, view/nn
 :::
