@@ -4,14 +4,11 @@ format: html
 number-sections: true
 ---
 
-These are slides presented at various conferences by Chiara Paolini.
-If you would like to download slides as PDF, please follow the [instructions in the Quarto documentation](https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf).
+These are slides presented at various conferences by Chiara Paolini. If you would like to download slides as PDF, please follow the [instructions in the Quarto documentation](https://quarto.org/docs/presentations/revealjs/presenting.html#print-to-pdf).
 
-# [Linguists’ Day 2022 (CBL-BKL)](BKL_22/index.qmd){target="_blank"}
+# [Linguists' Day 2022 (CBL-BKL)](BKL_22/index.qmd){target="_blank"}
 
-These are the slides presented at the Belgian Society of Linguistics on 21-10-2022
-with Benedikt Szmrecsanyi and Mariana Montes.
-[Read the abstract](BKL_22/abstract.qmd)
+These are the slides presented at the Belgian Society of Linguistics on 21-10-2022 with Benedikt Szmrecsanyi and Mariana Montes. [Read the abstract](BKL_22/abstract.qmd)
 
 <div>
 
@@ -21,15 +18,30 @@ with Benedikt Szmrecsanyi and Mariana Montes.
 
 </div>
 
+# [QLVL Colloquium](QLVL_colloquium/index.qmd){target="_blank"}
+
+These are the slides presented at the QLVL Colloquium on 4-11-2022. [Read the abstract](QLVL_colloquium/abstract.qmd)
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="QLVL_colloquium/index.html"></iframe>
+```
+
+</div>
+
 <!-- # [Conference](Conf_dir/index.qmd){target="_blank"} -->
 
 <!-- These are the slides presented at ... -->
+
 <!-- [Read the abstract](Conf_dir/abstract.qmd) -->
 
 <!-- <div> -->
 
 <!-- ```{=html} -->
+
 <!-- <iframe class="slide-deck" src="Conf_dir/index.html"></iframe> -->
+
 <!-- ``` -->
 
 <!-- </div> -->

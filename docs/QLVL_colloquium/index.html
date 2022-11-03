@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Chiara Paolini">
+<title>Annotation goes distributional:</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#outline" id="toc-outline" class="nav-link active" data-scroll-target="#outline">Outline</a></li>
+  <li>
+<a href="#introduction-the-dative-alternation" id="toc-introduction-the-dative-alternation" class="nav-link" data-scroll-target="#introduction-the-dative-alternation">Introduction: the dative alternation</a>
+  <ul class="collapse">
+<li><a href="#the-dative-alternation" id="toc-the-dative-alternation" class="nav-link" data-scroll-target="#the-dative-alternation">The dative alternation</a></li>
+  <li><a href="#modelling-grammatical-alternations" id="toc-modelling-grammatical-alternations" class="nav-link" data-scroll-target="#modelling-grammatical-alternations">Modelling grammatical alternations</a></li>
+  <li><a href="#role-of-semantic-predictors-in-alternation-predictions" id="toc-role-of-semantic-predictors-in-alternation-predictions" class="nav-link" data-scroll-target="#role-of-semantic-predictors-in-alternation-predictions">Role of semantic predictors in alternation predictions</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#from-vectors-to-predictors" id="toc-from-vectors-to-predictors" class="nav-link" data-scroll-target="#from-vectors-to-predictors">From vectors to predictors</a>
+  <ul class="collapse">
+<li><a href="#automatically-generated-semantic-predictors" id="toc-automatically-generated-semantic-predictors" class="nav-link" data-scroll-target="#automatically-generated-semantic-predictors">Automatically-generated semantic predictors</a></li>
+  <li><a href="#examples-recipient-type-lemmas" id="toc-examples-recipient-type-lemmas" class="nav-link" data-scroll-target="#examples-recipient-type-lemmas">Examples: recipient type-lemmas</a></li>
+  <li><a href="#matrix-of-recipients" id="toc-matrix-of-recipients" class="nav-link" data-scroll-target="#matrix-of-recipients">Matrix of recipients</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#forests-and-clouds" id="toc-forests-and-clouds" class="nav-link" data-scroll-target="#forests-and-clouds">Forests and clouds</a>
+  <ul class="collapse">
+<li><a href="#clouds-of-recipients" id="toc-clouds-of-recipients" class="nav-link" data-scroll-target="#clouds-of-recipients">Clouds of recipients</a></li>
+  <li><a href="#clouds-of-themes" id="toc-clouds-of-themes" class="nav-link" data-scroll-target="#clouds-of-themes">Clouds of themes</a></li>
+  <li><a href="#from-clouds-to-distributional-semantic-predictors" id="toc-from-clouds-to-distributional-semantic-predictors" class="nav-link" data-scroll-target="#from-clouds-to-distributional-semantic-predictors">From clouds to distributional semantic predictors</a></li>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest">Random forest</a></li>
+  <li><a href="#inside-the-most-important-clouds" id="toc-inside-the-most-important-clouds" class="nav-link" data-scroll-target="#inside-the-most-important-clouds">Inside the most important clouds</a></li>
+  <li><a href="#another-look-at-the-clouds-regression-modelling" id="toc-another-look-at-the-clouds-regression-modelling" class="nav-link" data-scroll-target="#another-look-at-the-clouds-regression-modelling">Another look at the clouds: regression modelling</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#insights-and-further-research" id="toc-insights-and-further-research" class="nav-link" data-scroll-target="#insights-and-further-research">Insights and further research</a>
+  <ul class="collapse">
+<li><a href="#take-home-messages" id="toc-take-home-messages" class="nav-link" data-scroll-target="#take-home-messages">Take-home messages</a></li>
+  <li><a href="#directions-for-future-research" id="toc-directions-for-future-research" class="nav-link" data-scroll-target="#directions-for-future-research">Directions for future research</a></li>
+  <li><a href="#thoughts-comments-suggestions" id="toc-thoughts-comments-suggestions" class="nav-link" data-scroll-target="#thoughts-comments-suggestions">Thoughts? Comments? Suggestions?</a></li>
+  <li><a href="#traditional-predictors" id="toc-traditional-predictors" class="nav-link" data-scroll-target="#traditional-predictors">Traditional predictors</a></li>
+  <li><a href="#inside-the-recipients-clouds" id="toc-inside-the-recipients-clouds" class="nav-link" data-scroll-target="#inside-the-recipients-clouds">Inside the recipients clouds</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Annotation goes distributional:</h1>
+<p class="subtitle lead">Modeling semantic predictors of the dative alternation using vector space models</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chiara Paolini </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header><section id="outline" class="level2"><h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<ul>
+<li>Introduction: the dative alternation</li>
+<li>From vectors to predictors</li>
+<li>Forests and clouds</li>
+<li>Insights and further research</li>
+</ul>
+<div class="notes">
+<p>In this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.</p>
+</div>
+</section><section id="introduction-the-dative-alternation" class="level1"><h1>Introduction: the dative alternation</h1>
+<section id="the-dative-alternation" class="level2"><h2 class="anchored" data-anchor-id="the-dative-alternation">The dative alternation</h2>
+<div style="color: #F39D41;">
+<ol type="1">
+<li>
+<strong>a) Ditransitive</strong> dative variant</li>
+</ol>
+</div>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p>
+<div style="color: #F39D41;">
+<ol type="1">
+<li>
+<strong>b) Prepositional</strong> dative variant</li>
+</ol>
+</div>
+<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p>
+<div class="notes">
+<p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.</p>
+<p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order).</p>
+</div>
+</section><section id="modelling-grammatical-alternations" class="level2"><h2 class="anchored" data-anchor-id="modelling-grammatical-alternations">Modelling grammatical alternations</h2>
+<p>In previous literature, focus on three kinds of predictors:</p>
+<ol type="1">
+<li><p><strong>Formal predictors:</strong> e.g., <em>structural complexity of constituents</em> (e.g., presence of heavy postmodification), <em>pronominality</em>, and <em>constituent length</em> (in words, syllables, or similar)</p></li>
+<li><p><strong>Information status‐related predictors:</strong> e.g., <em>givenness</em></p></li>
+<li><p><strong>Semantic, coarse-grained, higher-level predictors:</strong> e.g., <em>animacy</em> (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al.&nbsp;2007)</p></li>
+</ol>
+<div class="cell">
+
+</div>
+<div class="notes">
+<p>To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)</p>
+</div>
+</section><section id="role-of-semantic-predictors-in-alternation-predictions" class="level2"><h2 class="anchored" data-anchor-id="role-of-semantic-predictors-in-alternation-predictions">Role of semantic predictors in alternation predictions</h2>
+<p><strong>Annotating for semantics is labor‐intensive and challenging to perform objectively.</strong></p>
+<div class="caption" style="font-size: 0.8em;">
+<ul>
+<li><em>What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.</em></li>
+</ul>
+</div>
+<div style="text-align: center; color: #E04836;">
+<p><strong>We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.</strong></p>
+</div>
+<div class="notes">
+<p>Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover.</p>
+<p>In particular, we are interested how much the semantic characteristics of the lexical material in the slots of the dative variants predict the choice.</p>
+</div>
+</section></section><section id="from-vectors-to-predictors" class="level1"><h1>From vectors to predictors</h1>
+<section id="automatically-generated-semantic-predictors" class="level2"><h2 class="anchored" data-anchor-id="automatically-generated-semantic-predictors">Automatically-generated semantic predictors</h2>
+<div style="text-align: center; color: #E04836;">
+<p><strong>Our suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
+<li><p>Distributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.</p></li>
+</ul>
+</div>
+<div class="notes">
+<p>(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.</p>
+</div>
+</section><section id="examples-recipient-type-lemmas" class="level2"><h2 class="anchored" data-anchor-id="examples-recipient-type-lemmas">Examples: recipient type-lemmas</h2>
+<div style="color: #F39D41;">
+<ol type="1">
+<li><strong>DAT-4100</strong></li>
+</ol>
+</div>
+<div style="font-size: 0.8em;">
+<ul>
+<li>[<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub> they would just waste it.</li>
+</ul>
+</div>
+<div style="color: #F39D41;">
+<ol start="2" type="1">
+<li><strong>DAT-4067</strong></li>
+</ol>
+</div>
+<div style="font-size: 0.8em;">
+<ul>
+<li>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>theme</sub> [<em>to the mother</em>]<sub>recipient</sub> ninety-seven percent of the time.</li>
+</ul>
+</div>
+<div class="notes">
+<p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples).</p>
+</div>
+</section><section id="matrix-of-recipients" class="level2"><h2 class="anchored" data-anchor-id="matrix-of-recipients">Matrix of recipients</h2>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>daughter/nn</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>europe/np</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>it/pp</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>dad/nn</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>troop/nn</p>
+</div></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>government/nn</strong></p>
+</div></td>
+<td>-1.23</td>
+<td>3.23</td>
+<td>0.21</td>
+<td>0.0</td>
+<td>2.59</td>
+</tr>
+<tr class="even">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>mother/nn</strong></p>
+</div></td>
+<td>4.36</td>
+<td>0.0</td>
+<td>1.65</td>
+<td>2.89</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>advance/nn</strong></p>
+</div></td>
+<td>-2.32</td>
+<td>2.09</td>
+<td>0.0</td>
+<td>-0.59</td>
+<td>3.67</td>
+</tr>
+</tbody>
+</table>
+<div style="font-size: 0.7em;">
+<ul>
+<li>
+<strong><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em></strong>, which covers <strong>N = 1,190</strong> dative observations in contemporary <strong>spoken American English</strong> (Switchboard corpus)</li>
+<li>Corpus for building DMSs: <em><strong>Corpus of Contemporary American English</strong> (COCA),</em> spoken register (ca. <strong>127 million</strong> tokens)</li>
+</ul>
+</div>
+<div class="notes">
+<p>In this first part of the study, we implemented what we call a <strong>type-level model</strong>.</p>
+<p>Let’s consider only the group of recipients, here exemplified by government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a <strong>word-type vector</strong>. What you see here are raw frequencies transformed, or better, weighted using <strong>association strength measures, such as PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
+<p>Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.</p>
+<p>(read about the data set)</p>
+</div>
+</section></section><section id="forests-and-clouds" class="level1"><h1>Forests and clouds</h1>
+<section id="clouds-of-recipients" class="level2"><h2 class="anchored" data-anchor-id="clouds-of-recipients">Clouds of recipients</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-tsne-r" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="index_files/figure-html/fig-tsne-r-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>Building the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.</p>
+<p>Here, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).</p>
+<p>(describe the clusters)</p>
+</div>
+</section><section id="clouds-of-themes" class="level2"><h2 class="anchored" data-anchor-id="clouds-of-themes">Clouds of themes</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-tsne-t" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="index_files/figure-html/fig-tsne-t-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="from-clouds-to-distributional-semantic-predictors" class="level2"><h2 class="anchored" data-anchor-id="from-clouds-to-distributional-semantic-predictors">From clouds to distributional semantic predictors</h2>
+<div style="text-align: center; color: #E04836;">
+<p>Each grouping of recipient/theme lemmas represents what we call <strong><em>distributional (semantic) predictor.</em></strong></p>
+</div>
+<div style="text-align: center;">
+<p>The prediction of the dative variants is based on the <strong>membership of the recipient/theme type-lemma in a particular semantic cluster.</strong></p>
+</div>
+<div class="notes">
+<p>To summarize, each grouping of recipient/theme lemmas represents what we call <strong><em>distributional (semantic) predictor.</em></strong> In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster by using two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis.</p>
+</div>
+</section><section id="random-forest" class="level2"><h2 class="anchored" data-anchor-id="random-forest">Random forest</h2>
+<div style="font-size: 0.6em;">
+<p><strong>Random forest of traditional and distributional predictors</strong></p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/rf-full-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="notes">
+<p>CRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality</p>
+</div>
+</section><section id="inside-the-most-important-clouds" class="level2"><h2 class="anchored" data-anchor-id="inside-the-most-important-clouds">Inside the most important clouds</h2>
+<div style="color: #F39D41;">
+<p><strong>Theme.one:</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li>
+<strong>one/pn</strong>, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn</li>
+</ul>
+</div>
+<div style="color: #F39D41;">
+<p><strong>Recipient.everybody:</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li>
+<strong>everybody/pn</strong>, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp</li>
+</ul>
+</div>
+<div style="color: #F39D41;">
+<p><strong>Recipient.it:</strong></p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li>
+<strong>it/pp</strong>, that/dd, theory/nn, thing/nn</li>
+</ul>
+</div>
+</section><section id="another-look-at-the-clouds-regression-modelling" class="level2"><h2 class="anchored" data-anchor-id="another-look-at-the-clouds-regression-modelling">Another look at the clouds: regression modelling</h2>
+<div style="font-size: 0.7em;">
+<p><strong>c-values of regression model with only traditional and traditional+semantic predictors</strong></p>
+<div style="font-size: 0.7em; text-align: center; color: #E04836;">
+<p><strong>Chi-square (Χ<sup>2</sup>) goodness of fit (c-value)</strong> = non-parametric measure of how well a statistical model fits a set of observations.</p>
+</div>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 27%">
+<col style="width: 26%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>RM only trad predictors</th>
+<th>RM trad+sem predictors</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>C-value for fixed effects</strong></td>
+<td>0.9844213</td>
+<td>0.9747162</td>
+</tr>
+<tr class="even">
+<td><strong>C-value for fixed and random effects</strong></td>
+<td>0.9854791</td>
+<td>0.993123</td>
+</tr>
+</tbody>
+</table>
+<div class="notes">
+<p>We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.</p>
+<p>We computed the c-value (<strong>Concordance index C: goodness of fit</strong>) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
+</div>
+</section></section><section id="insights-and-further-research" class="level1"><h1>Insights and further research</h1>
+<section id="take-home-messages" class="level2"><h2 class="anchored" data-anchor-id="take-home-messages">Take-home messages</h2>
+<div style="text-align: center; color: #E04836;">
+<p><em>“You shall choose a variant by the company it keeps!”</em></p>
+<p><em>(semi-cit. Firth 1955)</em></p>
+</div>
+<ol type="1">
+<li><p>Overall, there are some <strong>distributional semantics clusters</strong> that are <strong>very predictive</strong> of the alternation</p></li>
+<li><p>Statistical analyses show how <strong>traditional predictors outperform distributional semantics predictors</strong> in terms of model performances</p></li>
+</ol>
+<div class="notes">
+<ol start="2" type="1">
+<li>based on the c-value</li>
+</ol>
+</div>
+</section><section id="directions-for-future-research" class="level2"><h2 class="anchored" data-anchor-id="directions-for-future-research">Directions for future research</h2>
+<ul>
+<li>
+<strong>Other alternations:</strong>
+<ul>
+<li><p><em>Clausal complementation alternation</em> in the history of English</p></li>
+<li><p><em>Progressive alternation</em> in Italian</p></li>
+</ul>
+</li>
+<li>
+<strong>Experiment with token-level modeling</strong>
+<ul>
+<li>see Montes (2021)</li>
+</ul>
+</li>
+</ul>
+<div class="notes">
+<p>Token-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context</p>
+</div>
+</section><section id="thoughts-comments-suggestions" class="level2"><h2 class="anchored" data-anchor-id="thoughts-comments-suggestions">Thoughts? Comments? Suggestions?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/thank_you.png" class="img-fluid figure-img" width="677"></p>
+</figure>
+</div>
+<div style="text-align: center; font-size: 0.6em;">
+<p><strong><em>chiara.paolini@kuleuven.be</em></strong></p>
+</div>
+</section><section id="traditional-predictors" class="level2" data-visibility="uncounted"><h2 data-visibility="uncounted" class="anchored" data-anchor-id="traditional-predictors">Traditional predictors</h2>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p><strong>Recipient/Theme.type:</strong> The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.</p></li>
+<li><p><strong>Recipient/Theme.definiteness:</strong> The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.</p></li>
+<li><p><strong>Recipient/Theme.animacy:</strong> The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.</p></li>
+<li><p><strong>Length.difference:</strong> The log difference between recipient and theme lengths (see Bresnan &amp; Ford 2010).</p></li>
+<li><p><strong>Semantics (of dative verb):</strong> (1) transfer; (2) communication; (3) abstract.</p></li>
+<li><p><strong>Recipient/Theme.head:</strong> Head lexeme of both the theme and the recipient.</p></li>
+</ul>
+</div>
+</section><section id="inside-the-recipients-clouds" class="level2" data-visibility="uncounted"><h2 data-visibility="uncounted" class="anchored" data-anchor-id="inside-the-recipients-clouds">Inside the recipients clouds</h2>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p><strong>Recipient.advance</strong>: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np</p></li>
+<li><p><strong>Recipient.wife</strong>: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np</p></li>
+<li>
+<p>Recipient.kids: agencies/nn</p>
+<p>2</p>
+<p>0.3443036000</p>
+<p>kids/nn</p>
+<p>16</p>
+<p>boys/nn</p>
+<p>2</p>
+<p>0.5979984000</p>
+<p>kids/nn</p>
+<p>20</p>
+<p>businesses/nn</p>
+<p>2</p>
+<p>0.4080819000</p>
+<p>kids/nn</p>
+<p>29</p>
+<p>companies/nn</p>
+<p>2</p>
+<p>0.5218712000</p>
+<p>kids/nn</p>
+<p>33</p>
+<p>countries/nn</p>
+<p>2</p>
+<p>0.5652321000</p>
+<p>kids/nn</p>
+<p>37</p>
+<p>criminals/nn</p>
+<p>2</p>
+<p>0.3794335700</p>
+<p>kids/nn</p>
+<p>42</p>
+<p>dogs/nn</p>
+<p>2</p>
+<p>0.5007423000</p>
+<p>kids/nn</p>
+<p>43</p>
+<p>employees/nn</p>
+<p>2</p>
+<p>0.4876230700</p>
+<p>kids/nn</p>
+<p>56</p>
+<p>friends/nn</p>
+<p>2</p>
+<p>0.4518532500</p>
+<p>kids/nn</p>
+<p>60</p>
+<p>grandparents/nn</p>
+<p>2</p>
+<p>0.3280267400</p>
+<p>kids/nn</p>
+<p>66</p>
+<p>guys/nn</p>
+<p>2</p>
+<p>0.3701141800</p>
+<p>kids/nn</p>
+<p>70</p>
+<p>horses/nn</p>
+<p>2</p>
+<p>0.3475765000</p>
+<p>kids/nn</p>
+<p>72</p>
+<p>houses/nn</p>
+<p>2</p>
+<p>0.5975894300</p>
+<p>kids/nn</p>
+<p>82</p>
+<p>kids/nn</p>
+<p>2</p>
+<p>0.6238054000</p>
+<p>kids/nn</p>
+<p>95</p>
+<p>members/nn</p>
+<p>2</p>
+<p>0.4905860400</p>
+<p>kids/nn</p>
+<p>104</p>
+<p>parents/nn</p>
+<p>2</p>
+<p>0.5942958000</p>
+<p>kids/nn</p>
+<p>113</p>
+<p>rashad/np</p>
+<p>2</p>
+<p>0.3486836900</p>
+<p>kids/nn</p>
+<p>124</p>
+<p>sons/nn</p>
+<p>2</p>
+<p>0.5616968000</p>
+<p>kids/nn</p>
+<p>127</p>
+<p>students/nn</p>
+<p>2</p>
+<p>0.4786918000</p>
+<p>kids/nn</p>
+<p>135</p>
+<p>things/nn</p>
+<p>2</p>
+<p>0.4555949600</p>
+<p>kids/nn</p>
+<p>141</p>
+<p>twins/nn</p>
+<p>2</p>
+<p>0.5751200300</p>
+<p>kids/nn</p>
+<p>152</p>
+<p>women/nn</p>
+</li>
+</ul>
+</div>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

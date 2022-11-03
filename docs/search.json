@@ -123,7 +123,7 @@
     "href": "index.html",
     "title": "Slides by Chiara Paolini",
     "section": "",
-    "text": "1 Linguists’ Day 2022 (CBL-BKL)\nThese are the slides presented at the Belgian Society of Linguistics on 21-10-2022 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract"
+    "text": "1 Linguists’ Day 2022 (CBL-BKL)\nThese are the slides presented at the Belgian Society of Linguistics on 21-10-2022 with Benedikt Szmrecsanyi and Mariana Montes. Read the abstract\n\n\n\n\n\n2 QLVL Colloquium\nThese are the slides presented at the QLVL Colloquium on 4-11-2022. Read the abstract"
   },
   {
     "objectID": "BKL_22/index.html#another-look-at-the-clouds-regression-modelling",
@@ -131,5 +131,292 @@
     "title": "Using distributional semantics to annotate for semantic predictors",
     "section": "Another look at the clouds: regression modelling",
     "text": "Another look at the clouds: regression modelling\nc-values of regression model with only traditional and traditional+semantic predictors\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the c-value (Concordance index C: goodness of fit) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones."
+  },
+  {
+    "objectID": "QLVL_colloquium/abstract.html",
+    "href": "QLVL_colloquium/abstract.html",
+    "title": "Annotation goes distributional:",
+    "section": "",
+    "text": "References\nBresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.), Cognitive Foundations of Interpretation. Royal Netherlands Academy of Science, Amsterdam, pp. 69–94.\nDavies, M., 2008-. The Corpus of Contemporary American English (COCA). Available online at https://www.englishcorpora.org/coca/. Lenci, A., 2018. Distributional models of word meaning. Annual review of Linguistics, 4, 151-171.\nLenci, A., 2018. Distributional Models of Word Meaning. Annual Review of Linguistics 4 (1): 151–71.\nRöthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive indigenization effects in the English dative alternation. Cogn. Linguist. 28, 673–710.\nSzmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. Glossa J. Gen. Linguist. 2, 86."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#outline",
+    "href": "QLVL_colloquium/index.html#outline",
+    "title": "Annotation goes distributional:",
+    "section": "Outline",
+    "text": "Outline\n\nIntroduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nInsights and further research\n\n\nIn this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#the-dative-alternation",
+    "href": "QLVL_colloquium/index.html#the-dative-alternation",
+    "title": "Annotation goes distributional:",
+    "section": "The dative alternation",
+    "text": "The dative alternation\n\n\n\na) Ditransitive dative variant\n\n\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n\n\n\nb) Prepositional dative variant\n\n\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order)."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#modelling-grammatical-alternations",
+    "href": "QLVL_colloquium/index.html#modelling-grammatical-alternations",
+    "title": "Annotation goes distributional:",
+    "section": "Modelling grammatical alternations",
+    "text": "Modelling grammatical alternations\nIn previous literature, focus on three kinds of predictors:\n\nFormal predictors: e.g., structural complexity of constituents (e.g., presence of heavy postmodification), pronominality, and constituent length (in words, syllables, or similar)\nInformation status‐related predictors: e.g., givenness\nSemantic, coarse-grained, higher-level predictors: e.g., animacy (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al. 2007)\n\n\n\n\n\nTo explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#role-of-semantic-predictors-in-alternation-predictions",
+    "href": "QLVL_colloquium/index.html#role-of-semantic-predictors-in-alternation-predictions",
+    "title": "Annotation goes distributional:",
+    "section": "Role of semantic predictors in alternation predictions",
+    "text": "Role of semantic predictors in alternation predictions\nAnnotating for semantics is labor‐intensive and challenging to perform objectively.\n\n\nWhat role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.\n\n\n\nWe assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.\n\n\nAnnotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover.\nIn particular, we are interested how much the semantic characteristics of the lexical material in the slots of the dative variants predict the choice."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#automatically-generated-semantic-predictors",
+    "href": "QLVL_colloquium/index.html#automatically-generated-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Automatically-generated semantic predictors",
+    "text": "Automatically-generated semantic predictors\n\nOur suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\n\nNew inputs from DMSs: more data, less annotation\nDistributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.\n\n\n\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#examples-recipient-type-lemmas",
+    "href": "QLVL_colloquium/index.html#examples-recipient-type-lemmas",
+    "title": "Annotation goes distributional:",
+    "section": "Examples: recipient type-lemmas",
+    "text": "Examples: recipient type-lemmas\n\n\nDAT-4100\n\n\n\n\n[if I]subject [gave]verb [it]theme [to the government]recipient they would just waste it.\n\n\n\n\nDAT-4067\n\n\n\n\n[The judge]subject [will usually, uh, give]verb [custody]theme [to the mother]recipient ninety-seven percent of the time.\n\n\n\nBut, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples)."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#matrix-of-recipients",
+    "href": "QLVL_colloquium/index.html#matrix-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Matrix of recipients",
+    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\n0.0\n2.59\n\n\n\nmother/nn\n\n4.36\n0.0\n1.65\n2.89\n0.0\n\n\n\nadvance/nn\n\n-2.32\n2.09\n0.0\n-0.59\n3.67\n\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 1,190 dative observations in contemporary spoken American English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nIn this first part of the study, we implemented what we call a type-level model.\nLet’s consider only the group of recipients, here exemplified by government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a word-type vector. What you see here are raw frequencies transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.\n(read about the data set)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#from-predictors-to-clouds-cloud-of-recipients",
+    "href": "QLVL_colloquium/index.html#from-predictors-to-clouds-cloud-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "From predictors to clouds: cloud of recipients",
+    "text": "From predictors to clouds: cloud of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#from-predictor-to-clouds-cloud-of-themes",
+    "href": "QLVL_colloquium/index.html#from-predictor-to-clouds-cloud-of-themes",
+    "title": "Annotation goes distributional:",
+    "section": "From predictor to clouds: cloud of themes",
+    "text": "From predictor to clouds: cloud of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#from-clouds-to-distributional-semantic-predictors",
+    "href": "QLVL_colloquium/index.html#from-clouds-to-distributional-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "From clouds to distributional semantic predictors",
+    "text": "From clouds to distributional semantic predictors\n\nEach grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor.\n\n\nThe prediction of the dative variants is based on the membership of the recipient/theme type-lemma in a particular semantic cluster.\n\n\nTo summarize, each grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor. In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster by using two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "href": "QLVL_colloquium/index.html#random-forest-of-traditional-and-distributional-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Random forest of traditional and distributional predictors",
+    "text": "Random forest of traditional and distributional predictors\n\n\nCRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-most-important-clouds",
+    "href": "QLVL_colloquium/index.html#inside-the-most-important-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the most important clouds",
+    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#another-look-at-the-clouds-regression-modelling",
+    "href": "QLVL_colloquium/index.html#another-look-at-the-clouds-regression-modelling",
+    "title": "Annotation goes distributional:",
+    "section": "Another look at the clouds: regression modelling",
+    "text": "Another look at the clouds: regression modelling\n\nc-values of regression model with only traditional and traditional+semantic predictors\n\nChi-square (Χ2) goodness of fit (c-value) = non-parametric measure of how well a statistical model fits a set of observations.\n\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the c-value (Concordance index C: goodness of fit) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#take-home-messages",
+    "href": "QLVL_colloquium/index.html#take-home-messages",
+    "title": "Annotation goes distributional:",
+    "section": "Take-home messages",
+    "text": "Take-home messages\n\n“You shall choose a variant by the company it keeps!”\n(semi-cit. Firth 1955)\n\n\nOverall, there are some distributional semantics clusters that are very predictive of the alternation\nStatistical analyses show how traditional predictors outperform distributional semantics predictors in terms of model performances\n\n\n\nbased on the c-value"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#directions-for-future-research",
+    "href": "QLVL_colloquium/index.html#directions-for-future-research",
+    "title": "Annotation goes distributional:",
+    "section": "Directions for future research",
+    "text": "Directions for future research\n\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\n\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#clouds-of-recipients",
+    "href": "QLVL_colloquium/index.html#clouds-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of recipients",
+    "text": "Clouds of recipients\n\n\n\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\n\n\n\n\n\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#clouds-of-themes",
+    "href": "QLVL_colloquium/index.html#clouds-of-themes",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of themes",
+    "text": "Clouds of themes\n\n\n\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#random-forest",
+    "href": "QLVL_colloquium/index.html#random-forest",
+    "title": "Annotation goes distributional:",
+    "section": "Random forest",
+    "text": "Random forest\n\nRandom forest of traditional and distributional predictors\n\n\n\n\n\n\n\nCRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#thank-you",
+    "href": "QLVL_colloquium/index.html#thank-you",
+    "title": "Annotation goes distributional:",
+    "section": "Thank you!",
+    "text": "Thank you!\n\n\n\nchiara.paolini@kuleuven.be\n\n\n\n\n\nQLVL colloquium - Leuven, 2022-11-4"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#thoughts-comments-suggestions",
+    "href": "QLVL_colloquium/index.html#thoughts-comments-suggestions",
+    "title": "Annotation goes distributional:",
+    "section": "Thoughts? Comments? Suggestions?",
+    "text": "Thoughts? Comments? Suggestions?\n\n\n\n\n\nchiara.paolini@kuleuven.be"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html",
+    "href": "QLVL_colloquium/index_pdf.html",
+    "title": "Annotation goes distributional:",
+    "section": "",
+    "text": "Introduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nInsights and further research\n\n\nIn this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#the-dative-alternation",
+    "href": "QLVL_colloquium/index_pdf.html#the-dative-alternation",
+    "title": "Annotation goes distributional:",
+    "section": "The dative alternation",
+    "text": "The dative alternation\n\n\n\na) Ditransitive dative variant\n\n\n[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n\n\n\nb) Prepositional dative variant\n\n\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order)."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#modelling-grammatical-alternations",
+    "href": "QLVL_colloquium/index_pdf.html#modelling-grammatical-alternations",
+    "title": "Annotation goes distributional:",
+    "section": "Modelling grammatical alternations",
+    "text": "Modelling grammatical alternations\nIn previous literature, focus on three kinds of predictors:\n\nFormal predictors: e.g., structural complexity of constituents (e.g., presence of heavy postmodification), pronominality, and constituent length (in words, syllables, or similar)\nInformation status‐related predictors: e.g., givenness\nSemantic, coarse-grained, higher-level predictors: e.g., animacy (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al. 2007)\n\n\n\n\n\nTo explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#role-of-semantic-predictors-in-alternation-predictions",
+    "href": "QLVL_colloquium/index_pdf.html#role-of-semantic-predictors-in-alternation-predictions",
+    "title": "Annotation goes distributional:",
+    "section": "Role of semantic predictors in alternation predictions",
+    "text": "Role of semantic predictors in alternation predictions\nAnnotating for semantics is labor‐intensive and challenging to perform objectively.\n\n\nWhat role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.\n\n\n\nWe assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.\n\n\nAnnotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover.\nIn particular, we are interested how much the semantic characteristics of the lexical material in the slots of the dative variants predict the choice."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#automatically-generated-semantic-predictors",
+    "href": "QLVL_colloquium/index_pdf.html#automatically-generated-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Automatically-generated semantic predictors",
+    "text": "Automatically-generated semantic predictors\n\nOur suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\n\nNew inputs from DMSs: more data, less annotation\nDistributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.\n\n\n\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#examples-recipient-type-lemmas",
+    "href": "QLVL_colloquium/index_pdf.html#examples-recipient-type-lemmas",
+    "title": "Annotation goes distributional:",
+    "section": "Examples: recipient type-lemmas",
+    "text": "Examples: recipient type-lemmas\n\n\nDAT-4100\n\n\n\n\n[if I]subject [gave]verb [it]theme [to the government]recipient they would just waste it.\n\n\n\n\nDAT-4067\n\n\n\n\n[The judge]subject [will usually, uh, give]verb [custody]theme [to the mother]recipient ninety-seven percent of the time.\n\n\n\nBut, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples)."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#matrix-of-recipients",
+    "href": "QLVL_colloquium/index_pdf.html#matrix-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Matrix of recipients",
+    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\n0.0\n2.59\n\n\n\nmother/nn\n\n4.36\n0.0\n1.65\n2.89\n0.0\n\n\n\nadvance/nn\n\n-2.32\n2.09\n0.0\n-0.59\n3.67\n\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 1,190 dative observations in contemporary spoken American English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nIn this first part of the study, we implemented what we call a type-level model.\nLet’s consider only the group of recipients, here exemplified by government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a word-type vector. What you see here are raw frequencies transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.\n(read about the data set)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#clouds-of-recipients",
+    "href": "QLVL_colloquium/index_pdf.html#clouds-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of recipients",
+    "text": "Clouds of recipients\n\n\n\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\n\n\n\n\n\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#clouds-of-themes",
+    "href": "QLVL_colloquium/index_pdf.html#clouds-of-themes",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of themes",
+    "text": "Clouds of themes\n\n\n\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#from-clouds-to-distributional-semantic-predictors",
+    "href": "QLVL_colloquium/index_pdf.html#from-clouds-to-distributional-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "From clouds to distributional semantic predictors",
+    "text": "From clouds to distributional semantic predictors\n\nEach grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor.\n\n\nThe prediction of the dative variants is based on the membership of the recipient/theme type-lemma in a particular semantic cluster.\n\n\nTo summarize, each grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor. In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster by using two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#random-forest",
+    "href": "QLVL_colloquium/index_pdf.html#random-forest",
+    "title": "Annotation goes distributional:",
+    "section": "Random forest",
+    "text": "Random forest\n\nRandom forest of traditional and distributional predictors\n\n\n\n\n\n\n\nCRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#inside-the-most-important-clouds",
+    "href": "QLVL_colloquium/index_pdf.html#inside-the-most-important-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the most important clouds",
+    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#another-look-at-the-clouds-regression-modelling",
+    "href": "QLVL_colloquium/index_pdf.html#another-look-at-the-clouds-regression-modelling",
+    "title": "Annotation goes distributional:",
+    "section": "Another look at the clouds: regression modelling",
+    "text": "Another look at the clouds: regression modelling\n\nc-values of regression model with only traditional and traditional+semantic predictors\n\nChi-square (Χ2) goodness of fit (c-value) = non-parametric measure of how well a statistical model fits a set of observations.\n\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\nC-value for fixed effects\n0.9844213\n0.9747162\n\n\nC-value for fixed and random effects\n0.9854791\n0.993123\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the c-value (Concordance index C: goodness of fit) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones."
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#take-home-messages",
+    "href": "QLVL_colloquium/index_pdf.html#take-home-messages",
+    "title": "Annotation goes distributional:",
+    "section": "Take-home messages",
+    "text": "Take-home messages\n\n“You shall choose a variant by the company it keeps!”\n(semi-cit. Firth 1955)\n\n\nOverall, there are some distributional semantics clusters that are very predictive of the alternation\nStatistical analyses show how traditional predictors outperform distributional semantics predictors in terms of model performances\n\n\n\nbased on the c-value"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#directions-for-future-research",
+    "href": "QLVL_colloquium/index_pdf.html#directions-for-future-research",
+    "title": "Annotation goes distributional:",
+    "section": "Directions for future research",
+    "text": "Directions for future research\n\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\n\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context"
+  },
+  {
+    "objectID": "QLVL_colloquium/index_pdf.html#thoughts-comments-suggestions",
+    "href": "QLVL_colloquium/index_pdf.html#thoughts-comments-suggestions",
+    "title": "Annotation goes distributional:",
+    "section": "Thoughts? Comments? Suggestions?",
+    "text": "Thoughts? Comments? Suggestions?\n\n\n\n\n\nchiara.paolini@kuleuven.be"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html",
+    "href": "QLVL_colloquium/index.html",
+    "title": "Annotation goes distributional:",
+    "section": "",
+    "text": "Introduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nInsights and further research\n\n\nIn this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-clouds",
+    "href": "QLVL_colloquium/index.html#inside-the-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the clouds",
+    "text": "Inside the clouds\n\nTheme.one:\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\nit/pp, that/dd, theory/nn, thing/nn\n\n\n\n\n\nQLVL colloquium - Leuven, 2022-11-4"
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#traditional-predictors",
+    "href": "QLVL_colloquium/index.html#traditional-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Traditional predictors",
+    "text": "Traditional predictors\n\n\nRecipient/Theme.type: The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.\nRecipient/Theme.definiteness: The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.\nRecipient/Theme.animacy: The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.\nLength.difference: The log difference between recipient and theme lengths (see Bresnan & Ford 2010).\nSemantics (of dative verb): (1) transfer; (2) communication; (3) abstract.\nRecipient/Theme.head: Head lexeme of both the theme and the recipient."
+  },
+  {
+    "objectID": "QLVL_colloquium/index.html#inside-the-recipients-clouds",
+    "href": "QLVL_colloquium/index.html#inside-the-recipients-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the recipients clouds",
+    "text": "Inside the recipients clouds\n\n\nRecipient.advance: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np\nRecipient.wife: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np\n\nRecipient.kids: agencies/nn\n2\n0.3443036000\nkids/nn\n16\nboys/nn\n2\n0.5979984000\nkids/nn\n20\nbusinesses/nn\n2\n0.4080819000\nkids/nn\n29\ncompanies/nn\n2\n0.5218712000\nkids/nn\n33\ncountries/nn\n2\n0.5652321000\nkids/nn\n37\ncriminals/nn\n2\n0.3794335700\nkids/nn\n42\ndogs/nn\n2\n0.5007423000\nkids/nn\n43\nemployees/nn\n2\n0.4876230700\nkids/nn\n56\nfriends/nn\n2\n0.4518532500\nkids/nn\n60\ngrandparents/nn\n2\n0.3280267400\nkids/nn\n66\nguys/nn\n2\n0.3701141800\nkids/nn\n70\nhorses/nn\n2\n0.3475765000\nkids/nn\n72\nhouses/nn\n2\n0.5975894300\nkids/nn\n82\nkids/nn\n2\n0.6238054000\nkids/nn\n95\nmembers/nn\n2\n0.4905860400\nkids/nn\n104\nparents/nn\n2\n0.5942958000\nkids/nn\n113\nrashad/np\n2\n0.3486836900\nkids/nn\n124\nsons/nn\n2\n0.5616968000\nkids/nn\n127\nstudents/nn\n2\n0.4786918000\nkids/nn\n135\nthings/nn\n2\n0.4555949600\nkids/nn\n141\ntwins/nn\n2\n0.5751200300\nkids/nn\n152\nwomen/nn"
   }
 ]
