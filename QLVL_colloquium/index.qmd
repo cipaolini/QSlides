@@ -16,7 +16,7 @@ execute:
 headings <- c("Introduction: the dative alternation",
               "From vectors to predictors",
               "Forests and clouds",
-              "Insights and further research")
+              "Conclusions")
 source(here::here("QLVL_colloquium", "R", "plots.R"))
 read_data <- function(fname) {
   read_tsv(here::here("QLVL_colloquium", "data_processed", paste0(fname, ".tsv")), show_col_types = FALSE)
@@ -48,13 +48,13 @@ In this talk, I would like to introduce you to the first case study of my PhD re
 ## The dative alternation
 
 ::: {style="color: #F39D41;"}
-1.  **a) Ditransitive** dative variant
+**1) a. Ditransitive** dative variant
 :::
 
 \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ \[*some pizza*\]~theme~
 
 ::: {style="color: #F39D41;"}
-1.  **b) Prepositional** dative variant
+&emsp; **b. Prepositional** dative variant
 :::
 
 \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ \[*to my cousin*\]~recipient~
@@ -83,7 +83,7 @@ i <- i+1
 ```
 
 ::: notes
-To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)
+To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)
 :::
 
 ## Role of semantic predictors in alternation predictions
@@ -119,13 +119,15 @@ In particular, we are interested how much the semantic characteristics of the le
 :::
 
 ::: notes
+A completely bottom-up approach to annotation.
+
 (after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.
 :::
 
 ## Examples: recipient type-lemmas
 
 ::: {style="color: #F39D41;"}
-1.  **DAT-4100**
+**2)** **a.** **DAT-4100**
 :::
 
 ::: {style="font-size: 0.8em;"}
@@ -133,7 +135,7 @@ In particular, we are interested how much the semantic characteristics of the le
 :::
 
 ::: {style="color: #F39D41;"}
-2.  **DAT-4067**
+&emsp; **b. DAT-4067**
 :::
 
 ::: {style="font-size: 0.8em;"}
@@ -172,7 +174,9 @@ But, what does it mean annotating predictors with DS? What we are going to distr
 ::: notes
 In this first part of the study, we implemented what we call a **type-level model**.
 
-Let's consider only the group of recipients, here exemplified by government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a **word-type vector**. What you see here are raw frequencies transformed, or better, weighted using **association strength measures, such as PPMI**, that allow the model to bring up to the light the informative semantic relationships between the words.
+Let's consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a **word-type vector**. What you see here are raw frequencies transformed, or better, weighted using **association strength measures, such as PPMI**, that allow the model to bring up to the light the informative semantic relationships between the words.
+
+The values here represent the the attraction/the association strenght between the target word and a context word.
 
 Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.
 
@@ -240,7 +244,7 @@ varimp_dotplot(varimp_full)
 ```
 
 ::: notes
-CRF ia a recursive partitioning method based on conditional inference trees: individual trees are 'grown', and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality
+CRF is a statistical method based CIF: trees are obtained though a finite series of recursive splits of the data in several dataset, based on predictors which better distinguish between the different values of the response variable. In CRF, the individual trees are 'grown' together, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality
 :::
 
 ## Inside the most important clouds
@@ -275,22 +279,22 @@ CRF ia a recursive partitioning method based on conditional inference trees: ind
 **c-values of regression model with only traditional and traditional+semantic predictors**
 
 ::: {style="font-size: 0.7em; text-align: center; color: #E04836;"}
-**Chi-square (Χ^2^) goodness of fit (c-value)** = non-parametric measure of how well a statistical model fits a set of observations.
+**Index of concordance (c-value)** = non-parametric measure of how well a statistical model fits a set of observations.
 :::
 :::
 
 +------------------------------------------+-------------------------+------------------------+
 |                                          | RM only trad predictors | RM trad+sem predictors |
 +==========================================+=========================+========================+
-| **C-value for fixed effects**            | 0.9844213               | 0.9747162              |
+| **C-value for fixed effects**            | 0.984                   | 0.975                  |
 +------------------------------------------+-------------------------+------------------------+
-| **C-value for fixed and random effects** | 0.9854791               | 0.993123               |
+| **C-value for fixed and random effects** | 0.985                   | 0.993                  |
 +------------------------------------------+-------------------------+------------------------+
 
 ::: notes
 We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.
 
-We computed the c-value (**Concordance index C: goodness of fit**) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.
+We computed the **Concordance index C: goodness of fit** (read the slide) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the T-model suggests how the traditional p performs better alone, than in combination with the semantic ones.
 :::
 
 ```{r}
@@ -336,6 +340,17 @@ Token-level: in-depth analysis of the correlation of the single occurrences of t
 
 ::: {style="text-align: center; font-size: 0.6em;"}
 ***chiara.paolini\@kuleuven.be***
+:::
+
+## Parameters of the type-level models {visibility="uncounted"}
+
+::: {style="font-size: 0.7em;"}
+-   Corpus filters: **window size** (3, 4, 7), **sentence boundaries** (y/n)
+-   Collocation matrix filters: **selection of context words** (dimensionality: 5000, 10000, 50000), **vocabulary filtering** (e.g., PoS, lemma, stop-words)
+-   Association measures: **PPMI, log likelihood**
+-   Distance measures: **Cosine**
+-   Dimensionality reduction: **Euclidian + UMAP** (none, 2, 10)
+-   **K-medoids (PAM)**: 3, 8, 15
 :::
 
 ## Traditional predictors {visibility="uncounted"}
