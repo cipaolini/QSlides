@@ -172,7 +172,7 @@
     "href": "QLVL_colloquium/index.html#automatically-generated-semantic-predictors",
     "title": "Annotation goes distributional:",
     "section": "Automatically-generated semantic predictors",
-    "text": "Automatically-generated semantic predictors\n\nOur suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\n\nNew inputs from DMSs: more data, less annotation\nDistributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.\n\n\n\nA completely bottom-up approach to annotation.\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
+    "text": "Automatically-generated semantic predictors\n\nWe use automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\n\nNew inputs from DMSs: more data, less annotation\nDistributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.(Lenci 2018)\n\n\n\nA completely bottom-up approach to annotation.\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
   },
   {
     "objectID": "QLVL_colloquium/index.html#examples-recipient-type-lemmas",
@@ -453,5 +453,166 @@
     "title": "Annotation goes distributional:",
     "section": "Parameters of the type-level models",
     "text": "Parameters of the type-level models\n\n\nCorpus filters: window size (3, 4, 7), sentence boundaries (y/n)\nCollocation matrix filters: selection of context words (dimensionality: 5000, 10000, 50000), vocabulary filtering (e.g., PoS, lemma, stop-words)\nAssociation measures: PPMI, log likelihood\nDistance measures: Cosine\nDimensionality reduction: Euclidian + UMAP (none, 2, 10)\nK-medoids (PAM): 3, 8, 15"
+  },
+  {
+    "objectID": "Taal_tongval/abstract.html",
+    "href": "Taal_tongval/abstract.html",
+    "title": "Annotation goes distributional:",
+    "section": "",
+    "text": "[The waiter]subject [gave]verb [my cousin]recipient [some pizza]theme\n[The waiter]subject [gave]verb [some pizza]theme [to my cousin]recipient\n\nMany quantitative studies focused on the more traditional formal predictors, such as structural complexity of constituents, pronominality, constituent length (e.g. Szmrecsanyi et al 2017). However, little is known about the semantic characteristics of the lexical context in which those variants are embedded. The extensive variationist alternation research considers semantic predictors as mere “nuisance” factors at best, without much substantial interest in them or in their relative explanatory power.\nOne of the reasons behind this lack of interest is the labor‐intensive annotation process for semantic predictors. Röthlisberger et al. (2017) has tried to tackle this issue via inclusion of lexical randomeffects in regression analysis, but while this method works reasonably well to increase the goodness of fit of regression models, it does not explain much.\nIn this presentation, we attempt to analyze the influence that semantic differences in the meanings of slot fillers have on the choice between the two variants of the dative alternation by including clustering solutions based on distributional models (Lenci 2018) as predictors in regression models. The objectives of this research are to determine how important semantic properties of the lexical context are for predicting variant choice, and whether and what they add to traditional predictors’ explanatory power. To accomplish our aims, we restrict attention to FIne‐Grained Ambitious Semantic predictors (henceforth: FIGAS predictors), which are obtained in a bottom‐up fashion by using type-level vector space models. In particular, the heads of the noun phrases that take the role of theme and recipient (e.g. pizza and cousin, respectively, in (i)) are modeled as strings of numbers called vectors, which represent which context words each word is attracted to and how much. Their mathematical properties allow us to compute weighted distances between them and thus gauge how similar two words are based on which other words they are attracted to. As a consequence, we can cluster both the theme heads and the recipient heads and use the resulting classes as categorical predictors in the regression model.\nThe preliminary findings suggest that semantic clusters have significant predictive power, but traditional predictors appear to be subtly more powerful than type-level semantic predictors. Nevertheless, lexical effects emerge as the most important features for both theme and recipients.\n\n\n\n\n\n\n\nReferences\nBresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.), Cognitive Foundations of Interpretation. Royal Netherlands Academy of Science, Amsterdam, pp. 69–94.\nDavies, M., 2008-. The Corpus of Contemporary American English (COCA). Available online at https://www.englishcorpora.org/coca/. Lenci, A., 2018. Distributional models of word meaning. Annual review of Linguistics, 4, 151-171.\nLenci, A., 2018. Distributional Models of Word Meaning. Annual Review of Linguistics 4 (1): 151–71.\nRöthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive indigenization effects in the English dative alternation. Cogn. Linguist. 28, 673–710.\nSzmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. Glossa J. Gen. Linguist. 2, 86."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#outline",
+    "href": "Taal_tongval/index.html#outline",
+    "title": "Annotation goes distributional:",
+    "section": "Outline",
+    "text": "Outline\n\nIntroduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nConclusions\n\n\nIn this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#the-dative-alternation",
+    "href": "Taal_tongval/index.html#the-dative-alternation",
+    "title": "Annotation goes distributional:",
+    "section": "The dative alternation",
+    "text": "The dative alternation\n\n(1) a. Ditransitive dative variant\n\n    [The waiter]subject [gave]verb [my cousin]recipient     [some pizza]theme\n\n   b. Prepositional dative variant\n\n    [The waiter]subject [gave]verb [some pizza]theme     [to my cousin]recipient\n\nLet’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.\nIn English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order)."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#modelling-grammatical-alternations",
+    "href": "Taal_tongval/index.html#modelling-grammatical-alternations",
+    "title": "Annotation goes distributional:",
+    "section": "Modelling grammatical alternations",
+    "text": "Modelling grammatical alternations\nIn previous literature, focus on three kinds of predictors:\n\nFormal predictors: e.g., structural complexity of constituents (e.g., presence of heavy postmodification), pronominality, and constituent length (in words, syllables, or similar)\nInformation status‐related predictors: e.g., givenness\nSemantic, coarse-grained, higher-level predictors: e.g., animacy (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al. 2007)\n\n\n\n\n\nTo explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#role-of-semantic-predictors-in-alternation-predictions",
+    "href": "Taal_tongval/index.html#role-of-semantic-predictors-in-alternation-predictions",
+    "title": "Annotation goes distributional:",
+    "section": "Role of semantic predictors in alternation predictions",
+    "text": "Role of semantic predictors in alternation predictions\nAnnotating for semantics is labor‐intensive and challenging to perform objectively.\n\n\nWhat role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.\n\n\n\nWe assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.\n\n\nAnnotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover.\nIn particular, we are interested how much the semantic characteristics of the lexical material in the slots of the dative variants predict the choice."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#automatically-generated-semantic-predictors",
+    "href": "Taal_tongval/index.html#automatically-generated-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Automatically-generated semantic predictors",
+    "text": "Automatically-generated semantic predictors\n\nWe use automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).\n\n\n\nNew inputs from DMSs: more data, less annotation\nDistributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.(Lenci 2018)\n\n\n\nA completely bottom-up approach to annotation.\n(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#examples-recipient-type-lemmas",
+    "href": "Taal_tongval/index.html#examples-recipient-type-lemmas",
+    "title": "Annotation goes distributional:",
+    "section": "Examples: recipient type-lemmas",
+    "text": "Examples: recipient type-lemmas\n\n(2) a. DAT-4100\n\n\n     [if I]subject [gave]verb [it]theme [to the government]recipient      they would just waste it.\n\n\n   b. DAT-4067\n\n\n     [The judge]subject [will usually, uh, give]verb [custody]theme      [to the mother]recipient ninety-seven percent of the time.\n\n\nBut, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples)."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#matrix-of-recipients",
+    "href": "Taal_tongval/index.html#matrix-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Matrix of recipients",
+    "text": "Matrix of recipients\n\n\n\n\n\n\n\n\n\n\n\n\n\ndaughter/nn\n\n\neurope/np\n\n\nit/pp\n\n\ndad/nn\n\n\ntroop/nn\n\n\n\n\n\n\ngovernment/nn\n\n-1.23\n3.23\n0.21\n0.0\n2.59\n\n\n\nmother/nn\n\n4.36\n0.0\n1.65\n2.89\n0.0\n\n\n\nadvance/nn\n\n-2.32\n2.09\n0.0\n-0.59\n3.67\n\n\n\n\n\nDative alternation dataset from Szmrecsanyi et al. (2017), which covers N = 1,190 dative observations in contemporary spoken American English (Switchboard corpus)\nCorpus for building DMSs: Corpus of Contemporary American English (COCA), spoken register (ca. 127 million tokens)\n\n\n\nIn this first part of the study, we implemented what we call a type-level model.\nLet’s consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a word-type vector. What you see here are raw frequencies transformed, or better, weighted using association strength measures, such as PPMI, that allow the model to bring up to the light the informative semantic relationships between the words.\nThe values here represent the the attraction/the association strenght between the target word and a context word.\nBuilding a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.\n(read about the data set)"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#clouds-of-recipients",
+    "href": "Taal_tongval/index.html#clouds-of-recipients",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of recipients",
+    "text": "Clouds of recipients\n\nFigure 1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.\nBuilding the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.\nHere, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).\n(describe the clusters)"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#clouds-of-themes",
+    "href": "Taal_tongval/index.html#clouds-of-themes",
+    "title": "Annotation goes distributional:",
+    "section": "Clouds of themes",
+    "text": "Clouds of themes\n\nFigure 2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#from-clouds-to-distributional-semantic-predictors",
+    "href": "Taal_tongval/index.html#from-clouds-to-distributional-semantic-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "From clouds to distributional semantic predictors",
+    "text": "From clouds to distributional semantic predictors\n\nEach grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor.\n\n\nThe prediction of the dative variants is based on the membership of the recipient/theme type-lemma in a particular semantic cluster.\n\n\nTo summarize, each grouping of recipient/theme lemmas represents what we call distributional (semantic) predictor. In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster by using two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#random-forest",
+    "href": "Taal_tongval/index.html#random-forest",
+    "title": "Annotation goes distributional:",
+    "section": "Random forest",
+    "text": "Random forest\n\nRandom forest of traditional and distributional predictors\n\n\n\nCRF is a statistical method based CIF: trees are obtained though a finite series of recursive splits of the data in several dataset, based on predictors which better distinguish between the different values of the response variable. In CRF, the individual trees are ‘grown’ together, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#inside-the-most-important-clouds",
+    "href": "Taal_tongval/index.html#inside-the-most-important-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the most important clouds",
+    "text": "Inside the most important clouds\n\nTheme.one:\n\n\n\none/pn, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn\n\n\n\nRecipient.everybody:\n\n\n\neverybody/pn, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp\n\n\n\nRecipient.it:\n\n\n\nit/pp, that/dd, theory/nn, thing/nn"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#another-look-at-the-clouds-regression-modelling",
+    "href": "Taal_tongval/index.html#another-look-at-the-clouds-regression-modelling",
+    "title": "Annotation goes distributional:",
+    "section": "Another look at the clouds: regression modelling",
+    "text": "Another look at the clouds: regression modelling\n\nc-values of regression model with only traditional and traditional+semantic predictors\n\nIndex of concordance (c-value) = non-parametric measure of how well a statistical model fits a set of observations.\n\n\n\n\n\n\n\n\n\n\n\nRM only trad predictors\nRM trad+sem predictors\n\n\n\n\nC-value for fixed effects\n0.984\n0.975\n\n\nC-value for fixed and random effects\n0.985\n0.993\n\n\n\n\nWe also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.\nWe computed the Concordance index C: goodness of fit (read the slide) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the T-model suggests how the traditional p performs better alone, than in combination with the semantic ones."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#take-home-messages",
+    "href": "Taal_tongval/index.html#take-home-messages",
+    "title": "Annotation goes distributional:",
+    "section": "Take-home messages",
+    "text": "Take-home messages\n\n“You shall choose a variant by the company it keeps!”\n(semi-cit. Firth 1955)\n\n\nOverall, there are some distributional semantics clusters that are very predictive of the alternation\nStatistical analyses show how traditional predictors outperform distributional semantics predictors in terms of model performances\n\n\n\nbased on the c-value"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#directions-for-future-research",
+    "href": "Taal_tongval/index.html#directions-for-future-research",
+    "title": "Annotation goes distributional:",
+    "section": "Directions for future research",
+    "text": "Directions for future research\n\nOther alternations:\n\nClausal complementation alternation in the history of English\nProgressive alternation in Italian\n\nExperiment with token-level modeling\n\nsee Montes (2021)\n\n\n\nToken-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#thoughts-comments-suggestions",
+    "href": "Taal_tongval/index.html#thoughts-comments-suggestions",
+    "title": "Annotation goes distributional:",
+    "section": "Thoughts? Comments? Suggestions?",
+    "text": "Thoughts? Comments? Suggestions?\n\n\nchiara.paolini@kuleuven.be"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#parameters-of-the-type-level-models",
+    "href": "Taal_tongval/index.html#parameters-of-the-type-level-models",
+    "title": "Annotation goes distributional:",
+    "section": "Parameters of the type-level models",
+    "text": "Parameters of the type-level models\n\n\nCorpus filters: window size (3, 4, 7), sentence boundaries (y/n)\nCollocation matrix filters: selection of context words (dimensionality: 5000, 10000, 50000), vocabulary filtering (e.g., PoS, lemma, stop-words)\nAssociation measures: PPMI, log likelihood\nDistance measures: Cosine\nDimensionality reduction: Euclidian + UMAP (none, 2, 10)\nK-medoids (PAM): 3, 8, 15"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#traditional-predictors",
+    "href": "Taal_tongval/index.html#traditional-predictors",
+    "title": "Annotation goes distributional:",
+    "section": "Traditional predictors",
+    "text": "Traditional predictors\n\n\nRecipient/Theme.type: The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.\nRecipient/Theme.definiteness: The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.\nRecipient/Theme.animacy: The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.\nLength.difference: The log difference between recipient and theme lengths (see Bresnan & Ford 2010).\nSemantics (of dative verb): (1) transfer; (2) communication; (3) abstract.\nRecipient/Theme.head: Head lexeme of both the theme and the recipient."
+  },
+  {
+    "objectID": "Taal_tongval/index.html#inside-the-recipient-clouds",
+    "href": "Taal_tongval/index.html#inside-the-recipient-clouds",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the recipient clouds",
+    "text": "Inside the recipient clouds\n\n\nRecipient.advance: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np\nRecipient.wife: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np\nRecipient.kids: agencies/nn, boys/nn, businesses/nn, companies/nn, countries/nn, criminals/nn, dogs/nn, employees/nn, friends/nn, grandparents/nn, guys/nn, horses/nn, houses/nn, kids/nn, members/nn, parents/nn, rashad/np, sons/nn, students/nn, things/nn, twins/nn, women/nn\nRecipient.people: people/nn, citizen/nn, folk/nn, individual/nn, other/nn, peasant/nn, public/nn, reader/nn, white/nn\nRecipient.person: person/nn, convict/nn. criminal/nn, guy/nn, man/nn, someone/pn, stranger/nn\nRecipient.court: court/nn, judge/nn, jury/nn, matter/nn, plaintiff/nn, topic/nn\nRecipient.business: business/nn, car/nn, charity/nn, company/nn, competitor/nn, employee/nn, enterprise/nn, environment/nn, food/nn, grower/nn, household/nn, management/nn, taxpayer/nn"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#inside-the-theme-clouds-1",
+    "href": "Taal_tongval/index.html#inside-the-theme-clouds-1",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the theme clouds #1",
+    "text": "Inside the theme clouds #1\n\n\nTheme.discount: discount/nn, allowance/nn, amount/nn, bargain/nn, benefit/nn, bill/nn, billion/nn, bond/nn, bonus/nn, buck/nn, budget/nn, card/nn, cash/nn, cent/nn, checkbook/nn, contract/nn, credit-card/nn, credit/nn, cut/nn, deal/nn, degree/nn, discount/nn, dollar/nn, estimate/nn, extra/nn, incentive/nn, income/nn, insurance/nn, less/da, limit/nn, loan/nn, mail/nn, million/nn, minimum/nn, money/nn, more/da, mortgage/nn, much/da, nickel/nn, number/nn, offer/nn, outlook/nn, pay/nn, paycheck/nn, payment/nn, penny/nn, percent/nn, physical/nn, point/nn, price/nn, profit-sharing/nn, raise/nn, rate/nn, rating/nn, rebate/nn, refund/nn, salary/nn, scale/nn, stipend/nn, stock/nn, tariff/nn, tax-credit/nn, tax/nn, thumbs-down/nn, ticket/nn, tune-up/nn, veto/nn, warranty/nn, worth/nn\nTheme.book: book/nn, address/nn, appearance/nn, assistant/nn, band/nn, booklet/nn, book/nn, break/nn, broadcast/nn, cable/nn, call/nn, comedy/nn, demo/nn, description/nn, entertainment/nn, f/np, figure/nn, game/nn, glimpse/nn, graph/nn, headline/nn, history/nn, husband/nn, list/nn, literature/nn, look/nn, magazine/nn, meeting/nn, message/nn, music/nn, name/nn, new/jj, news/nn, newspaper/nn, novel/nn, paper/nn, picture/nn, present/nn, rap/nn, report/nn, run/nn, rush/nn, screen/nn, sermon/nn, song/nn, speech/nn, story/nn, subscription/nn, subtitle/nn, synopsis/nn, talk/nn, tape/nn, television/nn, this/dd, tile/nn, topic/nn, trip/nn, tv/nn, update/nn, warning/nn, world/nn\nTheme.bag: bag/nn, amp/nn, arm/nn, azalea/nn, backpack/nn, ball/nn, bath/nn, bedroom/nn, bike/nn, bin/nn, body/nn, bulb/nn, can/nn, car/nn, coat/nn, deer/nn, dog/nn, glass/nn, gun/nn, inn/nn, junkyard/nn, knife/nn, light/nn, paint/nn, pair/nn, parking/nn, pt/nn, pipe/nn, plate/nn, pony/nn, puppy/nn, purse/nn, rabbit/nn, ride/nn, ring/nn, room/nn, seat/nn, shirts/nn, shirt/nn, shower/nn, spec/nn, spot/nn, suit/nn, sweatshirt/nn, tub/nn, uniform/nn, walking/nn"
+  },
+  {
+    "objectID": "Taal_tongval/index.html#inside-the-theme-clouds-2",
+    "href": "Taal_tongval/index.html#inside-the-theme-clouds-2",
+    "title": "Annotation goes distributional:",
+    "section": "Inside the theme clouds #2",
+    "text": "Inside the theme clouds #2\n\n\nTheme.appeal: appeal/nn, appointment/nn, choice/nn, custody/nn, decision/nn, demonstration/nn, demonstrator/nn, detention/nn, election/nn, felony/nn, jurisdiction/nn, law/nn, nomination/nn, order/nn, parole/nn, penalty/nn, punishment/nn, release/nn, right/nn, rule/nn, sentence/nn, trial/nn, verdict/nn\nTheme.power: power/nn, ability/nn, activity/nn, advantage/nn, ambition/nn, attention/nn, balance/nn, chance/nn, command/nn, concession/nn, consistency/nn, control/nn, credibility/nn, dignity/nn, direction/nn, flexibility/nn, focus/nn, foothold/nn, freedom/nn, goal/nn, importance/nn, independence/nn, interest/nn, isolation/nn, leeway/nn, opportunity/nn, patronage/nn, peace/nn, policy/nn, potential/nn, power/nn, preference/nn, process/nn, preference/nn, push/nn, rein/nn, self-esteem/nn, skill/nn, strenght/nn, support/nn, talent/nn, thrust/nn, traction/nn, variance/nn\nTheme.drug: drug/nn, ache/nn, aids/nn, awareness/nn, blood/nn, diet/nn, effect/nn, evaluation/nn, exercise/nn, exposure/nn, hdls/np, headache/nn, injection/nn, interaction/nn, medication/nn, medicine/nn, penicillin/nn, pill/nn, prescription/nn, rash/nn, relaxation/nn, simulation/nn, stroke/nn, test/nn, testing/nn, therapy/nn, transfusion/nn, workout/nn\nTheme.doubt: doubt/nn, affection/nn, answer/nn, appreciation/nn, background/nn, experience/nn, feeling/nn, grief/nn, idea/nn, impression/nn, insight/nn, knowledge/nn, life/nn, motivation/nn, motive/nn, payback/nn, perspective/nn, question/nn, reason/nn, respect/nn, sense/nn, slant/nn, sympathy/nn, thought/nn, uplift/nn, view/nn\n\n\n\n\n\nTaal en Tongval Colloquium - Gent, 2022-11-18"
+  },
+  {
+    "objectID": "Taal_tongval/index.html",
+    "href": "Taal_tongval/index.html",
+    "title": "Annotation goes distributional:",
+    "section": "",
+    "text": "Introduction: the dative alternation\nFrom vectors to predictors\nForests and clouds\nConclusions\n\n\nIn this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors."
   }
 ]

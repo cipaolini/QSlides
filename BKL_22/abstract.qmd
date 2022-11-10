@@ -9,7 +9,7 @@ format: html
 ---
 
 The dative alternation in English is one of the most extensively investigated alternations in English. The
-ditransitive (@dit) and prepositional (prep) variants (Bresnan et al. 2007) are acknowledged to be broadly
+ditransitive (@dit) and prepositional (@prep) variants (Bresnan et al. 2007) are acknowledged to be broadly
 equivalent semantically:
 
 (@dit) [*The waiter*]~subject~ [*gave*]~verb~ [*my cousin*]~recipient~ [*some pizza*]~theme~

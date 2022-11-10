@@ -336,7 +336,7 @@
 <li>Introduction: the dative alternation</li>
 <li>From vectors to predictors</li>
 <li>Forests and clouds</li>
-<li>Insights and further research</li>
+<li>Conclusions</li>
 </ul>
 <aside class="notes">
 <p>In this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.</p>
@@ -360,15 +360,11 @@
 <section id="the-dative-alternation" class="slide level2">
 <h2>The dative alternation</h2>
 <div style="color: #F39D41;">
-<ol type="1">
-<li><strong>a) Ditransitive</strong> dative variant</li>
-</ol>
+<p><strong>1) a. Ditransitive</strong> dative variant</p>
 </div>
 <p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p>
 <div style="color: #F39D41;">
-<ol type="1">
-<li><strong>b) Prepositional</strong> dative variant</li>
-</ol>
+<p>  <strong>b. Prepositional</strong> dative variant</p>
 </div>
 <p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p>
 <aside class="notes">
@@ -398,7 +394,7 @@
 
 </div>
 <aside class="notes">
-<p>To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy. This is because (next slide)</p>
+<p>To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -445,15 +441,16 @@
 <section id="automatically-generated-semantic-predictors" class="slide level2">
 <h2>Automatically-generated semantic predictors</h2>
 <div style="text-align: center; color: #E04836;">
-<p><strong>Our suggestion: automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
+<p><strong>We use automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
 </div>
 <div style="font-size: 0.7em;">
 <ul>
 <li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
-<li><p>Distributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.</p></li>
+<li><p>Distributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.(Lenci 2018)</p></li>
 </ul>
 </div>
 <aside class="notes">
+<p>A completely bottom-up approach to annotation.</p>
 <p>(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -470,9 +467,7 @@
 <section id="examples-recipient-type-lemmas" class="slide level2">
 <h2>Examples: recipient type-lemmas</h2>
 <div style="color: #F39D41;">
-<ol type="1">
-<li><strong>DAT-4100</strong></li>
-</ol>
+<p><strong>2)</strong> <strong>a.</strong> <strong>DAT-4100</strong></p>
 </div>
 <div style="font-size: 0.8em;">
 <ul>
@@ -480,9 +475,7 @@
 </ul>
 </div>
 <div style="color: #F39D41;">
-<ol start="2" type="1">
-<li><strong>DAT-4067</strong></li>
-</ol>
+<p>  <strong>b. DAT-4067</strong></p>
 </div>
 <div style="font-size: 0.8em;">
 <ul>
@@ -575,7 +568,8 @@
 </div>
 <aside class="notes">
 <p>In this first part of the study, we implemented what we call a <strong>type-level model</strong>.</p>
-<p>Let’s consider only the group of recipients, here exemplified by government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a <strong>word-type vector</strong>. What you see here are raw frequencies transformed, or better, weighted using <strong>association strength measures, such as PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
+<p>Let’s consider only the group of recipients, here exemplified by the types government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a <strong>word-type vector</strong>. What you see here are raw frequencies transformed, or better, weighted using <strong>association strength measures, such as PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
+<p>The values here represent the the attraction/the association strenght between the target word and a context word.</p>
 <p>Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.</p>
 <p>(read about the data set)</p>
 <style type="text/css">
@@ -647,7 +641,7 @@
 </div>
 
 <img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><aside class="notes">
-<p>CRF ia a recursive partitioning method based on conditional inference trees: individual trees are ‘grown’, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality</p>
+<p>CRF is a statistical method based CIF: trees are obtained though a finite series of recursive splits of the data in several dataset, based on predictors which better distinguish between the different values of the response variable. In CRF, the individual trees are ‘grown’ together, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -692,7 +686,7 @@
 <div style="font-size: 0.7em;">
 <p><strong>c-values of regression model with only traditional and traditional+semantic predictors</strong></p>
 <div style="font-size: 0.7em; text-align: center; color: #E04836;">
-<p><strong>Chi-square (Χ<sup>2</sup>) goodness of fit (c-value)</strong> = non-parametric measure of how well a statistical model fits a set of observations.</p>
+<p><strong>Index of concordance (c-value)</strong> = non-parametric measure of how well a statistical model fits a set of observations.</p>
 </div>
 </div>
 <table style="width:99%;">
@@ -711,19 +705,19 @@
 <tbody>
 <tr class="odd">
 <td><strong>C-value for fixed effects</strong></td>
-<td>0.9844213</td>
-<td>0.9747162</td>
+<td>0.984</td>
+<td>0.975</td>
 </tr>
 <tr class="even">
 <td><strong>C-value for fixed and random effects</strong></td>
-<td>0.9854791</td>
-<td>0.993123</td>
+<td>0.985</td>
+<td>0.993</td>
 </tr>
 </tbody>
 </table>
 <aside class="notes">
 <p>We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.</p>
-<p>We computed the c-value (<strong>Concordance index C: goodness of fit</strong>) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the Tmodel suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
+<p>We computed the <strong>Concordance index C: goodness of fit</strong> (read the slide) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the T-model suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -737,8 +731,8 @@
       }</style></aside>
 </section></section>
 <section>
-<section id="insights-and-further-research" class="title-slide slide level1 center">
-<h1>Insights and further research</h1>
+<section id="conclusions" class="title-slide slide level1 center">
+<h1>Conclusions</h1>
 
 </section>
 <section id="take-home-messages" class="slide level2">
@@ -799,6 +793,19 @@
 
 <img data-src="images/thank_you.png" width="677" class="r-stretch quarto-figure-center"><div style="text-align: center; font-size: 0.6em;">
 <p><strong><em>chiara.paolini@kuleuven.be</em></strong></p>
+</div>
+</section>
+<section id="parameters-of-the-type-level-models" class="slide level2" data-visibility="uncounted">
+<h2>Parameters of the type-level models</h2>
+<div style="font-size: 0.7em;">
+<ul>
+<li>Corpus filters: <strong>window size</strong> (3, 4, 7), <strong>sentence boundaries</strong> (y/n)</li>
+<li>Collocation matrix filters: <strong>selection of context words</strong> (dimensionality: 5000, 10000, 50000), <strong>vocabulary filtering</strong> (e.g., PoS, lemma, stop-words)</li>
+<li>Association measures: <strong>PPMI, log likelihood</strong></li>
+<li>Distance measures: <strong>Cosine</strong></li>
+<li>Dimensionality reduction: <strong>Euclidian + UMAP</strong> (none, 2, 10)</li>
+<li><strong>K-medoids (PAM)</strong>: 3, 8, 15</li>
+</ul>
 </div>
 </section>
 <section id="traditional-predictors" class="slide level2" data-visibility="uncounted">
@@ -888,7 +895,7 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":"16662598768146873000","id":"9ebf35c92aa92df7","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":"16680957220982229075","id":"fed87f3160360c59","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner

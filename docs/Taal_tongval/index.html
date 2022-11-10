@@ -10,6 +10,8 @@
   <meta name="generator" content="quarto-1.1.189">
 
   <meta name="author" content="Chiara Paolini">
+  <meta name="author" content="Benedikt Szmrecsanyi">
+  <meta name="author" content="Mariana Montes">
   <title>Annotation goes distributional:</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -328,6 +330,8 @@
   <h1 class="title">Annotation goes distributional:</h1>
   <p class="subtitle">Modeling semantic predictors of the dative alternation using vector space models</p>
   <p class="author">Chiara Paolini</p>
+  <p class="author">Benedikt Szmrecsanyi</p>
+  <p class="author">Mariana Montes</p>
 </section>
 
 <section id="outline" class="slide level2">
@@ -360,13 +364,13 @@
 <section id="the-dative-alternation" class="slide level2">
 <h2>The dative alternation</h2>
 <div style="color: #F39D41;">
-<p><strong>1) a. Ditransitive</strong> dative variant</p>
+<p><strong>(1) a. Ditransitive</strong> dative variant</p>
 </div>
-<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub> [<em>some pizza</em>]<sub>theme</sub></p>
+<p>    [<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>my cousin</em>]<sub>recipient</sub>     [<em>some pizza</em>]<sub>theme</sub></p>
 <div style="color: #F39D41;">
-<p>  <strong>b. Prepositional</strong> dative variant</p>
+<p>   <strong>b. Prepositional</strong> dative variant</p>
 </div>
-<p>[<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub> [<em>to my cousin</em>]<sub>recipient</sub></p>
+<p>    [<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub>     [<em>to my cousin</em>]<sub>recipient</sub></p>
 <aside class="notes">
 <p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.</p>
 <p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order).</p>
@@ -467,20 +471,16 @@
 <section id="examples-recipient-type-lemmas" class="slide level2">
 <h2>Examples: recipient type-lemmas</h2>
 <div style="color: #F39D41;">
-<p><strong>2)</strong> <strong>a.</strong> <strong>DAT-4100</strong></p>
+<p><strong>(2) a. DAT-4100</strong></p>
 </div>
 <div style="font-size: 0.8em;">
-<ul>
-<li>[<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub> they would just waste it.</li>
-</ul>
+<p>     [<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub>      they would just waste it.</p>
 </div>
 <div style="color: #F39D41;">
-<p>  <strong>b. DAT-4067</strong></p>
+<p>   <strong>b. DAT-4067</strong></p>
 </div>
 <div style="font-size: 0.8em;">
-<ul>
-<li>[<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>theme</sub> [<em>to the mother</em>]<sub>recipient</sub> ninety-seven percent of the time.</li>
-</ul>
+<p>     [<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>theme</sub>      [<em>to the mother</em>]<sub>recipient</sub> ninety-seven percent of the time.</p>
 </div>
 <aside class="notes">
 <p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples).</p>
@@ -858,7 +858,7 @@
 
 
 <img src="../qlvl.png" class="slide-logo r-stretch"><div class="footer footer-default">
-<p>QLVL colloquium - Leuven, 2022-11-4</p>
+<p>Taal en Tongval Colloquium - Gent, 2022-11-18</p>
 </div>
 </section></section>
     </div>
@@ -895,7 +895,7 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"fed87f3160360c59","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"6035d2f084c7b7fa","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner

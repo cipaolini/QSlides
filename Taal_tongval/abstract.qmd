@@ -1,0 +1,54 @@
+---
+title: "Annotation goes distributional:"
+subtitle: "Modeling semantic predictors of the dative alternation using vector space models"
+author:
+  - Chiara Paolini
+  - Benedikt Szmrecsanyi
+  - Mariana Montes
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+During the last decades, corpus linguistics has been instrumental in the understanding of several syntactic variation phenomena (Szmrecsanyi 2017). Consequently, it rapidly became pivotal in the study of grammatical alternations in variational and usage‐based linguistic research in order to address the empirical question of how much (near-)synonymy exists between syntactic patterns.
+The dative alternation in English is considered one of the most representative case studies in alternation research. The ditransitive (@dit) and prepositional (@prep) variants (Bresnan et al., 2007) are acknowledged to be broadly equivalent semantically:
+
+(@dit) [*The waiter*]~subject~ [*gave*]~verb~ [*my cousin*]~recipient~ [*some pizza*]~theme~
+
+(@prep) [*The waiter*]subject [*gave*]verb [*some pizza*]theme [*to my cousin*]recipient
+
+Many quantitative studies focused on the more traditional formal predictors, such as structural complexity of constituents, pronominality, constituent length (e.g. Szmrecsanyi et al 2017). However, little is known about the semantic characteristics of the lexical context in which those variants are embedded. The extensive variationist alternation research considers semantic predictors as mere "nuisance" factors at best, without much substantial interest in them or in their relative explanatory power.
+
+One of the reasons behind this lack of interest is the labor‐intensive annotation process for semantic predictors. Röthlisberger et al. (2017) has tried to tackle this issue via inclusion of lexical  randomeffects in regression analysis, but while this method works reasonably well to increase the goodness of fit of regression models, it does not explain much.
+
+In this presentation, we attempt to analyze the influence that semantic differences in the meanings of slot fillers have on the choice between the two variants of the dative alternation by including clustering solutions based on distributional models (Lenci 2018) as predictors in regression models. The objectives of this research are to determine how important semantic properties of the lexical context are for predicting variant choice, and whether and what they add to traditional predictors’ explanatory power.
+To accomplish our aims, we restrict attention to FIne‐Grained Ambitious Semantic predictors (henceforth: FIGAS predictors), which are obtained in a bottom‐up fashion by using type-level vector space models. In particular, the heads of the noun phrases that take the role of theme and recipient (e.g. pizza and cousin, respectively, in (i)) are modeled as strings of numbers called vectors, which represent which context words each word is attracted to and how much. Their mathematical properties allow us to compute weighted distances between them and thus gauge how similar two words are based on which other words they are attracted to. As a consequence, we can cluster both the theme heads and the recipient heads and use the resulting classes as categorical predictors in the regression model.
+
+The preliminary findings suggest that semantic clusters have significant predictive power, but traditional predictors appear to be subtly more powerful than type-level semantic predictors. Nevertheless, lexical effects emerge as the most important features for both theme and recipients.
+
+
+### References
+
+::: {#refs}
+Bresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the
+Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.),
+Cognitive Foundations of Interpretation. Royal Netherlands Academy of
+Science, Amsterdam, pp. 69--94.
+
+Davies, M., 2008-. The Corpus of Contemporary American English (COCA).
+Available online at https://www.englishcorpora.org/coca/. Lenci, A.,
+2018. Distributional models of word meaning. Annual review of
+Linguistics, 4, 151-171.
+
+Lenci, A., 2018. Distributional Models of Word Meaning. Annual Review of
+Linguistics 4 (1): 151--71.
+
+Röthlisberger, M., Grafmiller, J., Szmrecsanyi, B., 2017. Cognitive
+indigenization effects in the English dative alternation. Cogn.
+Linguist. 28, 673--710.
+
+Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A.,
+Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative
+perspective: The dative and genitive alternation in varieties of
+English. Glossa J. Gen. Linguist. 2, 86.
+:::

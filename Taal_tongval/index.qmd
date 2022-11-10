@@ -3,9 +3,11 @@ title: "Annotation goes distributional:"
 subtitle: "Modeling semantic predictors of the dative alternation using vector space models"
 author:
   - Chiara Paolini
+  - Benedikt Szmrecsanyi
+  - Mariana Montes
 format:
   revealjs:
-    footer: "QLVL colloquium - Leuven, 2022-11-4"
+    footer: "Taal en Tongval Colloquium - Gent, 2022-11-18"
 execute:
   echo: false
 ---
@@ -48,16 +50,18 @@ In this talk, I would like to introduce you to the first case study of my PhD re
 ## The dative alternation
 
 ::: {style="color: #F39D41;"}
-**1) a. Ditransitive** dative variant
+**(1) a. Ditransitive** dative variant
 :::
 
-\[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ \[*some pizza*\]~theme~
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ 
+    \[*some pizza*\]~theme~
 
 ::: {style="color: #F39D41;"}
-&emsp; **b. Prepositional** dative variant
+   **b. Prepositional** dative variant
 :::
 
-\[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ \[*to my cousin*\]~recipient~
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ 
+    \[*to my cousin*\]~recipient~
 
 ::: notes
 Let's dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as "two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker".
@@ -127,19 +131,21 @@ A completely bottom-up approach to annotation.
 ## Examples: recipient type-lemmas
 
 ::: {style="color: #F39D41;"}
-**2)** **a.** **DAT-4100**
+**(2) a. DAT-4100**
 :::
 
 ::: {style="font-size: 0.8em;"}
--   \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~ they would just waste it.
+     \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~ 
+     they would just waste it.
 :::
 
 ::: {style="color: #F39D41;"}
-&emsp; **b. DAT-4067**
+   **b. DAT-4067**
 :::
 
 ::: {style="font-size: 0.8em;"}
--   \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~theme~ \[*to the mother*\]~recipient~ ninety-seven percent of the time.
+     \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~theme~ 
+     \[*to the mother*\]~recipient~ ninety-seven percent of the time.
 :::
 
 ::: notes
