@@ -414,7 +414,7 @@
 <section id="role-of-semantic-predictors-in-alternation-predictions" class="slide level2">
 <h2>Role of semantic predictors in alternation predictions</h2>
 <p><strong>Annotating for semantics is labor‐intensive and challenging to perform objectively.</strong></p>
-<div class="caption" style="font-size: 0.8em;">
+<div class="caption" style="font-size: 0.7em;">
 <ul>
 <li><em>What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.</em></li>
 </ul>
@@ -532,31 +532,31 @@
 <td><div style="color: #F39D41; font-size: 35px;">
 <p><strong>government/nn</strong></p>
 </div></td>
-<td>-1.23</td>
-<td>3.23</td>
-<td>0.21</td>
-<td>0.0</td>
-<td>2.59</td>
+<td>1</td>
+<td>16</td>
+<td>3</td>
+<td>0</td>
+<td>10</td>
 </tr>
 <tr class="even">
 <td><div style="color: #F39D41; font-size: 35px;">
 <p><strong>mother/nn</strong></p>
 </div></td>
-<td>4.36</td>
-<td>0.0</td>
-<td>1.65</td>
-<td>2.89</td>
-<td>0.0</td>
+<td>21</td>
+<td>0</td>
+<td>5</td>
+<td>12</td>
+<td>0</td>
 </tr>
 <tr class="odd">
 <td><div style="color: #F39D41; font-size: 35px;">
 <p><strong>advance/nn</strong></p>
 </div></td>
-<td>-2.32</td>
-<td>2.09</td>
-<td>0.0</td>
-<td>-0.59</td>
-<td>3.67</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
 </tr>
 </tbody>
 </table>
@@ -568,10 +568,93 @@
 </div>
 <aside class="notes">
 <p>In this first part of the study, we implemented what we call a <strong>type-level model</strong>.</p>
-<p>Let’s consider only the group of recipients, here exemplified by the types government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a <strong>word-type vector</strong>. What you see here are raw frequencies transformed, or better, weighted using <strong>association strength measures, such as PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
-<p>The values here represent the the attraction/the association strenght between the target word and a context word.</p>
-<p>Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.</p>
-<p>(read about the data set)</p>
+<p>Let’s consider only the group of recipients, here exemplified by the types government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-words (from the dtasate) from the recipient slot: the aggregation of the frequencies between the TW and the CW (from the corpus) constitutes a <strong>word-type vector</strong>. What you see here are raw frequencies, that is how many time the TW co-occur with the CW. However, -&gt;</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="matrix-of-recipients---ppmi" class="slide level2">
+<h2>Matrix of recipients - PPMI</h2>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>daughter/nn</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>europe/np</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>it/pp</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>dad/nn</p>
+</div></th>
+<th><div style="color: #8D5924; font-size: 35px;">
+<p>troop/nn</p>
+</div></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>government/nn</strong></p>
+</div></td>
+<td>0</td>
+<td>3.23</td>
+<td>0.21</td>
+<td>0</td>
+<td>2.59</td>
+</tr>
+<tr class="even">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>mother/nn</strong></p>
+</div></td>
+<td>4.36</td>
+<td>0</td>
+<td>1.65</td>
+<td>2.89</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><div style="color: #F39D41; font-size: 35px;">
+<p><strong>advance/nn</strong></p>
+</div></td>
+<td>0</td>
+<td>2.09</td>
+<td>0</td>
+<td>0</td>
+<td>3.67</td>
+</tr>
+</tbody>
+</table>
+<div style="font-size: 0.7em;">
+<ul>
+<li><strong>Pointwise Mutual Information (PMI):</strong> the (log) probability of co-occurrence scaled by the product of the single probability of occurrence. In a nutshell, we want to quantify the likelihood of co-occurrence of two words if the two of them were independent.</li>
+<li><strong>Positive Pointwise mutual information (PPMI):</strong> Based on the same principle of the PMI, the negative values are replaced by 0 to better manage the possible inaccuracies that come from them.</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Raw frequencies are transformed, or better, weighted using <strong>association strength measures, such as PMI or PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
+<p>The values here represent the the attraction/the association strength between the target word and a context word.</p>
+<p>It is important to acknowledge that building a DS model means training DS model workflow, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -689,9 +772,9 @@
 <p><strong>Index of concordance (c-value)</strong> = non-parametric measure of how well a statistical model fits a set of observations.</p>
 </div>
 </div>
-<table style="width:99%;">
+<table>
 <colgroup>
-<col style="width: 45%">
+<col style="width: 46%">
 <col style="width: 27%">
 <col style="width: 26%">
 </colgroup>

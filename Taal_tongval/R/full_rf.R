@@ -19,7 +19,7 @@ traditional_predictors <- read_tsv(here::here("Taal_tongval", "data", "dat_us.ts
     Recipient.type.bin, Recipient.definiteness.bin, Recipient.animacy.bin,
     Theme.definiteness.bin, Length.difference, ends_with("pruned")
   ) %>% 
-  rename_with(~str_replace(.x, "([RT][a-z]+)\\.([a-z]+)", "\\2.\\1"), starts_with("Recipient") | starts_with("Theme"))
+  rename_with(~paste0("Trad.", .x), starts_with("Recipient") | starts_with("Theme")| starts_with("Semantics")| starts_with("Length"))
 
 # A few lines from the tokens are lost with the merge
 binarize <- function(df) {

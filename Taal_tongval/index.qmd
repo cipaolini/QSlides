@@ -19,9 +19,9 @@ headings <- c("Introduction: the dative alternation",
               "From vectors to predictors",
               "Forests and clouds",
               "Conclusions")
-source(here::here("QLVL_colloquium", "R", "plots.R"))
+source(here::here("Taal_tongval", "R", "plots.R"))
 read_data <- function(fname) {
-  read_tsv(here::here("QLVL_colloquium", "data_processed", paste0(fname, ".tsv")), show_col_types = FALSE)
+  read_tsv(here::here("Taal_tongval", "data_processed", paste0(fname, ".tsv")), show_col_types = FALSE)
 }
 recipient_coords <- read_data("recipient_coords")
 theme_coords <- read_data("theme_coords")
@@ -53,15 +53,13 @@ In this talk, I would like to introduce you to the first case study of my PhD re
 **(1) a. Ditransitive** dative variant
 :::
 
-    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~ 
-    \[*some pizza*\]~theme~
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~     \[*some pizza*\]~theme~
 
 ::: {style="color: #F39D41;"}
    **b. Prepositional** dative variant
 :::
 
-    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~ 
-    \[*to my cousin*\]~recipient~
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~     \[*to my cousin*\]~recipient~
 
 ::: notes
 Let's dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as "two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker".
@@ -94,7 +92,7 @@ To explore the correlation of choices between the two variants are both implemen
 
 **Annotating for semantics is labor‐intensive and challenging to perform objectively.**
 
-::: {.caption style="font-size: 0.8em;"}
+::: {.caption style="font-size: 0.7em;"}
 -   *What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.*
 :::
 
@@ -135,8 +133,7 @@ A completely bottom-up approach to annotation.
 :::
 
 ::: {style="font-size: 0.8em;"}
-     \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~ 
-     they would just waste it.
+     \[*if I*\]~subject~ \[*gave*\]~verb~ \[*it*\]~theme~ \[*to the government*\]~recipient~      they would just waste it.
 :::
 
 ::: {style="color: #F39D41;"}
@@ -144,8 +141,7 @@ A completely bottom-up approach to annotation.
 :::
 
 ::: {style="font-size: 0.8em;"}
-     \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~theme~ 
-     \[*to the mother*\]~recipient~ ninety-seven percent of the time.
+     \[*The judge*\]~subject~ \[*will usually, uh, give*\]~verb~ \[*custody*\]~theme~      \[*to the mother*\]~recipient~ ninety-seven percent of the time.
 :::
 
 ::: notes
@@ -159,15 +155,15 @@ But, what does it mean annotating predictors with DS? What we are going to distr
 |                                                | daughter/nn                                    | europe/np                                      | it/pp                                          | dad/nn                                         | troop/nn                                       |
 |                                                | :::                                            | :::                                            | :::                                            | :::                                            | :::                                            |
 +================================================+================================================+================================================+================================================+================================================+================================================+
-| ::: {style="color: #F39D41; font-size: 35px;"} | -1.23                                          | 3.23                                           | 0.21                                           | 0.0                                            | 2.59                                           |
+| ::: {style="color: #F39D41; font-size: 35px;"} | 1                                              | 16                                             | 3                                              | 0                                              | 10                                             |
 | **government/nn**                              |                                                |                                                |                                                |                                                |                                                |
 | :::                                            |                                                |                                                |                                                |                                                |                                                |
 +------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
-| ::: {style="color: #F39D41; font-size: 35px;"} | 4.36                                           | 0.0                                            | 1.65                                           | 2.89                                           | 0.0                                            |
+| ::: {style="color: #F39D41; font-size: 35px;"} | 21                                             | 0                                              | 5                                              | 12                                             | 0                                              |
 | **mother/nn**                                  |                                                |                                                |                                                |                                                |                                                |
 | :::                                            |                                                |                                                |                                                |                                                |                                                |
 +------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
-| ::: {style="color: #F39D41; font-size: 35px;"} | -2.32                                          | 2.09                                           | 0.0                                            | -0.59                                          | 3.67                                           |
+| ::: {style="color: #F39D41; font-size: 35px;"} | 0                                              | 1                                              | 0                                              | 0                                              | 5                                              |
 | **advance/nn**                                 |                                                |                                                |                                                |                                                |                                                |
 | :::                                            |                                                |                                                |                                                |                                                |                                                |
 +------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
@@ -180,13 +176,40 @@ But, what does it mean annotating predictors with DS? What we are going to distr
 ::: notes
 In this first part of the study, we implemented what we call a **type-level model**.
 
-Let's consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words from the recipient slot: the aggregation of the frequencies between the TW and the CW constitutes a **word-type vector**. What you see here are raw frequencies transformed, or better, weighted using **association strength measures, such as PPMI**, that allow the model to bring up to the light the informative semantic relationships between the words.
+Let's consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words (from the dtasate) from the recipient slot: the aggregation of the frequencies between the TW and the CW (from the corpus) constitutes a **word-type vector**. What you see here are raw frequencies, that is how many time the TW co-occur with the CW. However, -\>
+:::
 
-The values here represent the the attraction/the association strenght between the target word and a context word.
+## Matrix of recipients - PPMI
 
-Building a DS model, means that we train a DS mode, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.
++------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
+|                                                | ::: {style="color: #8D5924; font-size: 35px;"} | ::: {style="color: #8D5924; font-size: 35px;"} | ::: {style="color: #8D5924; font-size: 35px;"} | ::: {style="color: #8D5924; font-size: 35px;"} | ::: {style="color: #8D5924; font-size: 35px;"} |
+|                                                | daughter/nn                                    | europe/np                                      | it/pp                                          | dad/nn                                         | troop/nn                                       |
+|                                                | :::                                            | :::                                            | :::                                            | :::                                            | :::                                            |
++================================================+================================================+================================================+================================================+================================================+================================================+
+| ::: {style="color: #F39D41; font-size: 35px;"} | 0                                              | 3.23                                           | 0.21                                           | 0                                              | 2.59                                           |
+| **government/nn**                              |                                                |                                                |                                                |                                                |                                                |
+| :::                                            |                                                |                                                |                                                |                                                |                                                |
++------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
+| ::: {style="color: #F39D41; font-size: 35px;"} | 4.36                                           | 0                                              | 1.65                                           | 2.89                                           | 0                                              |
+| **mother/nn**                                  |                                                |                                                |                                                |                                                |                                                |
+| :::                                            |                                                |                                                |                                                |                                                |                                                |
++------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
+| ::: {style="color: #F39D41; font-size: 35px;"} | 0                                              | 2.09                                           | 0                                              | 0                                              | 3.67                                           |
+| **advance/nn**                                 |                                                |                                                |                                                |                                                |                                                |
+| :::                                            |                                                |                                                |                                                |                                                |                                                |
++------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
 
-(read about the data set)
+::: {style="font-size: 0.7em;"}
+-   **Pointwise Mutual Information (PMI):** the (log) probability of co-occurrence scaled by the product of the single probability of occurrence. In a nutshell, we want to quantify the likelihood of co-occurrence of two words if the two of them were independent.
+-   **Positive Pointwise mutual information (PPMI):** Based on the same principle of the PMI, the negative values are replaced by 0 to better manage the possible inaccuracies that come from them.
+:::
+
+::: notes
+Raw frequencies are transformed, or better, weighted using **association strength measures, such as PMI or PPMI**, that allow the model to bring up to the light the informative semantic relationships between the words.
+
+The values here represent the the attraction/the association strength between the target word and a context word.
+
+It is important to acknowledge that building a DS model means training DS model workflow, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.
 :::
 
 ```{r}
@@ -289,13 +312,10 @@ CRF is a statistical method based CIF: trees are obtained though a finite series
 :::
 :::
 
-+------------------------------------------+-------------------------+------------------------+
 |                                          | RM only trad predictors | RM trad+sem predictors |
-+==========================================+=========================+========================+
+|------------------------------------------|-------------------------|------------------------|
 | **C-value for fixed effects**            | 0.984                   | 0.975                  |
-+------------------------------------------+-------------------------+------------------------+
 | **C-value for fixed and random effects** | 0.985                   | 0.993                  |
-+------------------------------------------+-------------------------+------------------------+
 
 ::: notes
 We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.

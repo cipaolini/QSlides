@@ -51,29 +51,10 @@ varimp_dotplot <- function(varimp_data) {
     ggplot(aes(x = Varimp, y = reorder(Predictor, Varimp),
                color = Slot)) +
     geom_point(size = 3) +
-    scale_color_viridis_d(begin = 0.2, end = 0.8, option = "A") +
+    scale_color_viridis_d(begin = 0.2, end = 0.8, option = "plasma", direction = -1) +
     labs(x = "Variable importance", y = "Predictor") +
     geom_vline(xintercept = 0,
                color = "gray30", linetype = 2) +
     theme_minimal(base_size = 25) +
     theme(legend.position = c(0.9, 0.2))
 }
-
-## Actual plotting -------------------------------------------------------------
-# processed_data <- here::here("BKL_22", "data_processed")
-# recipient_coords <- read_tsv(file.path(processed_data, "recipient_coords.tsv"), show_col_types = FALSE)
-# tsne_plot(recipient_coords) %>%
-#   add_point(recipient_coords %>% filter(cw == "government/nn"), -6, 0) %>%
-#   add_point(recipient_coords %>% filter(cw == "mother/nn"), -7)
-# 
-# theme_coords <- read_tsv(file.path(processed_data, "theme_coords.tsv"), show_col_types = FALSE)
-# tsne_plot(theme_coords) %>%
-#   add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1)
-# 
-# tokens <- read_tsv(file.path(processed_data, "dat_clusters.tsv"), show_col_types = FALSE)
-# clusters_barplot(tokens, Recipient.medoid)
-# clusters_barplot(tokens, Theme.medoid)
-# clusters_barplot(tokens, tree_cluster)
-# varimp_bin <- read_tsv(file.path(processed_data, "varimp_bin.tsv"), show_col_types = FALSE)
-# varimp_dotplot(varimp_bin)
-# add a freq plot of the distribution of LEMMAS
