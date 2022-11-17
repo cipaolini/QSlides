@@ -85,15 +85,17 @@ i <- i+1
 ```
 
 ::: notes
-To explore the correlation of choices between the two variants are both implemented language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc). Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)
+To explore the correlation of choices between the two variants both language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc) are implemented. Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)
 :::
 
 ## Role of semantic predictors in alternation predictions
 
 **Annotating for semantics is labor‐intensive and challenging to perform objectively.**
 
-::: {.caption style="font-size: 0.7em;"}
--   *What role do semantic characteristics play in the choice of one of the two variants? At the current state of the research, we know very little about them.*
+::: {.caption style="font-size: 0.7em; text-align: center;"}
+*What role do semantic characteristics play in the choice of one of the two variants?*
+
+*At the current state of the research, we know very little about them.*
 :::
 
 ::: {style="text-align: center; color: #E04836;"}
@@ -121,9 +123,9 @@ In particular, we are interested how much the semantic characteristics of the le
 :::
 
 ::: notes
-A completely bottom-up approach to annotation.
+What we propose is a completely bottom-up approach to annotation by using .... predictors.
 
-(after reading the slides) DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from corpora: those differences can tell us something about the semantic relatedness of items.
+DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from a corpus: those differences can tell us something about the semantic relatedness of items.
 :::
 
 ## Examples: recipient type-lemmas
@@ -145,7 +147,7 @@ A completely bottom-up approach to annotation.
 :::
 
 ::: notes
-But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation. (read the examples).
+But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation, here exemplified in two observations form our dataset. (read the examples).
 :::
 
 ## Matrix of recipients
@@ -174,9 +176,9 @@ But, what does it mean annotating predictors with DS? What we are going to distr
 :::
 
 ::: notes
-In this first part of the study, we implemented what we call a **type-level model**.
+In this first part of the study, we implemented what we call a **type-level model**. -\> what is a type?
 
-Let's consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-words (from the dtasate) from the recipient slot: the aggregation of the frequencies between the TW and the CW (from the corpus) constitutes a **word-type vector**. What you see here are raw frequencies, that is how many time the TW co-occur with the CW. However, -\>
+Let's consider only the group of recipients, here exemplified by the types government/nn and mother/nn. As you can see in this co-occurence matrix, each row represents a target-word (from the dtasate) from the recipient slot, while each column represents a context word (from the corpus, with which we train the model): the aggregation of the frequencies between the single TW and all the CW constitutes a **word-type vector,** that is a distributional representation of a recipient lemma in that specific corpus. What you see here are raw frequencies, that is how many time the TW co-occur with the CW \[example with gov\]. However, -\>
 :::
 
 ## Matrix of recipients - PPMI
@@ -199,7 +201,7 @@ Let's consider only the group of recipients, here exemplified by the types gover
 | :::                                            |                                                |                                                |                                                |                                                |                                                |
 +------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+------------------------------------------------+
 
-::: {style="font-size: 0.7em;"}
+::: {style="font-size: 0.6em;"}
 -   **Pointwise Mutual Information (PMI):** the (log) probability of co-occurrence scaled by the product of the single probability of occurrence. In a nutshell, we want to quantify the likelihood of co-occurrence of two words if the two of them were independent.
 -   **Positive Pointwise mutual information (PPMI):** Based on the same principle of the PMI, the negative values are replaced by 0 to better manage the possible inaccuracies that come from them.
 :::
@@ -207,9 +209,11 @@ Let's consider only the group of recipients, here exemplified by the types gover
 ::: notes
 Raw frequencies are transformed, or better, weighted using **association strength measures, such as PMI or PPMI**, that allow the model to bring up to the light the informative semantic relationships between the words.
 
-The values here represent the the attraction/the association strength between the target word and a context word.
+iIn other words, the values here represent the the attraction, or the association strength between the target word and a context word.
 
-It is important to acknowledge that building a DS model means training DS model workflow, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.
+It is important to acknowledge that building a DS model means training a DS model workflow, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.
+
+There is a third matrix, namely distance matrix, computed to represent the distributional distance between the lemmas.
 :::
 
 ```{r}
@@ -231,7 +235,7 @@ tsne_plot(recipient_coords) %>%
 ```
 
 ::: notes
-Building the semantic predictors using DS means identifying the central member of the cluster (called medoid) from the data and grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, 15 in our case.
+Going back to our question, what does it mean building the semantic predictors using DS?, it means clustering the type-word vectors, that is our recipient lemmas in this case, by first identifying the central member of the cluster (called medoid) from the data, and then grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, or 15 like in our case.
 
 Here, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4\_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).
 
@@ -258,7 +262,7 @@ The prediction of the dative variants is based on the **membership of the recipi
 :::
 
 ::: notes
-To summarize, each grouping of recipient/theme lemmas represents what we call ***distributional (semantic) predictor.*** In what follows, we predict dative choices based on the membership of the recipients/themes in a particular semantic cluster by using two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis.
+To summarize, each grouping of recipient/theme lemmas represents what we call ***distributional (semantic) predictor.*** In what follows, we will use two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis, to predict dative choices based on the membership of the recipients/themes in a particular distributional cluster.
 :::
 
 ## Random forest
@@ -273,7 +277,7 @@ varimp_dotplot(varimp_full)
 ```
 
 ::: notes
-CRF is a statistical method based CIF: trees are obtained though a finite series of recursive splits of the data in several dataset, based on predictors which better distinguish between the different values of the response variable. In CRF, the individual trees are 'grown' together, and their predictions are averaged. This statistical method can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality
+CRF is a multivariate statistical method that can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality
 :::
 
 ## Inside the most important clouds
@@ -312,10 +316,13 @@ CRF is a statistical method based CIF: trees are obtained though a finite series
 :::
 :::
 
++------------------------------------------+-------------------------+------------------------+
 |                                          | RM only trad predictors | RM trad+sem predictors |
-|------------------------------------------|-------------------------|------------------------|
++==========================================+=========================+========================+
 | **C-value for fixed effects**            | 0.984                   | 0.975                  |
++------------------------------------------+-------------------------+------------------------+
 | **C-value for fixed and random effects** | 0.985                   | 0.993                  |
++------------------------------------------+-------------------------+------------------------+
 
 ::: notes
 We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.
