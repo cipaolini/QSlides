@@ -1,0 +1,376 @@
+---
+title: "Predicting the dative alternation in English"
+subtitle: "A case study with logistic regression"
+author: "Chiara Paolini"
+format:
+  html:
+   echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Here is presented a step-by-step variation study on the English dative
+alternation based on Szmrecsanyi et al. (2017), using two traditional
+statistical techniques in variationist analysis: *binomial logistic
+regression analysis* and *conditional random forest*.
+
+For the theoretical explanation of the dataset and the techniques,
+please check the **slides**.
+
+## Setup
+
+The analysis needs the activation of different packages, `lme4` and
+`party` for regression modeling with random effects and conditional
+random forest respectively. `Hmisc`, `car` and `MuMIn` are pivotal for
+calculating evaluation measures for regression modeling, while the
+library `effects` allows the plot of partial effects plot.
+
+*Make sure to have them installed on your R studio version before
+running the script!*
+
+```{r}
+#| warning: false
+library(tidyverse)   # Easily Install and Load the 'Tidyverse'
+library(here)        # Enable easy file referencing in project-oriented workflows
+library(lme4)        # for mixed-effects regression
+library(Hmisc)       # to calculate C values
+library(car)         # to calculate VIFs
+library(MuMIn)       # Multi-Model Inference for PSeudo R2 measures
+library(effects)     # for partial effects plot
+library(party)       # for ctrees and CRF
+library(kableExtra)  # Construct Complex Table with 'kable' and Pipe Syntax
+```
+
+### Upload and filter the dataset
+
+The dataset I will provide has already been manipulated: it represents
+only the American subsection of the original dataset (*1190
+observations*), plus it contains *recipient/theme.lemma*.
+
+```{r}
+dat_us <- read_tsv(here::here('MCL_seminar', 'data', 'dat_us.tsv'), show_col_types = F)
+head(dat_us)
+```
+
+After uploading the dataset, the second step is to filter and model the
+dataset based on our research needs. Specifically, here I first
+**select** only the predictors we are interested into and **filter out**
+the observations with any NA values in the predictors and the ones that
+do not contain the value **F** or **M** in the *speaker.sex* predictor.
+Then, I proceed to create the binary predictors as described in the
+paper, and the new *length.difference* variable by calculating the
+difference between the log values of theme/recipient.length.I also did
+here some level adjustment for the regression analysis: I set the
+reference level for the *response.variable* as **P**repositional, thus
+the predicted odds will be for the **D**itransitive variant.
+*Speaker.pruned* and *Theme/recipient.lemma.pruned* are pruned variables
+to be used in the regression model as random effects (I will get into
+details in the regression section): **fct_lump_min** creates a new level
+called *other* for lemmas that appear fewer than 2 times. Eventually,
+the character variables should be mutated in *factors*.
+
+> **IMPORTANT: Factors are used to represent categorical data in R**.
+> Factors are stored as integers, and have labels associated with these
+> unique integers (*levels*). While factors look (and often behave) like
+> character vectors, they are actually integers under the hood, and you
+> need to be careful when treating them like strings.
+>
+> Once created them using the `factor()` command, factors can only
+> contain a pre-defined set values, known as *levels*. By default, R
+> always sorts *levels* in alphabetical order.
+
+```{r}
+dat_us <- dat_us %>% 
+  select(Token.ID, Variety, Speaker, Speaker.sex, Response.variable,
+         Recipient.type, Theme.type,
+         Recipient.definiteness, Theme.definiteness,
+         Recipient.animacy, Theme.animacy,
+         Recipient.length, Theme.length,
+         Semantics,
+         Recipient.head, Theme.head, Recipient.lemma, Theme.lemma) %>% 
+  na.omit() %>%
+  filter(Speaker.sex %in% c('F', 'M')) %>%
+  mutate(
+    Recipient.type.bin = if_else(Recipient.type == 'N', 'N', 'P'),
+    Theme.type.bin = if_else(Theme.type == 'N', 'N', 'P'),
+    Recipient.definiteness.bin = if_else(Recipient.definiteness == 'Indefinite', 'Indefinite', 'Definite'),
+    Theme.definiteness.bin = if_else(Theme.definiteness == 'Indefinite', 'Indefinite', 'Definite'),
+    Recipient.animacy.bin = if_else(Recipient.animacy == 'A', 'A', 'I'),
+    Theme.animacy.bin = if_else(Theme.animacy == 'A', 'A', 'I'),
+    Length.difference = log(Recipient.length) - log(Theme.length)) %>% 
+  mutate(across(where(is.character), as.factor), 
+    Speaker = factor(Speaker),
+    Response.variable = fct_relevel(Response.variable, "P"), #level the response variable: reference level is P-dative, thus predicted odds are for the D-dative
+    Speaker.pruned = fct_lump_min(Speaker, 5, other_level = "other"), #pruning the random effects
+    Theme.lemma.pruned = fct_lump_min(Theme.lemma, 2, other_level = "other"),
+    Recipient.lemma.pruned = fct_lump_min(Recipient.lemma, 2, other_level = "other")) 
+ head(dat_us)%>%
+  kbl(fixed_thead = T) %>%
+  kable_paper()
+```
+
+## The bird's eye perspective: conditional random forest
+
+Conditional random forest (CRF) is a multivariate statistical method
+that can answer to the research question: ***which linguistic factors
+help to predict the use of particular linguistic variants?*** For an
+accessible introduction to conditional inference trees and random
+forest, check [Levshina
+(2020)](https://link.springer.com/chapter/10.1007/978-3-030-46216-1_25).
+
+CRF can be done using a great range of libraries (`partykit`, `ranger`
+among them): here I use `party`, the classic library for trees and
+forests in R.
+
+Since it is a partitioning algorithm, we need to set first a seed to get
+always the same result. **forest** represents the implementation of the
+formula for the CRF using the
+[`cforest`](https://rdrr.io/cran/party/man/cforest.html) function:
+similarly to the formula for regression models, the syntax is:
+`cforest (response variable ~ [variables], data = data_name)` .
+
+After computing the CRF, `varimp` allows to compute variable importance
+measures: if `conditional = TRUE`, the importance of each variable is
+computed by adjuststing for correlations between predictor variables
+(*pretty obscure, better check the
+[documentation](https://rdrr.io/cran/party/man/varimp.html) for a longer
+and detailed explanation*).
+
+The third chunk of the code is dedicated to the computation of the
+**Concordance index C-value**, better known as simply *C-value*, a
+non-parametric measure of how well a statistical model fits a set of
+observations. `Hmsic` is the reference library, using the function
+`somers2`.
+
+> C-value is a pivotal measure for most part of the statistical tools
+> employed in variationist analysis, especially for regression modeling.
+> However, make sure to not rely *only* on this measure for your
+> assessments as it gives a general evaluation of the model. For CRF is
+> fine, but we will see that it is not the case for regression modeling.
+
+Finally, it is possible to plot the result of the `varimp` computation
+and check for the most important variables in the prediction of the
+linguistic variants. The red dotted line represents the threshold to
+consider a variable slightly significant. For a detailed theoretical
+explanation, see [Tagliamonte & Baayen
+(2012)](http://read.psych.uni-potsdam.de/pmr2/index.php?option=com_content&view=article&id=78:tagliamonte-and-baayen-2012-models-forests-and-trees-of-york-english-was-were-variation-as-a-case-study-for-statistical-practice&catid=24:publications&Itemid=32).
+
+```{r}
+set.seed(123)
+forest = cforest(Response.variable ~ 
+              Speaker.sex +
+              Semantics +
+              Recipient.type.bin +
+              Theme.type.bin +
+              Recipient.definiteness.bin +
+              Theme.definiteness.bin+
+              Recipient.animacy.bin+
+              Theme.animacy.bin+
+              Length.difference,
+              data = dat_us)
+
+#### variable importance ranking, takes some time
+forest.varimp = varimp(forest, conditional = TRUE) 
+
+#### model C index
+#### C ranges between 0 an 1; the closer to 1, the better the model
+prob2.rf <- unlist(treeresponse(forest))[c(FALSE, TRUE)]
+somerssmallcrf <- somers2(prob2.rf, as.numeric(dat_us$Response.variable) - 1)
+somerssmallcrf["C"]
+
+### the following code creates a dot plot visualizing the variable importance ranking
+dotplot(sort(forest.varimp), xlab="Variable Importance", panel = function(x,y){
+  panel.dotplot(x, y, col='darkblue', pch=16, cex=1.1)
+  panel.abline(v=abs(min(forest.varimp)), col='red',
+               lty='longdash', lwd=2)
+}
+) 
+```
+
+## The jeweler's eye perspective: regression modeling
+
+To take a closer look at the predictors, and their direction in
+predicting one of the two linguistic variants, we use **binary logistic
+regression analysis with mixed effects** as implemented in the `lme4`
+package in R.
+
+Regression modeling has in general a very simple and standardize code,
+but it can be done in many different ways, using different techniques to
+get to the final results. Here I will show you the simplest bottom-up
+technique to get from a maximal model with all the predictors to a
+minimal model comprising of only the most meaningful predictors. The
+idea is to manually remove the predictor with the highest p-value at
+each run of the regression model, till we get a model with few
+meaningful predictors.
+
+> There are many ways to implement automatic algorithms to get minimal
+> models by using *stepwise modeling.* However, I would recommend to use
+> those automatic techniques when you feel to master an advance
+> knowledge of your data and of regression modeling.
+
+### Maximal regression model
+
+The reference level is **Prepositional**, thus the predicted odds are
+for the **Ditransitive** alternation.
+
+`glmer` is the function to use for regression models with mixed-effects.
+See the
+[documentation](https://www.rdocumentation.org/packages/lme4/versions/1.1-31/topics/glmer)
+for the formula and an in-depth explanation of the code.
+
+Here the monthly-updated [GLMM
+bible](https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html) for the
+thousands of problems in fitting the regression model.
+
+```{r}
+trad_model <- glmer(Response.variable ~ 
+              Speaker.sex +
+              Semantics +
+              Recipient.type.bin +
+              Theme.type.bin +
+              Recipient.definiteness.bin +
+              Theme.definiteness.bin+
+              Recipient.animacy.bin+
+              Theme.animacy.bin+
+              Length.difference+
+              (1|Speaker)+ # random effect (intercept adjustment)
+              (1|Recipient.lemma)+
+              (1|Theme.lemma),
+              data = dat_us,
+              family=binomial
+)
+summary(trad_model)
+```
+
+**Model summaries: Pseudo R2 measures (coefficient of determination), C
+value, and ViF**
+
+In order to evaluate the performance of the model, it is possible to
+compute different measures:
+
+-   **C-value** (see section on CRF)
+
+-   **Pseudo-R squared:** a goodness of fit measure explaining the
+    improvement in model likelihood over a null model (see for
+    discussion: [Hemmert et al.
+    (2018)](https://journals.sagepub.com/doi/abs/10.1177/0049124116638107?journalCode=smra#:~:text=LL%2Dbased%20pseudo%2DR2%20measures,indication%20of%20goodness%20of%20fit.)).
+    Here I compute the *marginal pseudo-R2* (the variance explained by
+    fixed factors) and the *conditional pseudo-R2* (variance explained
+    by both fixed and random factors (i.e. the entire model)).
+
+-   **Variance Inflation Factors:** A variance inflation factor (VIF)
+    detects multicollinearity in regression analysis. Multicollinearity
+    is when there is correlation between predictors (i.e. independent
+    variables) in a model; the presence of multicollinearity can
+    adversely affect your regression results. The VIF estimates how much
+    the variance of a regression coefficient is inflated due to
+    multicollinearity in the model. A goof VIF should be lower than 2.5,
+    but there is a lot of debate.
+
+```{r}
+# R2
+r.squaredGLMM(trad_model)
+
+# Concordance index C
+somers2(binomial()$linkinv(fitted(trad_model)), as.numeric(dat_us$Response.variable) -1)
+
+# Variance Inflation Factors
+vif(trad_model)
+```
+
+### Minimal regression model
+
+After manually removing our not-significant predictors, we should get
+our minimal adequate regression model.
+
+> For the sake of length, I did not show every passage (I will show it
+> in class).
+
+Before starting pruning the model, a good practice is to ***improve***
+the regression model in two steps:
+
+-   By **pruning** the random effects (i.e. consider only the levels
+    higher that a certain threshold);
+
+-   By **optimizing the model**, using different techniques: one of the
+    most common is the optimizer *bobyqa* which enhances the performance
+    of the model together with *optCtrl = list(maxfun = 100000)* which
+    allows the model to perform more runs.
+
+```{r}
+trad_model_min <- glmer(Response.variable ~ 
+              Semantics +
+              Recipient.type.bin +
+              Theme.type.bin +
+              Recipient.definiteness.bin +
+              Theme.definiteness.bin +
+              Recipient.animacy.bin+
+              Length.difference+
+              (1|Speaker.pruned)+ # random effect (intercept adjustment)
+              (1|Recipient.lemma.pruned)+
+              (1|Theme.lemma.pruned),
+              data = dat_us,
+              family=binomial,
+              glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 100000))
+)
+summary(trad_model_min)
+```
+
+**Model summaries: Pseudo R2 measures (coefficient of determination), C
+value and VIF**
+
+```{r}
+# Pseudo R2 measures
+r.squaredGLMM(trad_model_min)
+
+# Concordance index C
+somers2(binomial()$linkinv(fitted(trad_model_min)), as.numeric(dat_us$Response.variable) -1)
+
+# Variance Inflation Factors
+vif(trad_model_min)
+```
+
+### Partial effect plots on regression model
+
+The `effects` package can help us shed a light on the reading of the
+coefficients in regression models. Here I plotted the partial effects
+for the predictors of the minimal model.
+
+```{r}
+# partial effects plot (see https://data.library.virginia.edu/visualizing-the-effects-of-logistic-regression/)
+# vertical axes plot probability of the predicted outcome
+plot(Effect(focal.predictors = c("Semantics"), mod = trad_model_min))
+plot(Effect(focal.predictors = c("Recipient.type.bin"), mod = trad_model_min))
+plot(Effect(focal.predictors = c("Recipient.definiteness.bin"), mod = trad_model_min))
+plot(Effect(focal.predictors = c("Theme.definiteness.bin"), mod = trad_model_min))
+plot(Effect(focal.predictors = c("Recipient.animacy.bin"), mod = trad_model_min))
+plot(Effect(focal.predictors = c("Length.difference"), mod = trad_model_min))
+```
+
+## References and further readings
+
+::: {#refs}
+Bresnan, J., Cueni, A., Nikitina, T., Baayen, H., 2007. Predicting the
+Dative Alternation, in: Bouma, G., Kraemer, I., Zwarts, J. (Eds.),
+Cognitive Foundations of Interpretation. Royal Netherlands Academy of
+Science, Amsterdam, pp. 69--94.
+
+Hemmert, G. A. J., Schons, L. M., Wieseke, J., & Schimmelpfennig, H.
+(2018). Log-likelihood-based Pseudo-R2 in Logistic Regression: Deriving
+Sample-sensitive Benchmarks. *Sociological Methods & Research*, *47*(3),
+507--531.
+
+Levshina, N. (2020). Conditional Inference Trees and Random Forests. In:
+Paquot, M., Gries, S.T. (eds) A Practical Handbook of Corpus
+Linguistics. Springer, Cham., 611-44.
+
+Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A.,
+Tagliamonte, S., Todd, S., 2017. Spoken syntax in a comparative
+perspective: The dative and genitive alternation in varieties of
+English. Glossa J. Gen. Linguist. 2, 86.
+
+Tagliamonte, S., & Baayen, R. H. (2012). Models, forests and trees of
+York English: Was/were variation as a case study for statistical
+practice. *Language Variation and Change, 24*(2), 135--178.
+:::

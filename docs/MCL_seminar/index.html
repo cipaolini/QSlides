@@ -10,9 +10,7 @@
   <meta name="generator" content="quarto-1.1.189">
 
   <meta name="author" content="Chiara Paolini">
-  <meta name="author" content="Benedikt Szmrecsanyi">
-  <meta name="author" content="Mariana Montes">
-  <title>Annotation goes distributional:</title>
+  <title>Predicting the dative alternation in English:</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,23 +325,19 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Annotation goes distributional:</h1>
-  <p class="subtitle">Modeling semantic predictors of the dative alternation using vector space models</p>
+  <h1 class="title">Predicting the dative alternation in English:</h1>
+  <p class="subtitle">A case study with logistic regression</p>
   <p class="author">Chiara Paolini</p>
-  <p class="author">Benedikt Szmrecsanyi</p>
-  <p class="author">Mariana Montes</p>
 </section>
 
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Introduction: the dative alternation</li>
-<li>From vectors to predictors</li>
-<li>Forests and clouds</li>
-<li>Conclusions</li>
+<li>Preliminary steps</li>
+<li>The case study</li>
 </ul>
 <aside class="notes">
-<p>In this talk, I would like to introduce you to the first case study of my PhD research project called “How much does meaning matter? A fresh look at grammatical alternations”. The goal of this research is to examine if and how the way people choose between different ways of saying the same thing (i.e., grammatical alternations) depends on the meaning of the words in the utterance. I will start by introduce you to the dative alternation, our case study, and how lexical semantics is traditionally modeled in variationist linguistics. Then, I will illustrate our proposal, namely automatically-generated semantic predictors using DS techniques, and finally I will discuss the analyses and the results obtained from our first case study using type-level distributional semantic predictors.</p>
+<p>Step-by-step case study (partially) based on Szmrecsanyi et al.&nbsp;(2017). We will investigate the dative alternation in American English by employing two of the traditional statistical techniques in variationist analysis: *binomial logistic regression analysis and conditional random forest*.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -357,9 +351,97 @@
       }</style></aside>
 </section>
 <section>
-<section id="introduction-the-dative-alternation" class="title-slide slide level1 center">
-<h1>Introduction: the dative alternation</h1>
+<section id="preliminary-steps" class="title-slide slide level1 center">
+<h1>Preliminary steps</h1>
 
+</section>
+<section id="know-the-linguistic-phenomenon-you-want-to-analyse" class="slide level2">
+<h2>1. Know the linguistic phenomenon you want to analyse</h2>
+<p><strong>…and how people before you analyse it</strong></p>
+<p>Try to look for:</p>
+<ul>
+<li><p>The pivotal study on the phenomenon you want to study</p></li>
+<li><p>A couple of qualitative and quantitative investigations to get a sense of how researchers addressed to it before you and what you can integrate to their research: a new approach, a new perspective, new data with a previous approach etc.</p></li>
+</ul>
+</section>
+<section id="know-your-dataset-and-your-data" class="slide level2">
+<h2>2. Know your dataset (and your data)</h2>
+<p><strong>…especially if you did not build the dataset by yourselves!</strong></p>
+<ul>
+<li><p><strong>Linguistic information:</strong> where are the observations extracted from? and when? do they belong to a specific language register? did the authors apply some restrictions/limitations to the dataset?</p></li>
+<li><p><strong>Statistical information:</strong> how many observations the dataset counts originally? and after our restrictions? how many variables/predictors are annotated?</p>
+<ul>
+<li>Keep always an eye on how much the dataset change after you apply your specific filters</li>
+</ul></li>
+</ul>
+</section>
+<section id="know-your-dataset-and-your-data-1" class="slide level2">
+<h2>2. Know your dataset (and your data)</h2>
+<p><strong>…especially if you did not build the dataset by yourselves!</strong></p>
+<ul>
+<li><p><strong>Language internal/external predictors:</strong> identify and describe them.</p>
+<ul>
+<li><p><em>First thing First</em>: Response variable, type of the variables, levels of the variables</p></li>
+<li><p>Filters added in previous studies (they can drastically change the results of your replication study!!)</p></li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>We will see how the number of observation will change during the analysis of our case study.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="understand-the-choice-of-the-analysis" class="slide level2">
+<h2>3. Understand the choice of the analysis</h2>
+<p><strong>…based on the research questions and data you have</strong></p>
+<ul>
+<li><p>Why the authors chose to employ this/those analysis/es?</p></li>
+<li><p>Which questions these analyses answer to? Do they address to specific perspectives of the linguistic phenomenon, or they are more general?</p></li>
+<li><p>Did these analyses bring an innovation in terms of methodologies employed in the field? Or they have been already used (see 1)?</p></li>
+</ul>
+<div class="cell">
+
+</div>
+</section></section>
+<section>
+<section id="the-case-study" class="title-slide slide level1 center">
+<h1>The case study</h1>
+
+</section>
+<section id="starting-point-szmrecsanyi-et-al.-2017" class="slide level2">
+<h2>Starting point: Szmrecsanyi et al.&nbsp;(2017)</h2>
+<div style="font-size: 0.8em;">
+<p><a href="https://www.glossa-journal.org/article/id/4948/">This paper</a> investigates two of the well-known alternations in English, <strong>the dative and the genitive alternation</strong>, in four varieties of spoken English, using an ensamble of statistical analyses to understand the extent to which the probabilistic grammar of genitive and dative variant choice differs across varieties.</p>
+</div>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>Our mini-replication study will focus only on <strong>Spoken American English</strong>, and only on the <strong>dative alternation</strong></p></li>
+<li><p><strong>Goal</strong> of my analysis is slightly different from the original one: to <strong>get familiar with the so-called <em>traditional, top-down, manually annotated predictors</em></strong> for the dative alternation, and how well they predict the choice between the two variants in spoken American English.</p></li>
+</ul>
+</div>
+<aside class="notes">
+<ul>
+<li>This analysis was the first step in the first case study of my PhD research project.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-dative-alternation" class="slide level2">
 <h2>The dative alternation</h2>
@@ -371,8 +453,13 @@
 <p>   <strong>b. Prepositional</strong> dative variant</p>
 </div>
 <p>    [<em>The waiter</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>some pizza</em>]<sub>theme</sub>     [<em>to my cousin</em>]<sub>recipient</sub></p>
+<div style="font-size: 0.7em;">
+<p><strong>What is an alternation?</strong> See <a href="https://benjamins.com/catalog/bjl.00053.pij">Pijpops (2020)</a> and <a href="https://benjamins.com/catalog/bjl.00001.gri">Gries (2017)</a>.</p>
+</div>
 <aside class="notes">
-<p>Let’s dive into our case study. The DA is one of the most investigated cases of grammatical alternation - where we define a GA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.</p>
+<p>Let’s dive into our case study.</p>
+<p>The topic of our analysis is the dative alternation in *contemporary American* English.</p>
+<p>The DA is one of the most investigated cases of grammatical alternation - where we define a SA as “two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker”.</p>
 <p>In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -386,299 +473,74 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="modelling-grammatical-alternations" class="slide level2">
-<h2>Modelling grammatical alternations</h2>
-<p>In previous literature, focus on three kinds of predictors:</p>
-<ol type="1">
-<li><p><strong>Formal predictors:</strong> e.g., <em>structural complexity of constituents</em> (e.g., presence of heavy postmodification), <em>pronominality</em>, and <em>constituent length</em> (in words, syllables, or similar)</p></li>
-<li><p><strong>Information status‐related predictors:</strong> e.g., <em>givenness</em></p></li>
-<li><p><strong>Semantic, coarse-grained, higher-level predictors:</strong> e.g., <em>animacy</em> (i.e., annotate for a binary distinction between animate and inanimate recipients – see Bresnan et al.&nbsp;2007)</p></li>
-</ol>
-<div class="cell">
-
-</div>
-<aside class="notes">
-<p>To explore the correlation of choices between the two variants both language-internal predictors as well as language-external predictors (such as sex, race/ethnicity, etc) are implemented. Regarding the internal predictors, the traditional variationist approach is fairly good at manually annotating for formal, top-down predictors, such as in (1) and (2) for the dative alternation, but when it comes to the third point, namely the semantic predictors, the VA would annotate only for few semantic factors such as animacy, which can be defined as a top-down notion. This is because (next slide)</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="role-of-semantic-predictors-in-alternation-predictions" class="slide level2">
-<h2>Role of semantic predictors in alternation predictions</h2>
-<p><strong>Annotating for semantics is labor‐intensive and challenging to perform objectively.</strong></p>
-<div class="caption" style="font-size: 0.7em; text-align: center;">
-<p><em>What role do semantic characteristics play in the choice of one of the two variants?</em></p>
-<p><em>At the current state of the research, we know very little about them.</em></p>
-</div>
-<div style="text-align: center; color: #E04836;">
-<p><strong>We assume broad semantic equivalence of dative variants, but we are interested in extent to which semantics of materials in argument slots predicts choice.</strong></p>
-</div>
-<aside class="notes">
-<p>Annotating for semantics is labor‐intensive and time-consuming, and it’s challenging to perform objectively and systematically. So if we ask ourselves: What role do semantic characteristics play in the choice of one of the two variants? We do not have a clear answer because we are missing those data. And this is the research gap we want to cover.</p>
-<p>In particular, we are interested how much the semantic characteristics of the lexical material in the slots of the dative variants predict the choice.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="from-vectors-to-predictors" class="title-slide slide level1 center">
-<h1>From vectors to predictors</h1>
-
-</section>
-<section id="automatically-generated-semantic-predictors" class="slide level2">
-<h2>Automatically-generated semantic predictors</h2>
-<div style="text-align: center; color: #E04836;">
-<p><strong>We use automatically-generated, corpus-based semantic predictors using distributional semantic models (DSMs).</strong></p>
-</div>
-<div style="font-size: 0.7em;">
-<ul>
-<li><p>New inputs from DMSs: <strong>more data, less annotation</strong></p></li>
-<li><p>Distributional semantics is an usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different.(Lenci 2018)</p></li>
-</ul>
-</div>
-<aside class="notes">
-<p>What we propose is a completely bottom-up approach to annotation by using …. predictors.</p>
-<p>DSMs can help us understanding and bring to the light the semantic characteristics of the lexical context in which those variants are embedded. In a nutshell, DS is a usage-based model of meaning, based on the assumption that items that occur in similar contexts in a given corpus will be semantically similar, while those that occur in different contexts will be semantically different. To do that, we operationalize the differences in the distribution of two (or more) items by extracting their co-occurrences from a corpus: those differences can tell us something about the semantic relatedness of items.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="examples-recipient-type-lemmas" class="slide level2">
-<h2>Examples: recipient type-lemmas</h2>
-<div style="color: #F39D41;">
-<p><strong>(2) a. DAT-4100</strong></p>
-</div>
+<section id="predicting-the-da-the-dataset" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p>A core section of every variationist research is the dataset and its annotation: Szmrecsanyi et al.&nbsp;(2017) presents two comprehensive and homogeneously manually annotated <a href="https://purl.stanford.edu/qj187zs3852">datasets</a> for both alternations.</p>
 <div style="font-size: 0.8em;">
-<p>     [<em>if I</em>]<sub>subject</sub> [<em>gave</em>]<sub>verb</sub> [<em>it</em>]<sub>theme</sub> [<em>to the government</em>]<sub>recipient</sub>      they would just waste it.</p>
+<ul>
+<li>The paper offers a <strong>very, very</strong> good and detailed description of the dataset and its construction: read it to get an inspiration for your own study!</li>
+</ul>
 </div>
-<div style="color: #F39D41;">
-<p>   <strong>b. DAT-4067</strong></p>
+<aside class="notes">
+<p>Variationist sociolinguistics puts at the first place the choice for statistical and corpus-based methods in the exploration of language variation. Tagliamonte (2012)reported an immense and suggestive variety of quantitative approaches and statistical tools to use in our research.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="predicting-the-da-the-dataset-1" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p><strong>Linguistic information</strong></p>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>The dative tokens for American English were elicited from the <strong>Switchboard corpus of American English</strong> (Godfrey, Holliman &amp; McDaniel 1992), as described in Bresnan et al.&nbsp;(2007). The Switchboard corpus covers telephone conversations collected at the beginning of the 1990s.</p></li>
+<li><p>This dataset contains only observation with the verb <strong><em>give</em></strong> as verb of the dative construction.</p></li>
+<li><p>The collection follows Bresnan et al.&nbsp;(2007) directions in defining <em>interchangeable ditransitive and prepositional dative variants</em>: only instances of the verb <em>give</em> with two argument Noun Phrases, with the exception of non-interchangeable contructions, were considered.</p></li>
+</ul>
 </div>
+</section>
+<section id="predicting-the-da-the-dataset-2" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p><strong>Statistical information</strong></p>
+<ul>
+<li>The original dative dataset counts 4136 observations, with the American English section counting <strong>1190 observations</strong>, and a manual annotation for <strong>25 predictors</strong>.</li>
+</ul>
+</section>
+<section id="predicting-the-da-the-dataset-3" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p><strong>Language-external predictors</strong></p>
 <div style="font-size: 0.8em;">
-<p>     [<em>The judge</em>]<sub>subject</sub> [<em>will usually, uh, give</em>]<sub>verb</sub> [<em>custody</em>]<sub>theme</sub>      [<em>to the mother</em>]<sub>recipient</sub> ninety-seven percent of the time.</p>
-</div>
-<aside class="notes">
-<p>But, what does it mean annotating predictors with DS? What we are going to distributionally model are the recipient and the theme of the alternation, here exemplified in two observations form our dataset. (read the examples).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="matrix-of-recipients" class="slide level2">
-<h2>Matrix of recipients</h2>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>daughter/nn</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>europe/np</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>it/pp</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>dad/nn</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>troop/nn</p>
-</div></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>government/nn</strong></p>
-</div></td>
-<td>1</td>
-<td>16</td>
-<td>3</td>
-<td>0</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>mother/nn</strong></p>
-</div></td>
-<td>21</td>
-<td>0</td>
-<td>5</td>
-<td>12</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>advance/nn</strong></p>
-</div></td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>5</td>
-</tr>
-</tbody>
-</table>
-<div style="font-size: 0.7em;">
 <ul>
-<li><strong><em>Dative alternation dataset from Szmrecsanyi et al.&nbsp;(2017)</em></strong>, which covers <strong>N = 1,190</strong> dative observations in contemporary <strong>spoken American English</strong> (Switchboard corpus)</li>
-<li>Corpus for building DMSs: <em><strong>Corpus of Contemporary American English</strong> (COCA),</em> spoken register (ca. <strong>127 million</strong> tokens)</li>
+<li><strong>Variety</strong>: in our case, US - one level</li>
+<li><strong>Speaker.ID</strong></li>
+<li><strong>Speaker sex</strong> (only for a subset of observations)</li>
+<li><strong>Speaker year of birth</strong> (only for a subset of observations)</li>
 </ul>
 </div>
-<aside class="notes">
-<p>In this first part of the study, we implemented what we call a <strong>type-level model</strong>. -&gt; what is a type?</p>
-<p>Let’s consider only the group of recipients, here exemplified by the types government/nn and mother/nn.&nbsp;As you can see in this co-occurence matrix, each row represents a target-word (from the dtasate) from the recipient slot, while each column represents a context word (from the corpus, with which we train the model): the aggregation of the frequencies between the single TW and all the CW constitutes a <strong>word-type vector,</strong> that is a distributional representation of a recipient lemma in that specific corpus. What you see here are raw frequencies, that is how many time the TW co-occur with the CW [example with gov]. However, -&gt;</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="matrix-of-recipients---ppmi" class="slide level2">
-<h2>Matrix of recipients - PPMI</h2>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>daughter/nn</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>europe/np</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>it/pp</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>dad/nn</p>
-</div></th>
-<th><div style="color: #8D5924; font-size: 35px;">
-<p>troop/nn</p>
-</div></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>government/nn</strong></p>
-</div></td>
-<td>0</td>
-<td>3.23</td>
-<td>0.21</td>
-<td>0</td>
-<td>2.59</td>
-</tr>
-<tr class="even">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>mother/nn</strong></p>
-</div></td>
-<td>4.36</td>
-<td>0</td>
-<td>1.65</td>
-<td>2.89</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td><div style="color: #F39D41; font-size: 35px;">
-<p><strong>advance/nn</strong></p>
-</div></td>
-<td>0</td>
-<td>2.09</td>
-<td>0</td>
-<td>0</td>
-<td>3.67</td>
-</tr>
-</tbody>
-</table>
+<section id="predicting-the-da-the-dataset-4" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p><strong>Language-internal predictors:</strong> the authors annotated for well-known determinants of dative variation.</p>
 <div style="font-size: 0.6em;">
 <ul>
-<li><strong>Pointwise Mutual Information (PMI):</strong> the (log) probability of co-occurrence scaled by the product of the single probability of occurrence. In a nutshell, we want to quantify the likelihood of co-occurrence of two words if the two of them were independent.</li>
-<li><strong>Positive Pointwise mutual information (PPMI):</strong> Based on the same principle of the PMI, the negative values are replaced by 0 to better manage the possible inaccuracies that come from them.</li>
+<li><strong>Response.variable</strong>: Ditransitive dative versus prepositional dative.</li>
+<li><strong>Recipient/Theme.type:</strong> The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.</li>
+<li><strong>Recipient/Theme.definiteness:</strong> The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.</li>
+<li><strong>Recipient/Theme.animacy:</strong> The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.</li>
+<li><strong>Recipient/Theme.length:</strong> Length of the recipient and theme phrases in orthographically transcribed words.</li>
+<li><strong>Semantics (of dative verb):</strong> (1) transfer; (2) communication; (3) abstract.</li>
+<li><strong>Recipient/Theme.head:</strong> Head lexeme of both the theme and the recipient.</li>
 </ul>
 </div>
 <aside class="notes">
-<p>Raw frequencies are transformed, or better, weighted using <strong>association strength measures, such as PMI or PPMI</strong>, that allow the model to bring up to the light the informative semantic relationships between the words.</p>
-<p>iIn other words, the values here represent the the attraction, or the association strength between the target word and a context word.</p>
-<p>It is important to acknowledge that building a DS model means training a DS model workflow, a type-level one in this case, with different parameters and compare them to pick the best one BASED ON CUSTOMARY CRITERIA.</p>
-<p>There is a third matrix, namely distance matrix, computed to represent the distributional distance between the lemmas.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="forests-and-clouds" class="title-slide slide level1 center">
-<h1>Forests and clouds</h1>
-
-</section>
-<section id="clouds-of-recipients" class="slide level2">
-<h2>Clouds of recipients</h2>
-
-<img data-src="index_files/figure-revealjs/fig-tsne-r-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.</p><aside class="notes">
-<p>Going back to our question, what does it mean building the semantic predictors using DS?, it means clustering the type-word vectors, that is our recipient lemmas in this case, by first identifying the central member of the cluster (called medoid) from the data, and then grouping the type-word vectors around them based on Euclidean distance metric. We provide the number of clusters the algorithm should create: 3, 8, or 15 like in our case.</p>
-<p>Here, a nice plot of the clusters, or clouds as Mariana Montes says, of the recipients in our best model. (The best model is CS_4_ol_10000_ppmi_10_cosine_k15 (with dimensionality reduction)).</p>
-<p>(describe the clusters)</p>
+<p>!! This is not an exhaustive list of the predictors annotated in the dataset, but are those which have been considered for the analysis.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -691,20 +553,18 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="clouds-of-themes" class="slide level2">
-<h2>Clouds of themes</h2>
-
-<img data-src="index_files/figure-revealjs/fig-tsne-t-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.</p></section>
-<section id="from-clouds-to-distributional-semantic-predictors" class="slide level2">
-<h2>From clouds to distributional semantic predictors</h2>
-<div style="text-align: center; color: #E04836;">
-<p>Each grouping of recipient/theme lemmas represents what we call <strong><em>distributional (semantic) predictor.</em></strong></p>
-</div>
-<div style="text-align: center;">
-<p>The prediction of the dative variants is based on the <strong>membership of the recipient/theme type-lemma in a particular semantic cluster.</strong></p>
+<section id="predicting-the-da-the-dataset-5" class="slide level2">
+<h2>Predicting the DA: the dataset</h2>
+<p><strong>Language-internal predictors:</strong> further manipulation</p>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>Reducing the predictors into binary contrasts: <strong><em>Recipient/Theme.type</em></strong> were reduced to pronominal ([2], [3], [4]) versus non-pronominal ([1]); <strong><em>Recipient/Theme.definiteness</em></strong> were reduced to definite ([1], [3]) versus indefinite ([2]); <strong><em>Recipient/Theme.animacy</em></strong> were reduced to animate ([1]) versus inanimate ([2], [3], [4], [5])</p></li>
+<li><p>Creating a the new predictor <strong><em>Length.difference</em></strong>: the Recipient/Theme.length measures were combined into a relative measure of length, calculated as log(Recipient.length) - log(Theme.length).</p></li>
+<li><p><strong><em>Recipient/Theme.lemma</em></strong>: the annotated lemma of the heads.</p></li>
+</ul>
 </div>
 <aside class="notes">
-<p>To summarize, each grouping of recipient/theme lemmas represents what we call <strong><em>distributional (semantic) predictor.</em></strong> In what follows, we will use two of the most classic variationist statistical tools of analysis, Conditional Random forest and Regression analysis, to predict dative choices based on the membership of the recipients/themes in a particular distributional cluster.</p>
+<p>And now let’s go to the hands-on part!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -716,232 +576,10 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="random-forest" class="slide level2">
-<h2>Random forest</h2>
-<div style="font-size: 0.6em;">
-<p><strong>Random forest of traditional and distributional predictors</strong></p>
-</div>
-
-<img data-src="index_files/figure-revealjs/rf-full-1.png" width="960" class="r-stretch"><aside class="notes">
-<p>CRF is a multivariate statistical method that can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="inside-the-most-important-clouds" class="slide level2">
-<h2>Inside the most important clouds</h2>
-<div style="color: #F39D41;">
-<p><strong>Theme.one:</strong></p>
-</div>
-<div style="font-size: 0.7em;">
-<ul>
-<li><strong>one/pn</strong>, everything/pn, feel/nn, it/pp, lot/rr, one/nn, poke/nn, something/pn, stuff/nn, tempt/vv, that/dd, them/pp, thing/nn, try/nn, way/nn</li>
-</ul>
-</div>
-<div style="color: #F39D41;">
-<p><strong>Recipient.everybody:</strong></p>
-</div>
-<div style="font-size: 0.7em;">
-<ul>
-<li><strong>everybody/pn</strong>, anybody/pn, anyone/pn, anything/pn, everyone/pn, her/pp, him/pp, me/nn, me/pp, myself/pp, somebody/pn, stomach/nn, them/pp, us/pp, you/pp</li>
-</ul>
-</div>
-<div style="color: #F39D41;">
-<p><strong>Recipient.it:</strong></p>
-</div>
-<div style="font-size: 0.7em;">
-<ul>
-<li><strong>it/pp</strong>, that/dd, theory/nn, thing/nn</li>
-</ul>
-</div>
-</section>
-<section id="another-look-at-the-clouds-regression-modelling" class="slide level2">
-<h2>Another look at the clouds: regression modelling</h2>
-<div style="font-size: 0.7em;">
-<p><strong>c-values of regression model with only traditional and traditional+semantic predictors</strong></p>
-<div style="font-size: 0.7em; text-align: center; color: #E04836;">
-<p><strong>Index of concordance (c-value)</strong> = non-parametric measure of how well a statistical model fits a set of observations.</p>
-</div>
-</div>
-<table>
-<colgroup>
-<col style="width: 46%">
-<col style="width: 27%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>RM only trad predictors</th>
-<th>RM trad+sem predictors</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>C-value for fixed effects</strong></td>
-<td>0.984</td>
-<td>0.975</td>
-</tr>
-<tr class="even">
-<td><strong>C-value for fixed and random effects</strong></td>
-<td>0.985</td>
-<td>0.993</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.</p>
-<p>We computed the <strong>Concordance index C: goodness of fit</strong> (read the slide) for the two models with fixed and random effects: even if the model with T+S performs better with the mixed effects, the higher c-v of 0.98 by the T-model suggests how the traditional p performs better alone, than in combination with the semantic ones.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="conclusions" class="title-slide slide level1 center">
-<h1>Conclusions</h1>
-
-</section>
-<section id="take-home-messages" class="slide level2">
-<h2>Take-home messages</h2>
-<div style="text-align: center; color: #E04836;">
-<p><em>“You shall choose a variant by the company it keeps!”</em></p>
-<p><em>(semi-cit. Firth 1955)</em></p>
-</div>
-<ol type="1">
-<li><p>Overall, there are some <strong>distributional semantics clusters</strong> that are <strong>very predictive</strong> of the alternation</p></li>
-<li><p>Statistical analyses show how <strong>traditional predictors outperform distributional semantics predictors</strong> in terms of model performances</p></li>
-</ol>
-<aside class="notes">
-<ol start="2" type="1">
-<li>based on the c-value</li>
-</ol>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="directions-for-future-research" class="slide level2">
-<h2>Directions for future research</h2>
-<ul>
-<li><strong>Other alternations:</strong>
-<ul>
-<li><p><em>Clausal complementation alternation</em> in the history of English</p></li>
-<li><p><em>Progressive alternation</em> in Italian</p></li>
-</ul></li>
-<li><strong>Experiment with token-level modeling</strong>
-<ul>
-<li>see Montes (2021)</li>
-</ul></li>
-</ul>
-<aside class="notes">
-<p>Token-level: in-depth analysis of the correlation of the single occurrences of the lemmas with the context</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="thoughts-comments-suggestions" class="slide level2">
-<h2>Thoughts? Comments? Suggestions?</h2>
-
-<img data-src="images/thank_you.png" width="677" class="r-stretch quarto-figure-center"><div style="text-align: center; font-size: 0.6em;">
-<p><strong><em>chiara.paolini@kuleuven.be</em></strong></p>
-</div>
-</section>
-<section id="parameters-of-the-type-level-models" class="slide level2" data-visibility="uncounted">
-<h2>Parameters of the type-level models</h2>
-<div style="font-size: 0.7em;">
-<ul>
-<li>Corpus filters: <strong>window size</strong> (3, 4, 7), <strong>sentence boundaries</strong> (y/n)</li>
-<li>Collocation matrix filters: <strong>selection of context words</strong> (dimensionality: 5000, 10000, 50000), <strong>vocabulary filtering</strong> (e.g., PoS, lemma, stop-words)</li>
-<li>Association measures: <strong>PPMI, log likelihood</strong></li>
-<li>Distance measures: <strong>Cosine</strong></li>
-<li>Dimensionality reduction: <strong>Euclidian + UMAP</strong> (none, 2, 10)</li>
-<li><strong>K-medoids (PAM)</strong>: 3, 8, 15</li>
-</ul>
-</div>
-</section>
-<section id="traditional-predictors" class="slide level2" data-visibility="uncounted">
-<h2>Traditional predictors</h2>
-<div style="font-size: 0.7em;">
-<ul>
-<li><p><strong>Recipient/Theme.type:</strong> The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.</p></li>
-<li><p><strong>Recipient/Theme.definiteness:</strong> The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.</p></li>
-<li><p><strong>Recipient/Theme.animacy:</strong> The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.</p></li>
-<li><p><strong>Length.difference:</strong> The log difference between recipient and theme lengths (see Bresnan &amp; Ford 2010).</p></li>
-<li><p><strong>Semantics (of dative verb):</strong> (1) transfer; (2) communication; (3) abstract.</p></li>
-<li><p><strong>Recipient/Theme.head:</strong> Head lexeme of both the theme and the recipient.</p></li>
-</ul>
-</div>
-</section>
-<section id="inside-the-recipient-clouds" class="slide level2" data-visibility="uncounted">
-<h2>Inside the recipient clouds</h2>
-<div style="font-size: 0.6em;">
-<ul>
-<li><p><strong>Recipient.advance</strong>: advance/vv, america/np, arm/nn, country/nn, europe/np, government/nn, iranian/nn, nation/nn, nicaragua/np, russia/np, schwartzkopf/np, troop/nn, vietnamese/np</p></li>
-<li><p><strong>Recipient.wife</strong>: actress/nn, wife/nn, artist/nn, boss/nn, brother/nn, daughters/nn, friend/nn, husband/nn, kitty/np, ryan/np, sister/nn, thomases/np, trek/np</p></li>
-<li><p><strong>Recipient.kids:</strong> agencies/nn, boys/nn, businesses/nn, companies/nn, countries/nn, criminals/nn, dogs/nn, employees/nn, friends/nn, grandparents/nn, guys/nn, horses/nn, houses/nn, kids/nn, members/nn, parents/nn, rashad/np, sons/nn, students/nn, things/nn, twins/nn, women/nn</p></li>
-<li><p><strong>Recipient.people:</strong> people/nn, citizen/nn, folk/nn, individual/nn, other/nn, peasant/nn, public/nn, reader/nn, white/nn</p></li>
-<li><p><strong>Recipient.person:</strong> person/nn, convict/nn.&nbsp;criminal/nn, guy/nn, man/nn, someone/pn, stranger/nn</p></li>
-<li><p><strong>Recipient.cour</strong>t: court/nn, judge/nn, jury/nn, matter/nn, plaintiff/nn, topic/nn</p></li>
-<li><p><strong>Recipient.business:</strong> business/nn, car/nn, charity/nn, company/nn, competitor/nn, employee/nn, enterprise/nn, environment/nn, food/nn, grower/nn, household/nn, management/nn, taxpayer/nn</p></li>
-</ul>
-</div>
-</section>
-<section id="inside-the-theme-clouds-1" class="slide level2" data-visibility="uncounted">
-<h2>Inside the theme clouds #1</h2>
-<div style="font-size: 0.5em;">
-<ul>
-<li><p><strong>Theme.discount:</strong> discount/nn, allowance/nn, amount/nn, bargain/nn, benefit/nn, bill/nn, billion/nn, bond/nn, bonus/nn, buck/nn, budget/nn, card/nn, cash/nn, cent/nn, checkbook/nn, contract/nn, credit-card/nn, credit/nn, cut/nn, deal/nn, degree/nn, discount/nn, dollar/nn, estimate/nn, extra/nn, incentive/nn, income/nn, insurance/nn, less/da, limit/nn, loan/nn, mail/nn, million/nn, minimum/nn, money/nn, more/da, mortgage/nn, much/da, nickel/nn, number/nn, offer/nn, outlook/nn, pay/nn, paycheck/nn, payment/nn, penny/nn, percent/nn, physical/nn, point/nn, price/nn, profit-sharing/nn, raise/nn, rate/nn, rating/nn, rebate/nn, refund/nn, salary/nn, scale/nn, stipend/nn, stock/nn, tariff/nn, tax-credit/nn, tax/nn, thumbs-down/nn, ticket/nn, tune-up/nn, veto/nn, warranty/nn, worth/nn</p></li>
-<li><p><strong>Theme.book:</strong> book/nn, address/nn, appearance/nn, assistant/nn, band/nn, booklet/nn, book/nn, break/nn, broadcast/nn, cable/nn, call/nn, comedy/nn, demo/nn, description/nn, entertainment/nn, f/np, figure/nn, game/nn, glimpse/nn, graph/nn, headline/nn, history/nn, husband/nn, list/nn, literature/nn, look/nn, magazine/nn, meeting/nn, message/nn, music/nn, name/nn, new/jj, news/nn, newspaper/nn, novel/nn, paper/nn, picture/nn, present/nn, rap/nn, report/nn, run/nn, rush/nn, screen/nn, sermon/nn, song/nn, speech/nn, story/nn, subscription/nn, subtitle/nn, synopsis/nn, talk/nn, tape/nn, television/nn, this/dd, tile/nn, topic/nn, trip/nn, tv/nn, update/nn, warning/nn, world/nn</p></li>
-<li><p><strong>Theme.bag:</strong> bag/nn, amp/nn, arm/nn, azalea/nn, backpack/nn, ball/nn, bath/nn, bedroom/nn, bike/nn, bin/nn, body/nn, bulb/nn, can/nn, car/nn, coat/nn, deer/nn, dog/nn, glass/nn, gun/nn, inn/nn, junkyard/nn, knife/nn, light/nn, paint/nn, pair/nn, parking/nn, pt/nn, pipe/nn, plate/nn, pony/nn, puppy/nn, purse/nn, rabbit/nn, ride/nn, ring/nn, room/nn, seat/nn, shirts/nn, shirt/nn, shower/nn, spec/nn, spot/nn, suit/nn, sweatshirt/nn, tub/nn, uniform/nn, walking/nn</p></li>
-</ul>
-</div>
-</section>
-<section id="inside-the-theme-clouds-2" class="slide level2" data-visibility="uncounted">
-<h2>Inside the theme clouds #2</h2>
-<div style="font-size: 0.5em;">
-<ul>
-<li><p><strong>Theme.appeal:</strong> appeal/nn, appointment/nn, choice/nn, custody/nn, decision/nn, demonstration/nn, demonstrator/nn, detention/nn, election/nn, felony/nn, jurisdiction/nn, law/nn, nomination/nn, order/nn, parole/nn, penalty/nn, punishment/nn, release/nn, right/nn, rule/nn, sentence/nn, trial/nn, verdict/nn</p></li>
-<li><p><strong>Theme.power:</strong> power/nn, ability/nn, activity/nn, advantage/nn, ambition/nn, attention/nn, balance/nn, chance/nn, command/nn, concession/nn, consistency/nn, control/nn, credibility/nn, dignity/nn, direction/nn, flexibility/nn, focus/nn, foothold/nn, freedom/nn, goal/nn, importance/nn, independence/nn, interest/nn, isolation/nn, leeway/nn, opportunity/nn, patronage/nn, peace/nn, policy/nn, potential/nn, power/nn, preference/nn, process/nn, preference/nn, push/nn, rein/nn, self-esteem/nn, skill/nn, strenght/nn, support/nn, talent/nn, thrust/nn, traction/nn, variance/nn</p></li>
-<li><p><strong>Theme.drug:</strong> drug/nn, ache/nn, aids/nn, awareness/nn, blood/nn, diet/nn, effect/nn, evaluation/nn, exercise/nn, exposure/nn, hdls/np, headache/nn, injection/nn, interaction/nn, medication/nn, medicine/nn, penicillin/nn, pill/nn, prescription/nn, rash/nn, relaxation/nn, simulation/nn, stroke/nn, test/nn, testing/nn, therapy/nn, transfusion/nn, workout/nn</p></li>
-<li><p><strong>Theme.doubt:</strong> doubt/nn, affection/nn, answer/nn, appreciation/nn, background/nn, experience/nn, feeling/nn, grief/nn, idea/nn, impression/nn, insight/nn, knowledge/nn, life/nn, motivation/nn, motive/nn, payback/nn, perspective/nn, question/nn, reason/nn, respect/nn, sense/nn, slant/nn, sympathy/nn, thought/nn, uplift/nn, view/nn</p></li>
-</ul>
-</div>
 
 
 <img src="../qlvl.png" class="slide-logo r-stretch"><div class="footer footer-default">
-<p>Taal en Tongval Colloquium - Gent, 2022-11-18</p>
+<p>Methods is Corpus Linguistics - Leuven, 2022-12-8</p>
 </div>
 </section></section>
     </div>
@@ -978,7 +616,7 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'multiplex': {"secret":null,"id":"f0e40093c0ac32c9","url":"https://reveal-multiplex.glitch.me/"},
+'multiplex': {"secret":null,"id":"351f5a003524f9ae","url":"https://reveal-multiplex.glitch.me/"},
 'smaller': false,
  
         // Display controls in the bottom right corner

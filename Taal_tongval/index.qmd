@@ -316,13 +316,10 @@ CRF is a multivariate statistical method that can answer to the research questio
 :::
 :::
 
-+------------------------------------------+-------------------------+------------------------+
 |                                          | RM only trad predictors | RM trad+sem predictors |
-+==========================================+=========================+========================+
+|------------------------------------------|-------------------------|------------------------|
 | **C-value for fixed effects**            | 0.984                   | 0.975                  |
-+------------------------------------------+-------------------------+------------------------+
 | **C-value for fixed and random effects** | 0.985                   | 0.993                  |
-+------------------------------------------+-------------------------+------------------------+
 
 ::: notes
 We also analyzed the distributional predictors using RM, adding them to the traditional, manually annotated, predictors. We are going to have a quick glance at the main results.

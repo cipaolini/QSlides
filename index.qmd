@@ -33,12 +33,24 @@ These are the slides presented at the QLVL Colloquium on 4-11-2022. [Read the ab
 
 # [Taal en Tongval](Taal_tongval/index.qmd){target="_blank"}
 
-These are the slides to be presented at the Taal en Tongval Colloquium on 18-11-2022 with Benedikt Szmrecsanyi and Mariana Montes. [Read the abstract](Taal_tongval/abstract.qmd)
+These are the slides presented at the Taal en Tongval Colloquium on 18-11-2022 with Benedikt Szmrecsanyi and Mariana Montes. [Read the abstract](Taal_tongval/abstract.qmd)
 
 <div>
 
 ```{=html}
 <iframe class="slide-deck" src="Taal_tongval/index.html"></iframe>
+```
+
+</div>
+
+# [Methods in corpus linguistics: a case study with logistic regression](MCL_seminar/index.qmd){target="_blank"}
+
+These are the slides of the lecture held on 18-11-2022 for the Methods in Corpus Linguistics master course. [Here the step-by-step case study](MCL_seminar/study.qmd)
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="MCL_seminar/index.html"></iframe>
 ```
 
 </div>

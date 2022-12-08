@@ -1,0 +1,206 @@
+---
+title: "Predicting the dative alternation in English:"
+subtitle: "A case study with logistic regression"
+author: "Chiara Paolini"
+format:
+  revealjs:
+    footer: "Methods is Corpus Linguistics - Leuven, 2022-12-8"
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+headings <- c("Preliminary steps",
+              "The case study")
+```
+
+## Outline
+
+```{r}
+#| label: outline
+#| results: asis
+for (heading in headings) {
+  cat("-", heading, "\n")
+}
+i <- 1
+```
+
+::: notes
+Step-by-step case study (partially) based on Szmrecsanyi et al. (2017). We will investigate the dative alternation in American English by employing two of the traditional statistical techniques in variationist analysis: \*binomial logistic regression analysis and conditional random forest\*.
+:::
+
+# `r headings[[i]]`
+
+## 1. Know the linguistic phenomenon you want to analyse
+
+**...and how people before you analyse it**
+
+Try to look for:
+
+-   The pivotal study on the phenomenon you want to study
+
+-   A couple of qualitative and quantitative investigations to get a sense of how researchers addressed to it before you and what you can integrate to their research: a new approach, a new perspective, new data with a previous approach etc.
+
+## 2. Know your dataset (and your data)
+
+**...especially if you did not build the dataset by yourselves!**
+
+-   **Linguistic information:** where are the observations extracted from? and when? do they belong to a specific language register? did the authors apply some restrictions/limitations to the dataset?
+
+-   **Statistical information:** how many observations the dataset counts originally? and after our restrictions? how many variables/predictors are annotated?
+
+    -   Keep always an eye on how much the dataset change after you apply your specific filters
+
+## 2. Know your dataset (and your data)
+
+**...especially if you did not build the dataset by yourselves!**
+
+-   **Language internal/external predictors:** identify and describe them.
+
+    -   *First thing First*: Response variable, type of the variables, levels of the variables
+
+    -   Filters added in previous studies (they can drastically change the results of your replication study!!)
+
+::: notes
+We will see how the number of observation will change during the analysis of our case study.
+:::
+
+## 3. Understand the choice of the analysis
+
+**...based on the research questions and data you have**
+
+-   Why the authors chose to employ this/those analysis/es?
+
+-   Which questions these analyses answer to? Do they address to specific perspectives of the linguistic phenomenon, or they are more general?
+
+-   Did these analyses bring an innovation in terms of methodologies employed in the field? Or they have been already used (see 1)?
+
+```{r}
+#serve a far cambiare l'indice al ciclo degli headings
+#| label: add-heading1
+#| include: false
+i <- i+1
+```
+
+# `r headings[[i]]`
+
+## Starting point: Szmrecsanyi et al. (2017)
+
+::: {style="font-size: 0.8em;"}
+[This paper](https://www.glossa-journal.org/article/id/4948/) investigates two of the well-known alternations in English, **the dative and the genitive alternation**, in four varieties of spoken English, using an ensamble of statistical analyses to understand the extent to which the probabilistic grammar of genitive and dative variant choice differs across varieties.
+:::
+
+::: {style="font-size: 0.7em;"}
+-   Our mini-replication study will focus only on **Spoken American English**, and only on the **dative alternation**
+
+-   **Goal** of my analysis is slightly different from the original one: to **get familiar with the so-called *traditional, top-down, manually annotated predictors*** for the dative alternation, and how well they predict the choice between the two variants in spoken American English.
+:::
+
+::: notes
+-   This analysis was the first step in the first case study of my PhD research project.
+:::
+
+## The dative alternation
+
+::: {style="color: #F39D41;"}
+**(1) a. Ditransitive** dative variant
+:::
+
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*my cousin*\]~recipient~     \[*some pizza*\]~theme~
+
+::: {style="color: #F39D41;"}
+   **b. Prepositional** dative variant
+:::
+
+    \[*The waiter*\]~subject~ \[*gave*\]~verb~ \[*some pizza*\]~theme~     \[*to my cousin*\]~recipient~
+
+::: {style="font-size: 0.7em;"}
+**What is an alternation?** See [Pijpops (2020)](https://benjamins.com/catalog/bjl.00053.pij) and [Gries (2017)](https://benjamins.com/catalog/bjl.00001.gri).
+:::
+
+::: notes
+Let's dive into our case study.
+
+The topic of our analysis is the dative alternation in \*contemporary American\* English.
+
+The DA is one of the most investigated cases of grammatical alternation - where we define a SA as "two or more constructions, called variants, with a highly similar meaning. An A represents choice point for the individual speaker".
+
+In English, there are two ways, two variants to encode the dative relation: the ditransitive dative construction (recipient-theme order), and the prepositional dative construction (theme-recipient order).
+:::
+
+## Predicting the DA: the dataset
+
+A core section of every variationist research is the dataset and its annotation: Szmrecsanyi et al. (2017) presents two comprehensive and homogeneously manually annotated [datasets](https://purl.stanford.edu/qj187zs3852) for both alternations.
+
+::: {style="font-size: 0.8em;"}
+-   The paper offers a **very, very** good and detailed description of the dataset and its construction: read it to get an inspiration for your own study!
+:::
+
+::: notes
+Variationist sociolinguistics puts at the first place the choice for statistical and corpus-based methods in the exploration of language variation. Tagliamonte (2012)reported an immense and suggestive variety of quantitative approaches and statistical tools to use in our research.
+:::
+
+## Predicting the DA: the dataset
+
+**Linguistic information**
+
+::: {style="font-size: 0.7em;"}
+-   The dative tokens for American English were elicited from the **Switchboard corpus of American English** (Godfrey, Holliman & McDaniel 1992), as described in Bresnan et al. (2007). The Switchboard corpus covers telephone conversations collected at the beginning of the 1990s.
+
+-   This dataset contains only observation with the verb ***give*** as verb of the dative construction.
+
+-   The collection follows Bresnan et al. (2007) directions in defining *interchangeable ditransitive and prepositional dative variants*: only instances of the verb *give* with two argument Noun Phrases, with the exception of non-interchangeable contructions, were considered.
+:::
+
+## Predicting the DA: the dataset
+
+**Statistical information**
+
+-   The original dative dataset counts 4136 observations, with the American English section counting **1190 observations**, and a manual annotation for **25 predictors**.
+
+## Predicting the DA: the dataset
+
+**Language-external predictors**
+
+::: {style="font-size: 0.8em;"}
+-   **Variety**: in our case, US - one level
+-   **Speaker.ID**
+-   **Speaker sex** (only for a subset of observations)
+-   **Speaker year of birth** (only for a subset of observations)
+:::
+
+## Predicting the DA: the dataset
+
+**Language-internal predictors:** the authors annotated for well-known determinants of dative variation.
+
+::: {style="font-size: 0.6em;"}
+-   **Response.variable**: Ditransitive dative versus prepositional dative.
+-   **Recipient/Theme.type:** The annotation distinguishes between the following categories: (1) noun phrase; (2) personal pronoun; (3) demonstrative pronoun; (4) impersonal pronoun.
+-   **Recipient/Theme.definiteness:** The annotation distinguishes between the following categories: (1) definite; (2) indefinite (3) definite proper noun.
+-   **Recipient/Theme.animacy:** The annotation distinguishes between the following categories: (1) human and animal; (2) collective; (3) temporal; (4) locative; (5) inanimate.
+-   **Recipient/Theme.length:** Length of the recipient and theme phrases in orthographically transcribed words.
+-   **Semantics (of dative verb):** (1) transfer; (2) communication; (3) abstract.
+-   **Recipient/Theme.head:** Head lexeme of both the theme and the recipient.
+:::
+
+::: notes
+!! This is not an exhaustive list of the predictors annotated in the dataset, but are those which have been considered for the analysis.
+:::
+
+## Predicting the DA: the dataset
+
+**Language-internal predictors:** further manipulation
+
+::: {style="font-size: 0.7em;"}
+-   Reducing the predictors into binary contrasts: ***Recipient/Theme.type*** were reduced to pronominal (\[2\], \[3\], \[4\]) versus non-pronominal (\[1\]); ***Recipient/Theme.definiteness*** were reduced to definite (\[1\], \[3\]) versus indefinite (\[2\]); ***Recipient/Theme.animacy*** were reduced to animate (\[1\]) versus inanimate (\[2\], \[3\], \[4\], \[5\])
+
+-   Creating a the new predictor ***Length.difference***: the Recipient/Theme.length measures were combined into a relative measure of length, calculated as log(Recipient.length) - log(Theme.length).
+
+-   ***Recipient/Theme.lemma***: the annotated lemma of the heads.
+:::
+
+::: notes
+And now let's go to the hands-on part!
+:::
