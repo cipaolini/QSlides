@@ -31,7 +31,7 @@ running the script!*
 
 ```{r}
 #| warning: false
-library(tidyverse)   # Easily Install and Load the 'Tidyverse'
+library(tidyverse)   # Easily Load the 'Tidyverse'
 library(here)        # Enable easy file referencing in project-oriented workflows
 library(lme4)        # for mixed-effects regression
 library(Hmisc)       # to calculate C values
@@ -57,30 +57,34 @@ After uploading the dataset, the second step is to filter and model the
 dataset based on our research needs. Specifically, here I first
 **select** only the predictors we are interested into and **filter out**
 the observations with any NA values in the predictors and the ones that
-do not contain the value **F** or **M** in the *speaker.sex* predictor.
+do not contain the value **F** or **M** in the *Speaker.sex* predictor.
 Then, I proceed to create the binary predictors as described in the
-paper, and the new *length.difference* variable by calculating the
-difference between the log values of theme/recipient.length.I also did
-here some level adjustment for the regression analysis: I set the
-reference level for the *response.variable* as **P**repositional, thus
+paper, and the new *Length.difference* variable by calculating the
+difference between the log values of *Theme/Recipient.length*. I also
+did here some level adjustment for the regression analysis: I set the
+reference level for the *Response.variable* as **P**repositional, thus
 the predicted odds will be for the **D**itransitive variant.
-*Speaker.pruned* and *Theme/recipient.lemma.pruned* are pruned variables
+*Speaker.pruned* and *Theme/Recipient.lemma.pruned* are pruned variables
 to be used in the regression model as random effects (I will get into
 details in the regression section): **fct_lump_min** creates a new level
 called *other* for lemmas that appear fewer than 2 times. Eventually,
 the character variables should be mutated in *factors*.
 
-> **IMPORTANT: Factors are used to represent categorical data in R**.
-> Factors are stored as integers, and have labels associated with these
-> unique integers (*levels*). While factors look (and often behave) like
-> character vectors, they are actually integers under the hood, and you
-> need to be careful when treating them like strings.
->
-> Once created them using the `factor()` command, factors can only
-> contain a pre-defined set values, known as *levels*. By default, R
-> always sorts *levels* in alphabetical order.
+::: callout-important
+## Factors are used to represent categorical data in R.
+
+Factors are stored as integers, and have labels associated with these
+unique integers (*levels*). While factors look (and often behave) like
+character vectors, they are actually integers under the hood, and you
+need to be careful when treating them like strings.
+
+Once created them using the `factor()` command, factors can only contain
+a pre-defined set values, known as *levels*. By default, R always sorts
+*levels* in alphabetical order.
+:::
 
 ```{r}
+#| code-line-numbers: true
 dat_us <- dat_us %>% 
   select(Token.ID, Variety, Speaker, Speaker.sex, Response.variable,
          Recipient.type, Theme.type,
@@ -116,38 +120,36 @@ Conditional random forest (CRF) is a multivariate statistical method
 that can answer to the research question: ***which linguistic factors
 help to predict the use of particular linguistic variants?*** For an
 accessible introduction to conditional inference trees and random
-forest, check [Levshina
+forest, check out [Levshina
 (2020)](https://link.springer.com/chapter/10.1007/978-3-030-46216-1_25).
 
-CRF can be done using a great range of libraries (`partykit`, `ranger`
-among them): here I use `party`, the classic library for trees and
-forests in R.
+CRF can be done using a great range of libraries (`{partykit}`,
+`{ranger}` among them): here I use `{party}`, the classic library for
+trees and forests in R.
 
-Since it is a partitioning algorithm, we need to set first a seed to get
-always the same result. **forest** represents the implementation of the
-formula for the CRF using the
-[`cforest`](https://rdrr.io/cran/party/man/cforest.html) function:
-similarly to the formula for regression models, the syntax is:
-`cforest (response variable ~ [variables], data = data_name)` .
+Since it is a partitioning algorithm with random sampling, we need to
+set first a seed to get always the same result. *forest* represents the
+implementation of the formula for the CRF using the `cforest()`
+function: similarly to the formula for regression models, the syntax is:
+`cforest(response variable ~ [variables], data = data_name)` .
 
-After computing the CRF, `varimp` allows to compute variable importance
+After computing the CRF, `varimp()` computes variable importance
 measures: if `conditional = TRUE`, the importance of each variable is
-computed by adjuststing for correlations between predictor variables
-(*pretty obscure, better check the
-[documentation](https://rdrr.io/cran/party/man/varimp.html) for a longer
-and detailed explanation*).
+computed by adjusting for correlations between predictor variables.
 
 The third chunk of the code is dedicated to the computation of the
 **Concordance index C-value**, better known as simply *C-value*, a
 non-parametric measure of how well a statistical model fits a set of
-observations. `Hmsic` is the reference library, using the function
-`somers2`.
+observations. `{Hmsic}` is the reference library, using the function
+`somers2()`.
 
-> C-value is a pivotal measure for most part of the statistical tools
-> employed in variationist analysis, especially for regression modeling.
-> However, make sure to not rely *only* on this measure for your
-> assessments as it gives a general evaluation of the model. For CRF is
-> fine, but we will see that it is not the case for regression modeling.
+::: callout-important
+C-value is a pivotal measure for most part of the statistical tools
+employed in variationist analysis, especially for regression modeling.
+However, make sure to not rely *only* on this measure for your
+assessments as it gives a general evaluation of the model. For CRF is
+fine, but we will see that it is not the case for regression modeling.
+:::
 
 Finally, it is possible to plot the result of the `varimp` computation
 and check for the most important variables in the prediction of the
@@ -180,12 +182,14 @@ somerssmallcrf <- somers2(prob2.rf, as.numeric(dat_us$Response.variable) - 1)
 somerssmallcrf["C"]
 
 ### the following code creates a dot plot visualizing the variable importance ranking
-dotplot(sort(forest.varimp), xlab="Variable Importance", panel = function(x,y){
-  panel.dotplot(x, y, col='darkblue', pch=16, cex=1.1)
-  panel.abline(v=abs(min(forest.varimp)), col='red',
-               lty='longdash', lwd=2)
-}
-) 
+ggplot(enframe(forest.varimp, name="Predictor", value = "Varimp"),
+        aes(x = Varimp, y = reorder(Predictor, Varimp))) +
+    geom_point(size = 3, color = "darkblue") +
+    labs(x = "Variable importance", y = "Predictor") +
+    geom_vline(xintercept = abs(min(forest.varimp)),
+               color = "red", linetype = 2) +
+    theme_minimal(base_size = 20) +
+    theme(legend.position = c(0.9, 0.2))
 ```
 
 ## The jeweler's eye perspective: regression modeling
@@ -204,24 +208,27 @@ idea is to manually remove the predictor with the highest p-value at
 each run of the regression model, till we get a model with few
 meaningful predictors.
 
-> There are many ways to implement automatic algorithms to get minimal
-> models by using *stepwise modeling.* However, I would recommend to use
-> those automatic techniques when you feel to master an advance
-> knowledge of your data and of regression modeling.
+::: callout-note
+There are many ways to implement automatic algorithms to get minimal
+models by using *stepwise modeling.* However, I would recommend to use
+those automatic techniques when you feel to master an advance knowledge
+of your data and of regression modeling.
+:::
 
 ### Maximal regression model
 
 The reference level is **Prepositional**, thus the predicted odds are
 for the **Ditransitive** alternation.
 
-`glmer` is the function to use for regression models with mixed-effects.
-See the
-[documentation](https://www.rdocumentation.org/packages/lme4/versions/1.1-31/topics/glmer)
-for the formula and an in-depth explanation of the code.
+`glmer()` is the function to use for regression models with
+mixed-effects. See the documentation for the formula and an in-depth
+explanation of the code.
 
+::: callout-tip
 Here the monthly-updated [GLMM
 bible](https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html) for the
 thousands of problems in fitting the regression model.
+:::
 
 ```{r}
 trad_model <- glmer(Response.variable ~ 
@@ -294,8 +301,8 @@ the regression model in two steps:
     higher that a certain threshold);
 
 -   By **optimizing the model**, using different techniques: one of the
-    most common is the optimizer *bobyqa* which enhances the performance
-    of the model together with *optCtrl = list(maxfun = 100000)* which
+    most common is the optimizer `bobyqa` which enhances the performance
+    of the model together with `optCtrl = list(maxfun = 100000)` which
     allows the model to perform more runs.
 
 ```{r}
@@ -333,12 +340,14 @@ vif(trad_model_min)
 
 ### Partial effect plots on regression model
 
-The `effects` package can help us shed a light on the reading of the
+The `{effects}` package can help us shed a light on the reading of the
 coefficients in regression models. Here I plotted the partial effects
-for the predictors of the minimal model.
+for the predictors of the minimal model. For a detalied explanation,
+check out
+[here](https://data.library.virginia.edu/visualizing-the-effects-of-logistic-regression/).
 
 ```{r}
-# partial effects plot (see https://data.library.virginia.edu/visualizing-the-effects-of-logistic-regression/)
+# partial effects plot
 # vertical axes plot probability of the predicted outcome
 plot(Effect(focal.predictors = c("Semantics"), mod = trad_model_min))
 plot(Effect(focal.predictors = c("Recipient.type.bin"), mod = trad_model_min))

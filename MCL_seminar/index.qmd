@@ -35,23 +35,33 @@ Step-by-step case study (partially) based on Szmrecsanyi et al. (2017). We will 
 
 ## 1. Know the linguistic phenomenon you want to analyse
 
-**...and how people before you analyse it**
+**...and how people how studied it before**
 
 Try to look for:
 
 -   The pivotal study on the phenomenon you want to study
 
--   A couple of qualitative and quantitative investigations to get a sense of how researchers addressed to it before you and what you can integrate to their research: a new approach, a new perspective, new data with a previous approach etc.
+-   A couple of qualitative and quantitative investigations to get a sense of how researchers addressed it before you and what you can integrate to their research: a new approach, a new perspective, new data with a previous approach etc.
 
-## 2. Know your dataset (and your data)
+## 2. Know your dataset (and your data) {.scrollable}
 
 **...especially if you did not build the dataset by yourselves!**
 
--   **Linguistic information:** where are the observations extracted from? and when? do they belong to a specific language register? did the authors apply some restrictions/limitations to the dataset?
+-   **Linguistic information:**
 
--   **Statistical information:** how many observations the dataset counts originally? and after our restrictions? how many variables/predictors are annotated?
+    -   where are the observations extracted from? and when?
 
-    -   Keep always an eye on how much the dataset change after you apply your specific filters
+    -   do they belong to a specific language register?
+
+    -   did the authors apply some restrictions/limitations to the dataset?
+
+-   **Statistical information:**
+
+    -   how many observations the dataset counts originally and after restrictions
+
+    -   how many variables/predictors are annotated
+
+        -   Keep always an eye on how much the dataset change after you apply your specific filters
 
 ## 2. Know your dataset (and your data)
 
@@ -64,6 +74,8 @@ Try to look for:
     -   Filters added in previous studies (they can drastically change the results of your replication study!!)
 
 ::: notes
+t
+
 We will see how the number of observation will change during the analysis of our case study.
 :::
 
@@ -89,7 +101,8 @@ i <- i+1
 ## Starting point: Szmrecsanyi et al. (2017)
 
 ::: {style="font-size: 0.8em;"}
-[This paper](https://www.glossa-journal.org/article/id/4948/) investigates two of the well-known alternations in English, **the dative and the genitive alternation**, in four varieties of spoken English, using an ensamble of statistical analyses to understand the extent to which the probabilistic grammar of genitive and dative variant choice differs across varieties.
+[This paper](https://www.glossa-journal.org/article/id/4948/) investigates two of the well-known alternations in English, **the dative and the genitive alternation** in four varieties of spoken English. 
+An ensemble of statistical analyses is employed to understand the extent to which the probabilistic grammar of genitive and dative variant choice differs across varieties.
 :::
 
 ::: {style="font-size: 0.7em;"}

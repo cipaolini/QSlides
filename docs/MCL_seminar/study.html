@@ -193,7 +193,7 @@ div.csl-indent {
 <p>The analysis needs the activation of different packages, <code>lme4</code> and <code>party</code> for regression modeling with random effects and conditional random forest respectively. <code>Hmisc</code>, <code>car</code> and <code>MuMIn</code> are pivotal for calculating evaluation measures for regression modeling, while the library <code>effects</code> allows the plot of partial effects plot.</p>
 <p><em>Make sure to have them installed on your R studio version before running the script!</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>   <span class="co"># Easily Install and Load the 'Tidyverse'</span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>   <span class="co"># Easily Load the 'Tidyverse'</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>        <span class="co"># Enable easy file referencing in project-oriented workflows</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>        <span class="co"># for mixed-effects regression</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/Hmisc/">Hmisc</a></span><span class="op">)</span>       <span class="co"># to calculate C values</span></span>
@@ -227,39 +227,49 @@ div.csl-indent {
 #   Recipient.contains.multiword.number &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>After uploading the dataset, the second step is to filter and model the dataset based on our research needs. Specifically, here I first <strong>select</strong> only the predictors we are interested into and <strong>filter out</strong> the observations with any NA values in the predictors and the ones that do not contain the value <strong>F</strong> or <strong>M</strong> in the <em>speaker.sex</em> predictor. Then, I proceed to create the binary predictors as described in the paper, and the new <em>length.difference</em> variable by calculating the difference between the log values of theme/recipient.length.I also did here some level adjustment for the regression analysis: I set the reference level for the <em>response.variable</em> as <strong>P</strong>repositional, thus the predicted odds will be for the <strong>D</strong>itransitive variant. <em>Speaker.pruned</em> and <em>Theme/recipient.lemma.pruned</em> are pruned variables to be used in the regression model as random effects (I will get into details in the regression section): <strong>fct_lump_min</strong> creates a new level called <em>other</em> for lemmas that appear fewer than 2 times. Eventually, the character variables should be mutated in <em>factors</em>.</p>
-<blockquote class="blockquote">
-<p><strong>IMPORTANT: Factors are used to represent categorical data in R</strong>. Factors are stored as integers, and have labels associated with these unique integers (<em>levels</em>). While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
+<p>After uploading the dataset, the second step is to filter and model the dataset based on our research needs. Specifically, here I first <strong>select</strong> only the predictors we are interested into and <strong>filter out</strong> the observations with any NA values in the predictors and the ones that do not contain the value <strong>F</strong> or <strong>M</strong> in the <em>Speaker.sex</em> predictor. Then, I proceed to create the binary predictors as described in the paper, and the new <em>Length.difference</em> variable by calculating the difference between the log values of <em>Theme/Recipient.length</em>. I also did here some level adjustment for the regression analysis: I set the reference level for the <em>Response.variable</em> as <strong>P</strong>repositional, thus the predicted odds will be for the <strong>D</strong>itransitive variant. <em>Speaker.pruned</em> and <em>Theme/Recipient.lemma.pruned</em> are pruned variables to be used in the regression model as random effects (I will get into details in the regression section): <strong>fct_lump_min</strong> creates a new level called <em>other</em> for lemmas that appear fewer than 2 times. Eventually, the character variables should be mutated in <em>factors</em>.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Factors are used to represent categorical data in R.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Factors are stored as integers, and have labels associated with these unique integers (<em>levels</em>). While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
 <p>Once created them using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> command, factors can only contain a pre-defined set values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order.</p>
-</blockquote>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat_us</span> <span class="op">&lt;-</span> <span class="va">dat_us</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Token.ID</span>, <span class="va">Variety</span>, <span class="va">Speaker</span>, <span class="va">Speaker.sex</span>, <span class="va">Response.variable</span>,</span>
-<span>         <span class="va">Recipient.type</span>, <span class="va">Theme.type</span>,</span>
-<span>         <span class="va">Recipient.definiteness</span>, <span class="va">Theme.definiteness</span>,</span>
-<span>         <span class="va">Recipient.animacy</span>, <span class="va">Theme.animacy</span>,</span>
-<span>         <span class="va">Recipient.length</span>, <span class="va">Theme.length</span>,</span>
-<span>         <span class="va">Semantics</span>,</span>
-<span>         <span class="va">Recipient.head</span>, <span class="va">Theme.head</span>, <span class="va">Recipient.lemma</span>, <span class="va">Theme.lemma</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Speaker.sex</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'F'</span>, <span class="st">'M'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    Recipient.type.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Recipient.type</span> <span class="op">==</span> <span class="st">'N'</span>, <span class="st">'N'</span>, <span class="st">'P'</span><span class="op">)</span>,</span>
-<span>    Theme.type.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Theme.type</span> <span class="op">==</span> <span class="st">'N'</span>, <span class="st">'N'</span>, <span class="st">'P'</span><span class="op">)</span>,</span>
-<span>    Recipient.definiteness.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Recipient.definiteness</span> <span class="op">==</span> <span class="st">'Indefinite'</span>, <span class="st">'Indefinite'</span>, <span class="st">'Definite'</span><span class="op">)</span>,</span>
-<span>    Theme.definiteness.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Theme.definiteness</span> <span class="op">==</span> <span class="st">'Indefinite'</span>, <span class="st">'Indefinite'</span>, <span class="st">'Definite'</span><span class="op">)</span>,</span>
-<span>    Recipient.animacy.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Recipient.animacy</span> <span class="op">==</span> <span class="st">'A'</span>, <span class="st">'A'</span>, <span class="st">'I'</span><span class="op">)</span>,</span>
-<span>    Theme.animacy.bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Theme.animacy</span> <span class="op">==</span> <span class="st">'A'</span>, <span class="st">'A'</span>, <span class="st">'I'</span><span class="op">)</span>,</span>
-<span>    Length.difference <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Recipient.length</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Theme.length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/party/man/BinaryTree-class.html">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="va">as.factor</span><span class="op">)</span>, </span>
-<span>    Speaker <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Speaker</span><span class="op">)</span>,</span>
-<span>    Response.variable <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">Response.variable</span>, <span class="st">"P"</span><span class="op">)</span>, <span class="co">#level the response variable: reference level is P-dative, thus predicted odds are for the D-dative</span></span>
-<span>    Speaker.pruned <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_min</a></span><span class="op">(</span><span class="va">Speaker</span>, <span class="fl">5</span>, other_level <span class="op">=</span> <span class="st">"other"</span><span class="op">)</span>, <span class="co">#pruning the random effects</span></span>
-<span>    Theme.lemma.pruned <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_min</a></span><span class="op">(</span><span class="va">Theme.lemma</span>, <span class="fl">2</span>, other_level <span class="op">=</span> <span class="st">"other"</span><span class="op">)</span>,</span>
-<span>    Recipient.lemma.pruned <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump_min</a></span><span class="op">(</span><span class="va">Recipient.lemma</span>, <span class="fl">2</span>, other_level <span class="op">=</span> <span class="st">"other"</span><span class="op">)</span><span class="op">)</span> </span>
-<span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat_us</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html">kbl</a></span><span class="op">(</span>fixed_thead <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_classic.html">kable_paper</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dat_us <span class="ot">&lt;-</span> dat_us <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(Token.ID, Variety, Speaker, Speaker.sex, Response.variable,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>         Recipient.type, Theme.type,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>         Recipient.definiteness, Theme.definiteness,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>         Recipient.animacy, Theme.animacy,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>         Recipient.length, Theme.length,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>         Semantics,</span>
+<span id="cb4-8"><a href="#cb4-8"></a>         Recipient.head, Theme.head, Recipient.lemma, Theme.lemma) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">filter</span>(Speaker.sex <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'F'</span>, <span class="st">'M'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="at">Recipient.type.bin =</span> <span class="fu">if_else</span>(Recipient.type <span class="sc">==</span> <span class="st">'N'</span>, <span class="st">'N'</span>, <span class="st">'P'</span>),</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="at">Theme.type.bin =</span> <span class="fu">if_else</span>(Theme.type <span class="sc">==</span> <span class="st">'N'</span>, <span class="st">'N'</span>, <span class="st">'P'</span>),</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="at">Recipient.definiteness.bin =</span> <span class="fu">if_else</span>(Recipient.definiteness <span class="sc">==</span> <span class="st">'Indefinite'</span>, <span class="st">'Indefinite'</span>, <span class="st">'Definite'</span>),</span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="at">Theme.definiteness.bin =</span> <span class="fu">if_else</span>(Theme.definiteness <span class="sc">==</span> <span class="st">'Indefinite'</span>, <span class="st">'Indefinite'</span>, <span class="st">'Definite'</span>),</span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="at">Recipient.animacy.bin =</span> <span class="fu">if_else</span>(Recipient.animacy <span class="sc">==</span> <span class="st">'A'</span>, <span class="st">'A'</span>, <span class="st">'I'</span>),</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">Theme.animacy.bin =</span> <span class="fu">if_else</span>(Theme.animacy <span class="sc">==</span> <span class="st">'A'</span>, <span class="st">'A'</span>, <span class="st">'I'</span>),</span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">Length.difference =</span> <span class="fu">log</span>(Recipient.length) <span class="sc">-</span> <span class="fu">log</span>(Theme.length)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor), </span>
+<span id="cb4-20"><a href="#cb4-20"></a>    <span class="at">Speaker =</span> <span class="fu">factor</span>(Speaker),</span>
+<span id="cb4-21"><a href="#cb4-21"></a>    <span class="at">Response.variable =</span> <span class="fu">fct_relevel</span>(Response.variable, <span class="st">"P"</span>), <span class="co">#level the response variable: reference level is P-dative, thus predicted odds are for the D-dative</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>    <span class="at">Speaker.pruned =</span> <span class="fu">fct_lump_min</span>(Speaker, <span class="dv">5</span>, <span class="at">other_level =</span> <span class="st">"other"</span>), <span class="co">#pruning the random effects</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a>    <span class="at">Theme.lemma.pruned =</span> <span class="fu">fct_lump_min</span>(Theme.lemma, <span class="dv">2</span>, <span class="at">other_level =</span> <span class="st">"other"</span>),</span>
+<span id="cb4-24"><a href="#cb4-24"></a>    <span class="at">Recipient.lemma.pruned =</span> <span class="fu">fct_lump_min</span>(Recipient.lemma, <span class="dv">2</span>, <span class="at">other_level =</span> <span class="st">"other"</span>)) </span>
+<span id="cb4-25"><a href="#cb4-25"></a> <span class="fu">head</span>(dat_us)<span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a>  <span class="fu">kbl</span>(<span class="at">fixed_thead =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a>  <span class="fu">kable_paper</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
@@ -479,14 +489,24 @@ div.csl-indent {
 </div>
 </div>
 </section></section><section id="the-birds-eye-perspective-conditional-random-forest" class="level2"><h2 class="anchored" data-anchor-id="the-birds-eye-perspective-conditional-random-forest">The bird’s eye perspective: conditional random forest</h2>
-<p>Conditional random forest (CRF) is a multivariate statistical method that can answer to the research question: <strong><em>which linguistic factors help to predict the use of particular linguistic variants?</em></strong> For an accessible introduction to conditional inference trees and random forest, check <a href="https://link.springer.com/chapter/10.1007/978-3-030-46216-1_25">Levshina (2020)</a>.</p>
-<p>CRF can be done using a great range of libraries (<code>partykit</code>, <code>ranger</code> among them): here I use <code>party</code>, the classic library for trees and forests in R.</p>
-<p>Since it is a partitioning algorithm, we need to set first a seed to get always the same result. <strong>forest</strong> represents the implementation of the formula for the CRF using the <a href="https://rdrr.io/cran/party/man/cforest.html"><code>cforest</code></a> function: similarly to the formula for regression models, the syntax is: <code>cforest (response variable ~ [variables], data = data_name)</code> .</p>
-<p>After computing the CRF, <code>varimp</code> allows to compute variable importance measures: if <code>conditional = TRUE</code>, the importance of each variable is computed by adjuststing for correlations between predictor variables (<em>pretty obscure, better check the <a href="https://rdrr.io/cran/party/man/varimp.html">documentation</a> for a longer and detailed explanation</em>).</p>
-<p>The third chunk of the code is dedicated to the computation of the <strong>Concordance index C-value</strong>, better known as simply <em>C-value</em>, a non-parametric measure of how well a statistical model fits a set of observations. <code>Hmsic</code> is the reference library, using the function <code>somers2</code>.</p>
-<blockquote class="blockquote">
+<p>Conditional random forest (CRF) is a multivariate statistical method that can answer to the research question: <strong><em>which linguistic factors help to predict the use of particular linguistic variants?</em></strong> For an accessible introduction to conditional inference trees and random forest, check out <a href="https://link.springer.com/chapter/10.1007/978-3-030-46216-1_25">Levshina (2020)</a>.</p>
+<p>CRF can be done using a great range of libraries (<a href="http://partykit.r-forge.r-project.org/partykit/">partykit</a>, <a href="https://github.com/imbs-hl/ranger">ranger</a> among them): here I use <a href="http://party.R-forge.R-project.org">party</a>, the classic library for trees and forests in R.</p>
+<p>Since it is a partitioning algorithm with random sampling, we need to set first a seed to get always the same result. <em>forest</em> represents the implementation of the formula for the CRF using the <code><a href="https://rdrr.io/pkg/party/man/cforest.html">cforest()</a></code> function: similarly to the formula for regression models, the syntax is: <code>cforest(response variable ~ [variables], data = data_name)</code> .</p>
+<p>After computing the CRF, <code><a href="https://rdrr.io/pkg/party/man/varimp.html">varimp()</a></code> computes variable importance measures: if <code>conditional = TRUE</code>, the importance of each variable is computed by adjusting for correlations between predictor variables.</p>
+<p>The third chunk of the code is dedicated to the computation of the <strong>Concordance index C-value</strong>, better known as simply <em>C-value</em>, a non-parametric measure of how well a statistical model fits a set of observations. <code>{Hmsic}</code> is the reference library, using the function <code><a href="https://rdrr.io/pkg/Hmisc/man/somers2.html">somers2()</a></code>.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>C-value is a pivotal measure for most part of the statistical tools employed in variationist analysis, especially for regression modeling. However, make sure to not rely <em>only</em> on this measure for your assessments as it gives a general evaluation of the model. For CRF is fine, but we will see that it is not the case for regression modeling.</p>
-</blockquote>
+</div>
+</div>
 <p>Finally, it is possible to plot the result of the <code>varimp</code> computation and check for the most important variables in the prediction of the linguistic variants. The red dotted line represents the threshold to consider a variable slightly significant. For a detailed theoretical explanation, see <a href="http://read.psych.uni-potsdam.de/pmr2/index.php?option=com_content&amp;view=article&amp;id=78:tagliamonte-and-baayen-2012-models-forests-and-trees-of-york-english-was-were-variation-as-a-case-study-for-statistical-practice&amp;catid=24:publications&amp;Itemid=32">Tagliamonte &amp; Baayen (2012)</a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
@@ -515,12 +535,14 @@ div.csl-indent {
 0.986687 </code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### the following code creates a dot plot visualizing the variable importance ranking</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html">dotplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">forest.varimp</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">"Variable Importance"</span>, panel <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/panel.dotplot.html">panel.dotplot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, col<span class="op">=</span><span class="st">'darkblue'</span>, pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">1.1</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/panel.functions.html">panel.abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">forest.varimp</span><span class="op">)</span><span class="op">)</span>, col<span class="op">=</span><span class="st">'red'</span>,</span>
-<span>               lty<span class="op">=</span><span class="st">'longdash'</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="va">forest.varimp</span>, name<span class="op">=</span><span class="st">"Predictor"</span>, value <span class="op">=</span> <span class="st">"Varimp"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Varimp</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">Predictor</span>, <span class="va">Varimp</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Variable importance"</span>, y <span class="op">=</span> <span class="st">"Predictor"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">forest.varimp</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>               color <span class="op">=</span> <span class="st">"red"</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="study_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -528,13 +550,35 @@ div.csl-indent {
 </section><section id="the-jewelers-eye-perspective-regression-modeling" class="level2"><h2 class="anchored" data-anchor-id="the-jewelers-eye-perspective-regression-modeling">The jeweler’s eye perspective: regression modeling</h2>
 <p>To take a closer look at the predictors, and their direction in predicting one of the two linguistic variants, we use <strong>binary logistic regression analysis with mixed effects</strong> as implemented in the <code>lme4</code> package in R.</p>
 <p>Regression modeling has in general a very simple and standardize code, but it can be done in many different ways, using different techniques to get to the final results. Here I will show you the simplest bottom-up technique to get from a maximal model with all the predictors to a minimal model comprising of only the most meaningful predictors. The idea is to manually remove the predictor with the highest p-value at each run of the regression model, till we get a model with few meaningful predictors.</p>
-<blockquote class="blockquote">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>There are many ways to implement automatic algorithms to get minimal models by using <em>stepwise modeling.</em> However, I would recommend to use those automatic techniques when you feel to master an advance knowledge of your data and of regression modeling.</p>
-</blockquote>
+</div>
+</div>
 <section id="maximal-regression-model" class="level3"><h3 class="anchored" data-anchor-id="maximal-regression-model">Maximal regression model</h3>
 <p>The reference level is <strong>Prepositional</strong>, thus the predicted odds are for the <strong>Ditransitive</strong> alternation.</p>
-<p><code>glmer</code> is the function to use for regression models with mixed-effects. See the <a href="https://www.rdocumentation.org/packages/lme4/versions/1.1-31/topics/glmer">documentation</a> for the formula and an in-depth explanation of the code.</p>
+<p><code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code> is the function to use for regression models with mixed-effects. See the documentation for the formula and an in-depth explanation of the code.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Here the monthly-updated <a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html">GLMM bible</a> for the thousands of problems in fitting the regression model.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trad_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer</a></span><span class="op">(</span><span class="va">Response.variable</span> <span class="op">~</span> </span>
 <span>              <span class="va">Speaker.sex</span> <span class="op">+</span></span>
@@ -693,7 +737,7 @@ Length.difference          2.439304  1        1.561827</code></pre>
 <p>Before starting pruning the model, a good practice is to <strong><em>improve</em></strong> the regression model in two steps:</p>
 <ul>
 <li><p>By <strong>pruning</strong> the random effects (i.e.&nbsp;consider only the levels higher that a certain threshold);</p></li>
-<li><p>By <strong>optimizing the model</strong>, using different techniques: one of the most common is the optimizer <em>bobyqa</em> which enhances the performance of the model together with <em>optCtrl = list(maxfun = 100000)</em> which allows the model to perform more runs.</p></li>
+<li><p>By <strong>optimizing the model</strong>, using different techniques: one of the most common is the optimizer <code>bobyqa</code> which enhances the performance of the model together with <code>optCtrl = list(maxfun = 100000)</code> which allows the model to perform more runs.</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trad_model_min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer</a></span><span class="op">(</span><span class="va">Response.variable</span> <span class="op">~</span> </span>
@@ -797,9 +841,9 @@ Length.difference          1.420581  1        1.191881</code></pre>
 </div>
 </div>
 </section><section id="partial-effect-plots-on-regression-model" class="level3"><h3 class="anchored" data-anchor-id="partial-effect-plots-on-regression-model">Partial effect plots on regression model</h3>
-<p>The <code>effects</code> package can help us shed a light on the reading of the coefficients in regression models. Here I plotted the partial effects for the predictors of the minimal model.</p>
+<p>The <a href="https://www.r-project.org">effects</a> package can help us shed a light on the reading of the coefficients in regression models. Here I plotted the partial effects for the predictors of the minimal model. For a detalied explanation, check out <a href="https://data.library.virginia.edu/visualizing-the-effects-of-logistic-regression/">here</a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># partial effects plot (see https://data.library.virginia.edu/visualizing-the-effects-of-logistic-regression/)</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># partial effects plot</span></span>
 <span><span class="co"># vertical axes plot probability of the predicted outcome</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/effects/man/effect.html">Effect</a></span><span class="op">(</span>focal.predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Semantics"</span><span class="op">)</span>, mod <span class="op">=</span> <span class="va">trad_model_min</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
