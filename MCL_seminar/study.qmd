@@ -26,8 +26,12 @@ random forest respectively. `Hmisc`, `car` and `MuMIn` are pivotal for
 calculating evaluation measures for regression modeling, while the
 library `effects` allows the plot of partial effects plot.
 
-*Make sure to have them installed on your R studio version before
-running the script!*
+::: callout-tip
+## Double-check your libraries, always
+
+Make sure to have the required libraries installed on your R studio
+version before running the script!
+:::
 
 ```{r}
 #| warning: false
@@ -46,7 +50,18 @@ library(kableExtra)  # Construct Complex Table with 'kable' and Pipe Syntax
 
 The dataset I will provide has already been manipulated: it represents
 only the American subsection of the original dataset (*1190
-observations*), plus it contains *recipient/theme.lemma*.
+observations*), plus it contains *Recipient/Theme.lemma*. You can
+download the dataset from
+[here](https://github.com/cipaolini/QSlides/tree/master/MCL_seminar/data).
+
+::: callout-warning
+## How to download a file from Github (and no, it is now how you think)
+
+To avoid data loss and strange outputs, you need to first open the file
+on github (`data_us.tsv`), click on the `raw` button on the right, and
+then right-click -\> `save as..` . If you encounter any trouble, please
+send me an email at `chiara.paolini@kuleuven.be`
+:::
 
 ```{r}
 dat_us <- read_tsv(here::here('MCL_seminar', 'data', 'dat_us.tsv'), show_col_types = F)
@@ -54,14 +69,15 @@ head(dat_us)
 ```
 
 After uploading the dataset, the second step is to filter and model the
-dataset based on our research needs. Specifically, here I first
-**select** only the predictors we are interested into and **filter out**
+dataset based on our research needs. I did it in two steps. 
+In the first step, in which I replicate the same modifications to the dataset applied from the authors, I **select** only the predictors we are interested into and **filter out**
 the observations with any NA values in the predictors and the ones that
 do not contain the value **F** or **M** in the *Speaker.sex* predictor.
 Then, I proceed to create the binary predictors as described in the
 paper, and the new *Length.difference* variable by calculating the
-difference between the log values of *Theme/Recipient.length*. I also
-did here some level adjustment for the regression analysis: I set the
+difference between the log values of *Theme/Recipient.length*. 
+
+In the second step, I am adjusting the dataset according to my analysis: I set the
 reference level for the *Response.variable* as **P**repositional, thus
 the predicted odds will be for the **D**itransitive variant.
 *Speaker.pruned* and *Theme/Recipient.lemma.pruned* are pruned variables
@@ -303,7 +319,7 @@ the regression model in two steps:
 -   By **optimizing the model**, using different techniques: one of the
     most common is the optimizer `bobyqa` which enhances the performance
     of the model together with `optCtrl = list(maxfun = 100000)` which
-    allows the model to perform more runs.
+    allows the model to perform more runs.g
 
 ```{r}
 trad_model_min <- glmer(Response.variable ~ 

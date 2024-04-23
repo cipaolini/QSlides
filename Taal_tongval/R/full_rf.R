@@ -60,3 +60,4 @@ varimp_full <- varimp(forest, conditional = FALSE)
 varimp_full %>% enframe(name = "Predictor", value = "Varimp") %>% 
   write_tsv(here::here("Taal_tongval", "data_processed", "varimp_full.tsv"))
 # varimp_dotplot(varimp_full)
+

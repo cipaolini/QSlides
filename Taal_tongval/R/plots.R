@@ -15,7 +15,7 @@ tsne_plot <- function(coords, seed = 7) {
                      aes(label = cw),
                      seed = seed, size = 10) +
     theme_void() +
-    scale_color_viridis_d(na.value = "gray", guide = "none") +
+    scale_color_viridis_d(option = "H", na.value = "gray", guide = "none") +
     coord_fixed()
 }
 add_point <- function(p, lemma_data, add_x = 1, add_y = 1, curvature = -0.2,
@@ -39,7 +39,7 @@ clusters_barplot <- function(tokens, column) {
     scale_fill_grey(start = 0.4, end = 0.6) +
     labs(x = "Medoid", y = "N of tokens") +
     theme_minimal() +
-    theme(legend.position = c(0.9, 0.9)) +
+    theme(legend.position = c(0.8, 0.8)) +
     coord_flip()
 }
 varimp_dotplot <- function(varimp_data) {
@@ -51,7 +51,7 @@ varimp_dotplot <- function(varimp_data) {
     ggplot(aes(x = Varimp, y = reorder(Predictor, Varimp),
                color = Slot)) +
     geom_point(size = 3) +
-    scale_color_viridis_d(begin = 0.2, end = 0.8, option = "plasma", direction = -1) +
+    scale_colour_grey(start = 0.2, end = 0.8) +
     labs(x = "Variable importance", y = "Predictor") +
     geom_vline(xintercept = 0,
                color = "gray30", linetype = 2) +

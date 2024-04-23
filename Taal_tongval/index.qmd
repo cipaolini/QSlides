@@ -230,8 +230,10 @@ i <- i+1
 #| label: fig-tsne-r
 #| fig-cap: Scatterplot of recipient lemmas. Colors are clusters, labelled by their central members.
 tsne_plot(recipient_coords) %>%
-  add_point(recipient_coords %>% filter(cw == "government/nn"), -6, 0, font_size = 15) %>%
-  add_point(recipient_coords %>% filter(cw == "mother/nn"), -7, font_size = 15)
+  add_point(recipient_coords %>% filter(cw == "government"), 4, 4, font_size = 10) %>%
+  add_point(recipient_coords %>% filter(cw == "mother"), -3, -3, font_size = 10) %>% 
+  add_point(recipient_coords %>% filter(cw == "him"), -2, -2, font_size = 10) %>%
+  add_point(recipient_coords %>% filter(cw == "guy"), 2, 3, font_size = 10)
 ```
 
 ::: notes
@@ -248,7 +250,7 @@ Here, a nice plot of the clusters, or clouds as Mariana Montes says, of the reci
 #| label: fig-tsne-t
 #| fig-cap: Scatterplot of themes lemmas. Colors are clusters, labelled by their central members.
 tsne_plot(theme_coords) %>%
-  add_point(theme_coords %>% filter(cw == "it/pp"), -7, -10, vjust = 1, font_size = 15)
+  add_point(theme_coords %>% filter(cw == "it"), -4, -7, vjust = 1, font_size = 15)
 ```
 
 ## From clouds to distributional semantic predictors
@@ -275,6 +277,7 @@ To summarize, each grouping of recipient/theme lemmas represents what we call **
 #| label: rf-full
 varimp_dotplot(varimp_full)
 ```
+
 
 ::: notes
 CRF is a multivariate statistical method that can answer to the research question: which linguistic factors help to predict the use of particular linguistic variants? (explain the forest and show immediately the next slide) - Do not insist too much on the pronominality

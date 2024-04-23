@@ -2,6 +2,7 @@ library(tidyverse)
 library(semcloud)
 library(Rtsne)
 library(ggparty)
+library(here)
 
 data_folder <- here::here("Taal_tongval", "data")
 model_name <- list.dirs(data_folder, recursive = FALSE, full.names = FALSE)
@@ -42,8 +43,9 @@ tree_df <- as_tibble(ggparty(tree_data$tree)$data) %>%
   deframe()
 
 ### Tokens with clustering ----
-recipient_clusters <- read_tsv(fnames$clusters_r, show_col_types = FALSE)
-theme_clusters <- read_tsv(fnames$clusters_t, show_col_types = FALSE) 
+recipient_clusters <- read_tsv(fnames$clusters_r, show_col_types = FALSE) 
+theme_clusters <- read_tsv(fnames$clusters_t, show_col_types = FALSE)
+
 tokens <- read_tsv(fnames$tokens, show_col_types = FALSE) %>% 
   filter(Theme.inlist, Recipient.inlist, Speaker.sex %in% c("F", "M")) %>% 
   select(Token.ID, Context, Variant = Response.variable,
@@ -61,12 +63,13 @@ tokens <- read_tsv(fnames$tokens, show_col_types = FALSE) %>%
     Recipient.medoid = if_else(Recipient.silhouette < 0, "other", Recipient.medoid_label),
     Theme.medoid = if_else(Theme.silhouette < 0, "other", Theme.medoid_label)
     ) %>% 
-  unite(cluster_combo, Recipient.medoid_label, Theme.medoid_label, sep = "-", remove = FALSE) %>% 
-  mutate(tree_cluster = as.factor(tree_df[cluster_combo]))
+  unite(cluster_combo, Recipient.medoid_label, Theme.medoid_label, sep = "-", remove = FALSE) 
+
+#%>% mutate(tree_cluster = as.factor(tree_df[cluster_combo]))
 
 ### Coordinates ----
 get_coords <- function(filename) {
-  set.seed(8541)
+  set.seed(7543)
   mat <- focdistsFromCsv(filename) %>% 
     transformMats(TRUE)
   coords <- Rtsne(as.dist(mat), dims=2, perplexity=30,
@@ -78,6 +81,9 @@ get_coords <- function(filename) {
     y = coords[,2]
   )
 }
+
+
+
 recipient_coords <- get_coords(fnames$wwmx_r) %>% 
   left_join(recipient_clusters, by = c("cw" = "type_word")) %>% 
   mutate(final_cluster = if_else(silhouette < 0, NA_character_, medoid_label))
@@ -95,31 +101,31 @@ walk2(
   output_files,
   write_tsv
 )
-# Experiment ----
-# check the main clusters in tree results
-if (FALSE) {
-  cluster_distrib <- tokens %>% 
-    select(Token.ID, ends_with("label"), tree_cluster) %>% 
-    unite(cluster_combo, ends_with("medoid_label"), sep = "-", remove = FALSE) %>% 
-    add_count(tree_cluster, name = "N")
-  get_top <- function(column_name) {
-    cluster_distrib %>% add_count(tree_cluster, {{ column_name }}) %>% 
-      select(tree_cluster, {{ column_name }}, N, n) %>% 
-      distinct() %>% 
-      group_by(tree_cluster) %>% 
-      filter(n == max(n))
-  }
-  combo_top <- get_top(cluster_combo) %>% 
-    rename(name = cluster_combo) %>% 
-    mutate(what = "combo")
-  r_top <- get_top(Recipient.medoid_label) %>% 
-    rename(name = Recipient.medoid_label) %>% 
-    mutate(what = "Recipient")
-  t_top <- get_top(Theme.medoid_label) %>% 
-    rename(name = Theme.medoid_label) %>% 
-    mutate(what = "Theme")
-  bind_rows(combo_top, r_top, t_top) %>% 
-    group_by(tree_cluster) %>% 
-    filter(n == max(n))
-  
-}
+# # Experiment ----
+# # check the main clusters in tree results
+# if (FALSE) {
+#   cluster_distrib <- tokens %>% 
+#     select(Token.ID, ends_with("label"), tree_cluster) %>% 
+#     unite(cluster_combo, ends_with("medoid_label"), sep = "-", remove = FALSE) %>% 
+#     add_count(tree_cluster, name = "N")
+#   get_top <- function(column_name) {
+#     cluster_distrib %>% add_count(tree_cluster, {{ column_name }}) %>% 
+#       select(tree_cluster, {{ column_name }}, N, n) %>% 
+#       distinct() %>% 
+#       group_by(tree_cluster) %>% 
+#       filter(n == max(n))
+#   }
+#   combo_top <- get_top(cluster_combo) %>% 
+#     rename(name = cluster_combo) %>% 
+#     mutate(what = "combo")
+#   r_top <- get_top(Recipient.medoid_label) %>% 
+#     rename(name = Recipient.medoid_label) %>% 
+#     mutate(what = "Recipient")
+#   t_top <- get_top(Theme.medoid_label) %>% 
+#     rename(name = Theme.medoid_label) %>% 
+#     mutate(what = "Theme")
+#   bind_rows(combo_top, r_top, t_top) %>% 
+#     group_by(tree_cluster) %>% 
+#     filter(n == max(n))
+#   
+# }

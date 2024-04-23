@@ -58,4 +58,4 @@ forest <- cforest(Variant ~ ., data = dataset)
 varimp_full <- varimp(forest, conditional = FALSE)
 varimp_full %>% enframe(name = "Predictor", value = "Importance") %>% 
   write_tsv(here::here("BKL_22", "data_processed", "varimp_full.tsv"))
-varimp_dotplot(varimp_full)
+#varimp_dotplot(varimp_full)
